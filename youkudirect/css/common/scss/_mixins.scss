@@ -1,0 +1,287 @@
+@charset "utf-8";
+
+@import "settings";
+
+// 标题设置
+
+// 一级标题
+%h1 {
+    font-size: 30px;
+    color: #555;
+    font-weight: normal;
+}
+
+// 二级标题
+%h2, %h3 {
+    color: #909090;
+}
+
+%h2 {
+    font-size: 24px;
+}
+
+// 三级标题
+%h3 {
+    font-size: 16px;
+}
+
+// 主要文本
+%main-txt {
+    font-size: 14px;
+    color: #555;
+}
+
+// 次要文本
+%sub-txt {
+    font-size: 14px;
+    color: #909090;
+}
+
+// 描述文本
+%desc-txt {
+    font-size: 14px;
+    color: #bbb;
+}
+
+// 链接文本
+%link-txt {
+    font-size: 14px;
+    color: #555;
+}
+
+// 功能链接文本
+%main-link {
+    font-size: 14px;
+    color: $mainLink;
+    transition: color 0.2s ease-in 0s;
+    &:hover {
+        color: #555;
+    }
+}
+
+// 通用按钮样式
+// 蓝色按钮
+%blue-btn {
+    display: block;
+    border: 1px solid #007dcc;
+    background: #1c98e7;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.2s ease-in 0s;
+    &:hover {
+        background: #38B1FE;
+        border: 1px solid #3399e0;
+    }
+}
+
+// 灰色按钮
+%gray-btn {
+    display: block;
+    border: 1px solid #d1d1d1;
+    background: #f2f2f2;
+    color: #555;
+    text-align: center;
+    font-size: 14px;
+    transition: all 0.2s ease-in 0s;
+    &:hover {
+        background: #fff;
+        border: 1px solid #d0d0d0;
+    }
+}
+
+// 橙色按钮
+%orange-btn {
+    display: block;
+    background: #f60;
+    border: 1px solid #e44b15;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.2s ease-in 0s;
+    &:hover {
+        background: #FF7F18;
+        border: 1px solid #E65D02;
+    }
+}
+
+// 橙色强调
+%orange {
+    font-style: normal;
+    color: #f60;
+}
+
+// 红色
+%red {
+    font-style: normal;
+    color: #de0000;
+}
+
+// 多屏电影轮播
+%index-main-title {
+    .main-title {
+        position: relative;
+        > .tit {
+            display: inline-block;
+            font-size: 24px;
+            color: #111;
+            line-height: 54px;
+            padding-top: 15px;
+        }
+        > .more {
+            display: inline-block;
+            color: #444;
+            font-size: 14px;
+            margin-left: 16px;
+        }
+    }
+}
+
+%movie-slider-module {
+    @extend %index-main-title;
+}
+
+%row-wrapper {
+    position: relative;
+    width: $mainWidth;
+    margin: 0 auto;
+}
+
+// 错误成功 icon图标
+// 分为24*24，16*16两种规格，默认使用16*16
+%result-icon {
+    &:before {
+        display: inline-block;
+        content: '';
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+        background-image: url(#{$commonBg}/result-icon.png);
+        background-repeat: no-repeat;
+        vertical-align: middle;
+    }
+}
+
+// 懒加载背景图
+%lazy-bg {
+    display: block;
+    background: #efefef url(#{$commonBg}/loading.png) center center no-repeat;
+}
+
+// 载入中菊花图
+// 懒加载背景图
+%loading-bg {
+    display: block;
+    background: #efefef url(#{$commonBg}/loading.gif) center center no-repeat;
+}
+
+// 背景图路径简写
+@mixin bg($bgname, $type: "app", $left: center, $top: center) {
+    @if $type == "app" {
+        background-image: url(#{$appBg}/#{$bgname});
+    }
+    @else if $type == "common" {
+        background-image: url(#{$commonBg}/#{$bgname});
+    }
+    @else if $type == "utils" {
+        background-image: url(#{$utilsBg}/#{$bgname});
+    }
+    @else {
+        background-image: url(#{$appBg}/#{$bgname});
+    }
+    background-position: $left $top;
+    background-repeat: no-repeat;
+}
+
+// 垂直渐变背景
+@mixin gradient-vertical($direction, $start, $end, $times: 1) {
+    // background: $start;
+    @if $direction == top {
+        $direction: to bottom;
+    }
+    @else if $direction == bottom {
+        $direction: to top;
+    }
+    @if $times == 1 {
+        background-image: none;
+    }
+    @else {
+        $all: linear-gradient($direction, $start, $end);
+        @for $i from 2 to $times {
+            $all: append($all, linear-gradient($direction, $start, $end), comma);
+        }
+        background-image: $all;
+    }
+}
+
+// clearfix
+%clearfix {
+    &:before, &:after {
+        content: '';
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// 文本溢出
+%ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 文本折行切断
+%word-break {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+%text-hide {
+    display: block;
+    text-indent: -9999em;
+    overflow: hidden;
+}
+
+// 文本折行溢出，显示省略号
+// 只是适合webkit浏览器
+@mixin line-clamp($clamps: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $clamps;
+    -webkit-box-orient: vertical;
+}
+
+// css小三角
+%triangle-basic {
+    content: "";
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+@mixin triangle($direction, $size, $borderColor) {
+    @extend %triangle-basic;
+    @if $direction == top {
+        border-bottom: $size solid $borderColor;
+        border-left: $size dashed transparent;
+        border-right: $size dashed transparent;
+    }
+    @else if $direction == right {
+        border-left: $size solid $borderColor;
+        border-top: $size dashed transparent;
+        border-bottom: $size dashed transparent;
+    }
+    @else if $direction == bottom {
+        border-top: $size solid $borderColor;
+        border-left: $size dashed transparent;
+        border-right: $size dashed transparent;
+    }
+    @else if $direction == left {
+        border-right: $size solid $borderColor;
+        border-top: $size dashed transparent;
+        border-bottom: $size dashed transparent;
+    }
+}

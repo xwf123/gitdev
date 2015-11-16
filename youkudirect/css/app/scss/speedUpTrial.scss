@@ -1,0 +1,199 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../widgets/scss/header";
+@import "../../widgets/scss/footer";
+@import "../../../js/utils/dialog/dist/ui-dialog";
+
+.trial-box {
+    width: 100%;
+    margin: 0px auto 0;
+    padding: 0px 0px 50px;
+    overflow: hidden;
+    background: #efefef;
+    .trial-banner {
+        width: 100%;
+        @include bg("speed_bg.jpg");
+        height: 997px;
+        overflow: hidden;
+        position: relative;
+        .speed-button {
+            @include bg("speed_button.png");
+            background-color: transparent;
+            width: 168px;
+            height: 63px;
+            position: absolute;
+            left: 50%;
+            margin-left: -90px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            line-height: 63px;
+            top: 372px;
+        }
+        .speed-on {
+            @include bg("speed_button.png");
+            background-color: transparent;
+            width: 168px;
+            height: 63px;
+            position: absolute;
+            left: 50%;
+            margin-left: -90px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+            line-height: 63px;
+            top: 372px;
+        }
+        .trial-pointer {
+            @include bg("time_pointer.png");
+            background-position: center 0;
+            width: 160px;
+            height: 146px;
+            position: absolute;
+            left: 50%;
+            margin-left: -86px;
+            top: 257px;
+        }
+        .pointer {
+            -webkit-animation-name: pointer;
+            animation-name: pointer;
+            -webkit-animation: pointer 2s 1;
+            animation: pointer 2s 1;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+        }
+        @-webkit-keyframes pointer {
+            5% {
+                -webkit-transform: rotate(-10deg);
+            }
+            80% {
+                -webkit-transform: rotate(-120deg);
+            }
+            100% {
+                -webkit-transform: rotate(120deg);
+            }
+        }
+
+        @keyframes pointer {
+            5% {
+                transform: rotate(-10deg);
+            }
+            80% {
+                transform: rotate(-120deg);
+            }
+            100% {
+                transform: rotate(120deg);
+            }
+        }
+    }
+    .first-part {
+        @include bg("speed_moden.jpg");
+        width: 100%;
+        background-color: #0ec1a1;
+        height: 500px;
+        overflow: hidden;
+    }
+    .two-part {
+        @include bg("speed_moden1.jpg");
+        width: 100%;
+        background-color: #00b76f;
+        height: 492px;
+        overflow: hidden;
+    }
+    .vip-pay-button {
+        width: 100%;
+        background-color: #486995;
+        height: 418px;
+        overflow: hidden;
+        .net-speed-info {
+            width: 1010px;
+            margin: 62px auto 0;
+            border: 1px dotted #fff;
+            height: 128px;
+            overflow: hidden;
+            position: relative;
+            dl {
+                position: absolute;
+                top: 7px;
+                left: 55px;
+                color: #fff;
+                width: 645px;
+            }
+            dt {
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 50px;
+            }
+            dd {
+                font-size: 16px;
+                line-height: 28px;
+            }
+            a.pay-vip-button {
+                position: absolute;
+                top: 35px;
+                left: 780px;
+                width: 190px;
+                height: 60px;
+                border: 2px solid #fff;
+                border-radius: 2px;
+                background: #f15736;
+                -webkit-border-radius: 2px;
+                font-size: 22px;
+                text-align: center;
+                line-height: 60px;
+                color: #fff;
+            }
+        }
+        .warmth-tips {
+            width: 1010px;
+            margin: 35px auto 0;
+            height: 170px;
+            overflow: hidden;
+            position: relative;
+            color: #000;
+            dt {
+                font-size: 24px;
+                font-weight: bold;
+                line-height: 32px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            dd {
+                position: absolute;
+                top: 0;
+                left: 135px;
+                font-size: 14px;
+                line-height: 28px;
+                width: 880px;
+            }
+        }
+    }
+    .privilege-ad {
+        @include bg("privilege_speed_icon.png");
+        background-color: #efefef;
+        width: 100%;
+        height: 282px;
+        overflow: hidden;
+    }
+}
+
+/*浮层*/
+
+.dialog-small-title {
+    padding: 0;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+/*pay-info*/
+
+.ui-dialog-title {
+    text-align: center;
+}
+
+.on-accelerate {
+    padding-left: 20px;
+}

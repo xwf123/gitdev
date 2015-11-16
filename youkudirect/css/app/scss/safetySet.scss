@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../widgets/scss/header";
+@import "../../widgets/scss/footer";
+
+.safecity-wrapper {
+    margin-top: 60px;
+    @extend %row-wrapper;
+}

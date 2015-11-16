@@ -1,0 +1,143 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../widgets/scss/header";
+@import "../../widgets/scss/footer";
+@import "../../../js/utils/dialog/dist/ui-dialog";
+
+.vip-card-wrapper {
+    width: $mainWidth;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #888;
+    margin-top: 60px;
+    @include bg("vipcard.png", "app", 600px, 56px);
+}
+
+%card-h2-title {
+    font-size: 24px;
+    color: #888;
+    font-weight: normal;
+}
+
+.card-form {
+    .h2 {
+        @extend %card-h2-title;
+        line-height: 44px;
+        margin-bottom: 10px;
+    }
+    .frm-error {
+        display: none;
+        color: #ab0707;
+        line-height: 1.5;
+        margin: 10px 0;
+        margin-left: 100px;
+        @extend %result-icon;
+        &:before {
+            background-position: 0 -64px;
+        }
+    }
+    .frm-item {
+        @extend %clearfix;
+        margin-bottom: 20px;
+        label {
+            float: left;
+            width: 86px;
+            margin-right: 14px;
+            line-height: 36px;
+            text-align: right;
+            cursor: pointer;
+        }
+        .pwd-txt, .code-txt {
+            float: left;
+            height: 26px;
+            border: 1px solid #d7d7d7;
+            color: #555;
+            font-size: 14px;
+            padding: 4px;
+            overflow: hidden;
+        }
+        .vcode-img, .switch-vcode {
+            float: left;
+        }
+        .vcode-img {
+            width: 94px;
+            height: 36px;
+            margin-left: 10px;
+            img {
+                border: 1px solid #eee;
+            }
+        }
+        .switch-vcode {
+            padding: 0 10px;
+            height: 34px;
+            line-height: 34px;
+            color: #888;
+        }
+        .pwd-txt {
+            width: 262px;
+        }
+        .code-txt {
+            width: 128px;
+        }
+        .submit-btn {
+            margin-left: 100px;
+            width: 138px;
+            height: 40px;
+            border: 1px solid #007dcc;
+            color: #fff;
+            text-align: center;
+            line-height: 34px;
+            font-size: 14px;
+            background: #1c98e7;
+        }
+    }
+}
+
+// 会员卡使用说明
+.card-intro {
+    padding-top: 34px;
+    .h2 {
+        @extend %card-h2-title;
+        line-height: 36px;
+        margin-bottom: 10px;
+    }
+    ol {
+        line-height: 25px;
+        list-style: decimal;
+        padding-left: 20px;
+    }
+    .server-tel {
+        line-height: 34px;
+        padding-left: 20px;
+    }
+}
+
+// 激活成功失败浮层
+.active-card-result {
+    text-align: center;
+    padding: 30px 20px;
+    > .inner {
+        display: inline-block;
+        text-align: left;
+    }
+    p {
+        line-height: 30px;
+    }
+    .d-error {
+        @extend %result-icon;
+        padding-left: 22px;
+        &:before {
+            margin-left: -22px;
+            background-position: 0 -64px;
+        }
+    }
+    .d-success {
+        @extend %result-icon;
+        padding-left: 22px;
+        &:before {
+            margin-left: -22px;
+            background-position: 0 0;
+        }
+    }
+}

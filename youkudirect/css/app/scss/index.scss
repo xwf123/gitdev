@@ -1,0 +1,1078 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../widgets/scss/header";
+@import "../../widgets/scss/footer";
+@import "../../../js/utils/slider/dist/slider";
+@import "../../../js/utils/slider/dist/easySwitch";
+
+/* 
+*----------
+*登录模块
+*-------------
+ */
+.lazy-bg {
+    @extend %lazy-bg;
+}
+
+.index-login-box {
+    position: absolute;
+    width: 270px;
+    padding: 0 20px;
+    height: 370px;
+    right: 0;
+    top: 50px;
+    z-index: 3;
+    color: #555;
+    font-size: 14px;
+    @include bg("index-login-bg.png");
+    .orange {
+        color: #f60;
+    }
+    em {
+        font-style: normal;
+    }
+    // 登录信息区域
+    .log-mod {
+        position: relative;
+        height: 132px;
+    }
+    // 登录后信息区域
+    // 特权提示信息
+    .vip-tips {
+        height: 38px;
+        line-height: 38px;
+        text-align: center;
+        border-width: 1px 0;
+        border-style: dashed;
+        border-color: #dadada;
+    }
+    // 特权模块
+    .privilege-mod {
+        position: relative;
+        height: 70px;
+        padding: 20px 0;
+        ul {
+            margin-bottom: -10px;
+            overflow: hidden;
+        }
+        ul:before {
+            position: absolute;
+            content: '';
+            width: 0;
+            top: 20px;
+            bottom: 20px;
+            overflow: hidden;
+            left: 50%;
+            border-left: 1px dashed #dadada;
+        }
+        a {
+            color: #555;
+            text-decoration: underline;
+        }
+        li {
+            float: left;
+            width: 50%;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+        .item {
+            position: relative;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            color: #555;
+            overflow: hidden;
+            text-decoration: none;
+            &:before {
+                position: absolute;
+                content: '';
+                width: 30px;
+                height: 30px;
+                left: 24px;
+                top: 5px;
+                @include bg("privilege-small.png", "app", 0, 0);
+            }
+            span {
+                margin: 0 8px 0 52px;
+            }
+        }
+        &.isvip {
+            .item {
+                &:before {
+                    left: 4px;
+                }
+                span {
+                    margin: 0 8px 0 32px;
+                }
+            }
+        }
+        .no-ad {
+            .item:before {
+                background-position: 0 0;
+            }
+        }
+        .free-ticket {
+            .item:before {
+                background-position: 0 -30px;
+            }
+        }
+        .half-price {
+            .item:before {
+                background-position: 0 -60px;
+            }
+        }
+        .vip-speed {
+            .item:before {
+                background-position: 0 -90px;
+            }
+        }
+    }
+    // 过期会员
+    .privilege-mod.outdate-vip {
+        .no-ad {
+            .item:before {
+                background-position: -37px 0;
+            }
+        }
+        .free-ticket {
+            .item:before {
+                background-position: -37px -30px;
+            }
+        }
+        .half-price {
+            .item:before {
+                background-position: -37px -60px;
+            }
+        }
+        .vip-speed {
+            .item:before {
+                background-position: -37px -90px;
+            }
+        }
+    }
+    // 会员特权
+    .privilege-mod.isvip {
+        ul:before {
+            display: none;
+        }
+        li {
+            width: 100%;
+        }
+    }
+    // 购买会员按钮
+    .pay-btn {
+        display: block;
+        width: 268px;
+        height: 38px;
+        @extend %orange-btn;
+        line-height: 38px;
+        text-align: center;
+        color: #fff;
+    }
+    // 喇叭信息
+    .news {
+        display: block;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        overflow: hidden;
+        color: #555;
+        &:before {
+            display: inline-block;
+            content: '';
+            width: 15px;
+            height: 14px;
+            vertical-align: middle;
+            @include bg("crown-icon.png", "app", -7px, 0);
+        }
+        span {
+            padding-left: 14px;
+        }
+    }
+    // 未登录状态
+    .log-out-state {
+        .login-txt {
+            position: absolute;
+            @extend %main-link;
+            font-size: 12px;
+            right: 0;
+            top: 16px;
+        }
+        .login-logo {
+            position: absolute;
+            width: 110px;
+            height: 100px;
+            left: 50%;
+            top: 50%;
+            margin: -50px 0 0 -55px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 0;
+            @include bg("index-logout-bg.png", "app", 0, 0);
+            &.active, &:hover {
+                background-position: 0 -111px;
+                font-size: 14px;
+            }
+        }
+    }
+    // 登录状态
+    .login-state {
+        .user-info {
+            padding: 23px 0 12px 0;
+        }
+        .user-img {
+            float: left;
+            width: 98px;
+            height: 98px;
+            border-radius: 100%;
+            overflow: hidden;
+            margin-right: 12px;
+            img {
+                display: block;
+                width: 98px;
+                height: 98px;
+            }
+        }
+        h2 {
+            height: 31px;
+            line-height: 31px;
+            font-size: 16px;
+            overflow: hidden;
+            span {
+                float: left;
+                max-width: 124px;
+                color: #f00;
+                @extend %ellipsis;
+            }
+            &:after {
+                float: left;
+                content: '';
+                margin: 7px 6px 0 6px;
+                width: 22px;
+                height: 16px;
+                @include bg("vip-level-icons.png", "app", 0, 0);
+            }
+        }
+        .no-vip-0-0 {
+            &:after {
+                background: none;
+            }
+        }
+        .light-1-1 {
+            &:after {
+                background-position: 0px 0px;
+                width: 35px;
+            }
+        }
+        .light-1-0 {
+            &:after {
+                background-position: 0px 0px;
+            }
+        }
+        .light-2-1 {
+            &:after {
+                background-position: 0px -16px;
+                width: 35px;
+            }
+        }
+        .light-2-0 {
+            &:after {
+                background-position: 0px -16px;
+            }
+        }
+        .light-3-1 {
+            &:after {
+                background-position: 0px -32px;
+                width: 35px;
+            }
+        }
+        .light-3-0 {
+            &:after {
+                background-position: 0px -32px;
+            }
+        }
+        .light-4-1 {
+            &:after {
+                background-position: 0px -48px;
+                width: 35px;
+            }
+        }
+        .light-4-0 {
+            &:after {
+                background-position: 0px -48px;
+            }
+        }
+        .light-5-1 {
+            &:after {
+                background-position: 0px -64px;
+                width: 35px;
+            }
+        }
+        .light-5-0 {
+            &:after {
+                background-position: 0px -64px;
+            }
+        }
+        .light-6-1 {
+            &:after {
+                background-position: 0px -80px;
+                width: 35px;
+            }
+        }
+        .light-6-0 {
+            &:after {
+                background-position: 0px -80px;
+            }
+        }
+        .light-7-1 {
+            &:after {
+                background-position: 0px -96px;
+                width: 35px;
+            }
+        }
+        .light-7-0 {
+            &:after {
+                background-position: 0px -96px;
+            }
+        }
+        .vip-1-1 {
+            &:after {
+                background-position: 0px -112px;
+                width: 35px;
+            }
+        }
+        .vip-1-0 {
+            &:after {
+                background-position: 0px -112px;
+            }
+        }
+        .vip-2-1 {
+            &:after {
+                background-position: 0px -128px;
+                width: 35px;
+            }
+        }
+        .vip-2-0 {
+            &:after {
+                background-position: 0px -128px;
+            }
+        }
+        .vip-3-1 {
+            &:after {
+                background-position: 0px -144px;
+                width: 35px;
+            }
+        }
+        .vip-3-0 {
+            &:after {
+                background-position: 0px -144px;
+            }
+        }
+        .vip-4-1 {
+            &:after {
+                background-position: 0px -160px;
+                width: 35px;
+            }
+        }
+        .vip-4-0 {
+            &:after {
+                background-position: 0px -160px;
+            }
+        }
+        .vip-5-1 {
+            &:after {
+                background-position: 0px -176px;
+                width: 35px;
+            }
+        }
+        .vip-5-0 {
+            &:after {
+                background-position: 0px -176px;
+            }
+        }
+        .vip-6-1 {
+            &:after {
+                background-position: 0px -192px;
+                width: 35px;
+            }
+        }
+        .vip-6-0 {
+            &:after {
+                background-position: 0px -192px;
+            }
+        }
+        .vip-7-1 {
+            &:after {
+                background-position: 0px -208px;
+                width: 35px;
+            }
+        }
+        .vip-7-0 {
+            &:after {
+                background-position: 0px -208px;
+            }
+        }
+        .no-vip-1-1 {
+            &:after {
+                background-position: 0px -224px;
+                width: 35px;
+            }
+        }
+        .no-vip-1-0 {
+            &:after {
+                background-position: 0px -224px;
+            }
+        }
+        .no-vip-2-1 {
+            &:after {
+                background-position: 0px -240px;
+                width: 35px;
+            }
+        }
+        .no-vip-2-0 {
+            &:after {
+                background-position: 0px -240px;
+            }
+        }
+        .no-vip-3-1 {
+            &:after {
+                background-position: 0px -256px;
+                width: 35px;
+            }
+        }
+        .no-vip-3-0 {
+            &:after {
+                background-position: 0px -256px;
+            }
+        }
+        .no-vip-4-1 {
+            &:after {
+                background-position: 0px -272px;
+                width: 35px;
+            }
+        }
+        .no-vip-4-0 {
+            &:after {
+                background-position: 0px -272px;
+            }
+        }
+        .no-vip-5-1 {
+            &:after {
+                background-position: 0px -288px;
+                width: 35px;
+            }
+        }
+        .no-vip-5-0 {
+            &:after {
+                background-position: 0px -288px;
+            }
+        }
+        .no-vip-6-1 {
+            &:after {
+                background-position: 0px -304px;
+                width: 35px;
+            }
+        }
+        .no-vip-6-0 {
+            &:after {
+                background-position: 0px -304px;
+            }
+        }
+        .no-vip-7-1 {
+            &:after {
+                background-position: 0px -320px;
+                width: 35px;
+            }
+        }
+        .no-vip-7-0 {
+            &:after {
+                background-position: 0px -320px;
+            }
+        }
+        .vip, .noad-vip {
+            &:after {
+                background-position: -5px -24px;
+            }
+        }
+        .light-vip {
+            &:after {
+                background-position: -5px -50px;
+            }
+        }
+        .not-vip, .outdate-vip {
+            span {
+                color: #555;
+            }
+            &:after {
+                background-position: -5px -76px;
+            }
+        }
+        .user-info p {
+            line-height: 31px;
+        }
+        .end-date {
+            height: 24px;
+            overflow: hidden;
+            > a {
+                float: left;
+                color: #555;
+            }
+            &:after {
+                margin: 8px 0 0 6px;
+                float: left;
+                content: '';
+                width: 17px;
+                height: 17px;
+                @include bg("crown-icon.png", "app", -7px, -102px);
+            }
+        }
+    }
+    // 登录异常
+    .warning-login {
+        text-align: center;
+        line-height: 30px;
+        .warning-tips {
+            border-top: 1px dashed #dadada;
+            padding: 16px 0;
+            color: #f00;
+        }
+        .help {
+            padding: 18px 0;
+            border: 1px dashed #dadada;
+            border-left: 0;
+            border-right: 0;
+        }
+        p {
+            line-height: 26px;
+        }
+        .tel {
+            font-size: 18px;
+            line-height: 34px;
+        }
+    }
+}
+
+/* 
+*----------
+*轮播大图
+*-------------
+ */
+.index-main-slider {
+    // width: 1190px;
+    position: relative;
+    width: 100%;
+    height: 470px;
+    margin: 0 auto;
+    background-color: #efefef;
+    // @extend %lazy-bg;
+    // background-position: 376px center;
+    &:before {
+        position: absolute;
+        content: '';
+        left: 50%;
+        top: 50%;
+        width: 108px;
+        height: 84px;
+        margin: -42px 0 0 -209px;
+        @extend %lazy-bg;
+    }
+    .switch-play-btn {
+        position: absolute;
+        left: 50%;
+        margin-left: -595px;
+        width: 1190px;
+        height: 0;
+        bottom: 0;
+    }
+    .switch-prev, .switch-next {
+        @include bg("slider-btns.png", "app", 0, 0);
+        @extend %text-hide;
+        border-radius: 100%;
+        top: -235px;
+    }
+    .switch-prev {
+        left: 22px;
+        background-position: -3px -3px;
+    }
+    .switch-next {
+        right: 350px;
+        background-position: -1px -59px;
+    }
+    .switch-number {
+        // width: 100%;
+        width: 860px;
+        left: 0;
+        left: 50%;
+        margin-left: -594px;
+        text-align: center;
+        font-size: 0;
+        bottom: 10px;
+    }
+    .switch-number a {
+        float: none;
+        display: inline-block;
+        padding: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background: #fff;
+        margin: 0 6px;
+        @extend %text-hide;
+        overflow: hidden;
+        &.current {
+            width: 12px;
+            height: 12px;
+            margin: 0 9px;
+            background: #69aaec;
+        }
+    }
+}
+
+.index-main-body {
+    margin: 0 auto;
+    // background: $bodyBg;
+    padding-bottom: 46px;
+}
+
+.row-wrapper, .today-welfare, .privilege, .movie-slider-module {
+    @extend %row-wrapper;
+}
+
+/* 今日福利 */
+.today-welfare {
+    @extend %index-main-title;
+    .bd {
+        overflow: hidden;
+        height: 282px;
+        ul {
+            @extend %clearfix;
+            margin-right: -19px;
+        }
+        li {
+            float: left;
+            width: 384px;
+            margin-right: 19px;
+        }
+        .no-result, .loading-state {
+            height: 282px;
+            line-height: 282px;
+            color: #555;
+            font-size: 14px;
+            text-align: center;
+        }
+        .loading-state {
+            @extend %loading-bg;
+        }
+    }
+    // 已经领取
+    .geted-welfare, .none-welfare {
+        position: relative;
+        &:before {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 122px;
+            height: 110px;
+            content: '';
+            z-index: 3;
+            @include bg("get-present.png", "app", 0, 0);
+        }
+        &:after {
+            position: absolute;
+            content: '';
+            left: 0;
+            top: 0;
+            height: 200px;
+            width: 100%;
+            z-index: 2;
+            background: #000;
+            opacity: 0.5;
+        }
+    }
+    .none-welfare {
+        &:before {
+            background-position: 0 -138px;
+        }
+    }
+    .desc {
+        position: relative;
+        padding: 16px 122px 16px 20px;
+        background: #fff;
+        h2 {
+            line-height: 26px;
+            color: #555;
+            font-size: 16px;
+            @extend %ellipsis;
+        }
+        p {
+            color: #555;
+            font-size: 14px;
+            line-height: 24px;
+            @extend %ellipsis;
+            span {
+                margin-right: 8px;
+            }
+        }
+        em {
+            padding: 0 3px;
+            font-style: normal;
+        }
+        // 获取礼物，如何使用按钮
+        .get-present-btn, .how-use-btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            margin-top: -19px;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            @extend %blue-btn;
+        }
+        .how-use-btn {
+            @extend %gray-btn;
+        }
+    }
+    .none-welfare .desc em {
+        color: #f00;
+    }
+}
+
+.row-wrapper {
+    @extend %clearfix;
+}
+
+/* 观影团 */
+.movie-watcher {
+    float: left;
+    @extend %index-main-title;
+    .bd {
+        .lazy-bg {
+            float: left;
+        }
+    }
+    .desc {
+        position: relative;
+        padding: 0 20px;
+        width: 366px;
+        height: 200px;
+        background: #fff;
+        overflow: hidden;
+        color: #888;
+        font-size: 14px;
+        h2 {
+            font-size: 20px;
+            color: #111;
+            line-height: 62px;
+            border-bottom: 1px solid #f4f4f4;
+            max-width: 270px;
+            @extend %ellipsis;
+        }
+        ul {
+            padding-top: 10px;
+        }
+        li {
+            @extend %ellipsis;
+            line-height: 29px;
+        }
+        strong {
+            color: #555;
+            font-weight: normal;
+        }
+        .more {
+            position: absolute;
+            width: 88px;
+            height: 26px;
+            line-height: 26px;
+            right: 20px;
+            top: 18px;
+            @extend %blue-btn;
+        }
+    }
+}
+
+/* 会员特权 */
+.privilege {
+    position: relative;
+    @extend %index-main-title;
+    .privilege-menu {
+        position: absolute;
+        top: 28px;
+        left: 114px;
+        a {
+            float: left;
+            height: 28px;
+            padding: 0 23px;
+            line-height: 28px;
+            color: #444;
+            font-size: 14px;
+            &.active {
+                color: #fff;
+                background: #1c98e7;
+            }
+        }
+    }
+    .privilege-cont {
+        overflow: hidden;
+        .privilege-list {
+            @extend %clearfix;
+            margin-right: -10px;
+            display: none;
+        }
+        li {
+            float: left;
+            margin-right: 10px;
+            > a {
+                display: block;
+                width: 230px;
+                height: 60px;
+                padding: 25px 0;
+                background: #fcfcfd;
+                transition: background 0.2s ease-in 0s;
+                &:hover {
+                    background: #fff;
+                }
+            }
+        }
+        .icon {
+            float: left;
+            height: 100%;
+            margin-left: 22px;
+            width: 62px;
+            @include bg("privilege-sprites.png", "app", 0, 0);
+        }
+        // 最热
+        .no-ad .icon {
+            margin-right: 17px;
+            background-position: -20px -11px;
+        }
+        .vip-free .icon {
+            margin-left: 12px;
+            margin-right: 8px;
+            background-position: -100px -11px;
+        }
+        .vip-speed .icon {
+            margin-right: 20px;
+            background-position: -180px -11px;
+        }
+        .free-ticket .icon {
+            margin-right: 17px;
+            background-position: -260px -11px;
+        }
+        .half-price .icon {
+            margin-right: 19px;
+            background-position: -341px -11px;
+        }
+        // 最新
+        .my-video .icon {
+            margin-left: 8px;
+            margin-right: 4px;
+            background-position: -20px -134px;
+        }
+        .live-view .icon {
+            margin-left: 10px;
+            margin-right: 10px;
+            background-position: -100px -134px;
+        }
+        .speed-rank .icon {
+            margin-right: 20px;
+            background-position: -180px -134px;
+        }
+        .face .icon {
+            margin-right: 17px;
+            background-position: -260px -134px;
+        }
+        .red-name .icon {
+            margin-right: 19px;
+            background-position: -341px -134px;
+        }
+        .my-upload .icon {
+            margin-right: 14px;
+            margin-left: 14px;
+            background-position: -418px -134px;
+        }
+    }
+    .desc {
+        color: #555;
+        line-height: 24px;
+        h2 {
+            line-height: 24px;
+            font-size: 16px;
+            padding-top: 6px;
+        }
+        .txt {
+            @extend %ellipsis;
+            em {
+                color: #f00;
+                font-style: normal;
+            }
+        }
+    }
+}
+
+/* 其他内容 */
+.other-placeholder {
+    float: right;
+    width: 384px;
+    @extend %index-main-title;
+}
+
+/* 会员活动和直播 */
+.vip-activity {
+    float: left;
+    @extend %index-main-title;
+    overflow: hidden;
+    ul {
+        @extend %clearfix;
+        margin-right: -20px;
+    }
+    li {
+        float: left;
+        width: 420px;
+        margin-right: 20px;
+    }
+    .bd {
+        .desc {
+            line-height: 54px;
+            color: #555;
+            font-size: 14px;
+            background: #fff;
+            p, a {
+                display: block;
+                @extend %ellipsis;
+                padding-left: 20px;
+                color: #555;
+                transition: all 0.2s ease-in 0s;
+            }
+            a:hover {
+                color: #888;
+            }
+        }
+    }
+}
+
+// 直播
+.live {
+    float: right;
+    @extend %index-main-title;
+    overflow: hidden;
+    .bd {
+        margin-bottom: -20px;
+        li {
+            margin-bottom: 20px;
+        }
+        .desc {
+            line-height: 54px;
+            color: #555;
+            font-size: 14px;
+            background: #fff;
+            p, a {
+                display: block;
+                @extend %ellipsis;
+                padding-left: 20px;
+                color: #555;
+                transition: all 0.2s ease-in 0s;
+            }
+            a:hover {
+                color: #888;
+            }
+        }
+    }
+}
+
+.movie-slider-module {
+    @extend %movie-slider-module;
+}
+
+/*常见问题*/
+.gb-problem {
+    width: 1190px;
+    margin: 20px auto 0;
+    clear: both;
+    .problem-lists {
+        width: 860px;
+        float: left;
+    }
+    .contact-us {
+        width: 310px;
+        float: right;
+    }
+    .privilegelist .vip_headtitle {
+        margin-bottom: 0;
+    }
+    .vip-headtitle {
+        font-weight: normal;
+        font-size: 26px;
+        color: #909090;
+        line-height: 34px;
+        height: 34px;
+        overflow: hidden;
+        padding: 20px 0;
+        margin-top: 10px;
+        span {
+            font-size: 14px;
+            color: #909090;
+            margin: 0 10px 0 0;
+            cursor: pointer;
+        }
+    }
+    .fre-ask-body li {
+        width: 285px;
+        float: left;
+        a {
+            line-height: 30px;
+            height: 30px;
+            font-size: 14px;
+            color: #555;
+        }
+    }
+    .menber_weibo {
+        margin-top: 20px;
+        li {
+            height: 36px;
+            overflow: hidden;
+            line-height: 36px;
+            margin-bottom: 20px;
+            padding-left: 45px;
+            position: relative;
+            line-height: 36px;
+            height: 36px;
+            font-size: 18px;
+            color: #555;
+            a {
+                line-height: 36px;
+                height: 36px;
+                font-size: 18px;
+                color: #3399e0;
+            }
+        }
+    }
+    .weibosina {
+        @include bg("sns-icon.png", "app", 0, 0);
+        width: 45px;
+        height: 36px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .weiboweixin {
+        @include bg("sns-icon.png", "app", -46px, 0);
+        width: 45px;
+        height: 36px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .menber_weibo li.weiboweixinli {
+        height: 100px;
+    }
+    .erma {
+        position: absolute;
+        left: 102px;
+        top: -5px;
+    }
+    .erma img {
+        width: 75px;
+        height: 75px;
+    }
+}

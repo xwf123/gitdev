@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/app/dist/goldMember.css"/>
+</head>
+<body>
+<input type="hidden" id="result" value="{_$result_}"/>
+<!-- <input type="text" id="result" value="2"/> -->
+<!-- 判断会员登录 -->
+<div class="maskx"></div>
+<div class="mask-mobile">
+</div>
+<!-- 头部开始 -->
+<header class="gb-header">
+    <div class="inner">
+        <p class="logo">
+            <a href="#">
+                <img src="" alt="">优酷会员</a>
+        </p>
+        <a href="#" class="youku-index">优酷首页</a>
+        <nav class="main-nav" id="J-nav">
+            <ul>
+                <li class="main-nav-item active" data-tag="index">
+                    <a href="#">首页</a>
+                </li>
+                <li class="main-nav-item" data-tag="vip-movie">
+                    <a href="#">会员影院</a>
+                </li>
+                <li class="main-nav-item" data-tag="vip-privilege">
+                    <a href="#">会员特权</a>
+                    <nav class="sub-nav">
+                        <div class="inner">
+                            <ul>
+                                <li>
+                                    <a href="#">会员特权首页</a>
+                                </li>
+                                <li>
+                                    <a href="#">会员特权详情页</a>
+                                </li>
+                                <li>
+                                    <a href="http://cms.g.youku.com/ykvip/gameprivilege?from=vip-game">游戏特权</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="nav-icon"></span>
+                    </nav>
+                </li>
+                <li class="main-nav-item" data-tag="vip-rank">
+                    <a href="#">会员等级</a>
+                </li>
+                <li class="main-nav-item" data-tag="light-vip">
+                    <a href="#">轻会员</a>
+                </li>
+                <li class="main-nav-item" data-tag="my-account">
+                    <a href="#">我的账户</a>
+                    <nav class="sub-nav">
+                        <div class="inner">
+                            <ul>
+                                <li>
+                                    <a href="#">账户信息</a>
+                                </li>
+                                <li>
+                                    <a href="#">观影券</a>
+                                </li>
+                                <li>
+                                    <a href="#">交易记录</a>
+                                </li>
+                                <li>
+                                    <a href="#">安全设置</a>
+                                </li>
+                                <li>
+                                    <a href="#">会员卡激活</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="nav-icon"></span>
+                    </nav>
+                </li>
+                <li class="main-nav-item" data-tag="wopai">
+                    <a href="http://4g.youku.com/wl/youku/wo/index.html" target="_blank">沃派优酷专区</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="J-header-login" class="header-login">
+            <!-- 需要登录 -->
+            <div class="need-login" style="display:none;">
+                <a href="#" class="login-btn J-login">登录</a>
+                <a href="#" class="register-btn">注册</a>
+            </div>
+            <!-- 登录后界面 -->
+            <div class="login-out">
+                <div class="u-small-img">
+                    <a href="http://i.youku.com/u/home/" class="user-small-img">
+                        <img src="http://static.youku.com/user/img/avatar/30/6.jpg" alt="">
+                    </a>
+                </div>
+                <a href="#" class="user-name">黄小琥wanda广场haiyoushui</a><i class="vip-5-1"></i>
+                <a href="#" class="login-out-btn J-logout">登出</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- 头部结束 -->
+<div class="headertop">
+    <div class="section">
+        <div class="headertop-btn">
+            <div class="subscribe"></div>
+            <div class="share">
+                <div class="shareico">
+                    <div class="textshare">分享</div>
+                    <a title="转发到QQ空间" href="" target="_blank" class="qzone"></a>
+                    <a title="转发到微博" href="" target="_blank" class="weibo"></a>
+                    <a title="转发给QQ好友" href="" target="_blank" class="qq_q"></a>
+                    <a title="转发到微信" href="" target="_blank" class="weixin"></a>
+                    <a title="转发到百度贴吧" href=""  target="_blank" class="tieba"></a>
+                    <a title="转发到豆瓣" href="" target="_blank" class="douban"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="playbox">
+    <div class="section">
+        <div class="contentbox">
+            <div id="player_container"></div>
+        </div>
+    </div>
+</div>
+<div class="introduction">
+    <div class="section">
+        <!--<div class="lead"></div>-->
+        <!--<div class="img"><img src="http://r4.ykimg.com/050D000055C1D53667BC3C5B85088413"/></div>-->
+        <!--<div class="introduction-desc">-->
+          <!--<h2><span><img src="images/playicon.png"/></span><span class="title">美国狙击手》American Sniper</span></h2>-->
+            <!--<dl>-->
+                <!--<dt>导　　演：克林特·伊斯特伍德</dt>-->
+                <!--<dt>主要演员：布莱德利·库珀 / 西耶娜·米勒 / 凯尔·加尔纳 / 卢克·葛莱姆斯 / 杰克·麦克道曼 ...</dt>-->
+                <!--<dd>剧情简介：克里斯·凯尔（布莱德利·库珀 Bradley-->
+                    <!--Cooper饰）原本是一名普通美国牛仔，“911”事件以后他以30岁的高龄参加了海豹突击队并成为了伊拉克战场上的一名优秀狙击手。参军之后克里斯认识了塔雅（西耶娜·米勒 Sienna Miller-->
+                    <!--饰）两人很快结婚生子，但是随着克里斯的多次出征伊拉克，两人的家庭发生了很多问题。战场上的克里斯十分优秀，被队友称呼为“传奇”，恐怖分子以高额奖金请职业狙击手猎杀他，但屡次都未得手，可是身边的队友却一个个遭遇不测，虽然妻子三番五次恳求他退伍，但是他抱着为队友复仇的信念最后一次出征……-->
+                <!--</dd>-->
+            <!--</dl>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<div class="aboutcolumn">
+    <div class="movie-slider-module">
+        <div class="m-slider simple coming-movie">
+            <div class="move">
+                <a href="#" class="prev">prev</a>
+                <a href="#" class="next">next</a>
+            </div>
+            <div class="inner">
+                <ul class="slider-box">
+                    <!--<li class="slider-item">-->
+                        <!--<div class="slider-info-box">-->
+                            <!--<a href="#"><img data-original="images/temp/month-one.jpg" width="200" height="300" alt=""></a>-->
+                            <!--<div class="info">-->
+                                <!--<h2>格利佛游记1</h2>-->
+                                <!--<p class="txt">小职员误闯神秘小人国</p>-->
+                                <!--<a href="http://v.youku.com/v_show/id_XMTI4NjMwMDMzNg==.html" class="v-url">格利佛游记1</a>-->
+                                    <!--&lt;!&ndash; <a href="#" class="watch-btn">观看正片</a>-->
+                                    <!--<span class="filter"></span> &ndash;&gt;-->
+                     <!--</div>-->
+                 <!--</div>-->
+             <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer -->
+<div id="J-gb-problem" class="gb-problem">
+    <div class="problem-lists">
+        <div class="frequently-ask">
+            <div class="vip-headtitle">常见问题</div>
+            <div class="fre-ask-body">
+                <ul>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_101">什么是优酷会员？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_105">什么是优酷视频点播服务？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_109">为什么购买会员后还是有广告？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_102">如何成为优酷会员？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_106">如何购买点播影片？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_110">付费影片能否下载，海外地区能否享受服务？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_103">优酷会员有哪些特权？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_107">购买点播影片的有效期怎么计算？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_111">提示账号分享了怎么办？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_104">会员卡介绍及使用方法</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_108">观影券介绍及使用方法</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_112">会员账号被盗或丢失如何找回？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_113">什么是轻会员？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_114">轻会员和会员有什么区别？</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://svip.youku.com/help/new#faq_115">如何开通轻会员？</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="contact-us">
+        <div class="vip-headtitle">联系我们</div>
+        <div class="menber_weibo">
+            <ul>
+                <li>
+                    <div class="weibosina"></div>会员微博：
+                    <a target="_blank" href="http://weibo.com/youkuyuanxian">新浪微博</a>
+                </li>
+                <li class="weiboweixinli">
+                    <div class="weiboweixin"></div>微信：
+                        <span class="erma">
+                            <img src="images/yk-qrcode.jpg">
+                        </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="gb-footer">
+    <div class="charainfor">
+        <div class="chara_inner">
+            <div class="item">
+                <div class="item_inner">
+                    <strong>正版保障</strong>
+                    <p>正版片源，品质保证</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item_inner">
+                    <strong>高清快播</strong>
+                    <p>蓝光画质，优酷速度</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item_inner">
+                    <strong>稳健更新</strong>
+                    <p>院线大片，周周有更新</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item_inner">
+                    <strong>安全快捷</strong>
+                    <p>三重保护，支付方便</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="item_inner nobor">
+                    <strong>售后服务</strong>
+                    <p class="contact">
+                        <a target="_blank" href="http://www.youku.com/service/feed/subtype_30/">在线反馈</a>
+                        <br>客服电话：400-810-3568
+                        <br>会员客服QQ号：4008103568</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-box">
+        <div class="copyright">
+            <span>Copyright©2015优酷 youku.com 版权所有</span>
+            <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP证060288号</a>
+            <a class="icp" href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202006082400023" target="_blank" title="经营性网站备案">
+                经营性网站备案
+            </a>
+        </div>
+    </div>
+</div>
+<!--footer结束-->
+<script type="text/javascript">
+    // 底部弹框配置信息
+    var popsConfig = {
+        posid: '1',
+        pushAction: 'mockdata/data/pop.php', //推送消息的请求接口
+        watchAction: 'http://lantingting.m.vip.youku.com/index.php?c=popbox&a=log&callback=?',//监控关闭窗口，链接跳转接口
+
+        descAction:'http://yangqing.newvip.youku.com/?c=play&a=ajax_get_video_info',//简介描述接口
+        aboutcolumnAction:'http://yangqing.newvip.youku.com/?c=play&a=ajax_get_video_recommend',//关联项目接口
+        logdelayAction:'http://yangqing.newvip.youku.com/?c=play&a=ajax_send_video_recommend_log',//log推送
+        sendcodeAction:'http://yangqing.newvip.youku.com/?c=sms&a=ajax_sendsms',//发送验证码接口
+        binkMoileAction:'http://yangqing.newvip.youku.com/?c=play&a=ajax_bind_mobile',//绑定手机接口
+        subscribeAction:'http://yangqing.newvip.youku.com/?c=play&a=ajax_member_subscribe'//点击订阅接口
+    };
+</script>
+<script type="text/javascript" src="js/libs/require.js"></script>
+<script type="text/javascript" src="js/requirejs-config.js"></script>
+<script type="text/javascript" src="js/app/swfInsert.js"></script>
+<script type="text/javascript" src="js/app/flashVas.js"></script>
+</body>
+</html>

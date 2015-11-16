@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../widgets/scss/header";
+@import "../../widgets/scss/footer";
+
+.page-404 {
+    @extend %row-wrapper;
+    min-height: 500px;
+    @include bg("404-bg.png");
+}
+
+.tips-404 {
+    position: absolute;
+    width: 490px;
+    left: 374px;
+    top: 294px;
+    color: #8f6a01;
+    h1 {
+        line-height: 42px;
+        font-size: 24px;
+        color: #8f6a01;
+    }
+    ul {
+        font-size: 14px;
+    }
+    li {
+        position: relative;
+        padding-left: 10px;
+        &:before {
+            position: absolute;
+            content: '.';
+            font-weight: bold;
+            font-size: 18px;
+            left: 0;
+            top: -4px;
+        }
+        line-height: 24px;
+        a {
+            color: #0069a5;
+        }
+    }
+}

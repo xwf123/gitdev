@@ -1,0 +1,54 @@
+{{! 领取福利模板 }}
+
+{{#if result}}
+    <ul>
+    {{#each result}}
+        {{#compare state '===' 1 }}
+        <li class="rest-welfare">
+            <a class="lazy-bg" href="http://yuanxian.youku.com/fls" target="_blank">
+                <img data-original="{{home_pic_url}}" alt="" width="384" height="200">
+            </a>
+            <div class="desc">
+                <h2>{{title}}</h2>
+                <p>
+                    <span>{{desc}}</span>
+                    <span>剩余<em>{{num}}</em>张</span>
+                </p>
+                <a href="http://yuanxian.youku.com/fls" class="get-present-btn" target="_blank">立即领取</a>
+            </div>
+        </li>
+        {{/compare}}
+        {{#compare state '===' 2 }}
+        <li class="none-welfare">
+            <a class="lazy-bg" href="javascript:void(0)">
+                <img data-original="{{home_pic_url}}" alt="" width="384" height="200">
+            </a>
+            <div class="desc">
+                <h2>{{title}}</h2>
+                <p>
+                    <span>{{desc}}</span>
+                    <span>剩余<em>0</em>张</span>
+                </p>
+            </div>
+        </li>
+        {{/compare}}
+        {{#compare state '===' 3 }}
+        <li class="geted-welfare">
+            <a class="lazy-bg" href="javascript:void(0)" target="_blank">
+                <img data-original="{{home_pic_url}}" alt="" width="384" height="200">
+            </a>
+            <div class="desc">
+                <h2>{{title}}</h2>
+                <p>
+                    <span>{{desc}}</span>
+                    <span>剩余<em>{{num}}</em>张</span>
+                </p>
+                <a href="http://yuanxian.youku.com/fls" class="how-use-btn" target="_blank">如何使用</a>
+            </div>
+        </li>
+        {{/compare}} 
+    {{/each}}
+    </ul>
+{{else}}
+    <p class="no-result">可能是你打开的姿势不对，请刷新试试</p>
+{{/if}}

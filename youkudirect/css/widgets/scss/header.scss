@@ -1,0 +1,350 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+
+/* 
+*----------
+*头部
+*-------------
+ */
+$headerHeight: 70px;
+
+.gb-header {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    > .inner {
+        width: $mainWidth;
+        height: $headerHeight;
+        margin: 0 auto;
+        @extend %clearfix;
+    }
+    // logo
+    .logo {
+        float: left;
+        margin-right: 20px;
+        width: 148px;
+        height: $headerHeight;
+        line-height: $headerHeight;
+        @extend %text-hide;
+        @include bg("logo.png");
+        > a {
+            display: block;
+        }
+    }
+    .youku-index {
+        float: left;
+        line-height: $headerHeight;
+        color: #444;
+        font-size: 14px;
+        padding: 0 40px 0 0px;
+    }
+    // 导航
+    .main-nav {
+        float: left;
+        font-size: 16px;
+        line-height: $headerHeight;
+        > ul {
+            @extend %clearfix;
+        }
+        .main-nav-item {
+            // position: relative;
+            float: left;
+            height: $headerHeight;
+            color: #444;
+            & > a {
+                position: relative;
+                display: block;
+                padding: 0 16px;
+                height: 100%;
+                color: #555;
+                z-index: 1;
+            }
+            // &.active {
+            //     > .sub-nav {
+            //         visibility: hidden;
+            //     }
+            // }
+            &.active > a, & > a:hover {
+                color: $mainLink;
+            }
+        }
+    }
+    .sub-nav {
+        position: absolute;
+        visibility: hidden;
+        width: 100%;
+        height: 38px;
+        z-index: 12;
+        left: 0;
+        right: 0;
+        border-top: 1px solid #e2e2e2;
+        background: rgba(255, 255, 255, 0.8);
+        background: url("../../../images/subnav-bg.png") repeat-x\9;
+        .nav-icon {
+            position: absolute;
+            content: '';
+            width: 126px;
+            left: 0;
+            top: -6px;
+            right: 0;
+            height: 6px;
+            @include bg("nav-active.png", "app", center, top);
+            z-index: 1;
+        }
+        &.show {
+            visibility: visible;
+        }
+        &.hide {
+            visibility: hidden;
+        }
+        .inner {
+            width: 1190px;
+            margin: 0 auto;
+        }
+        ul {
+            position: absolute;
+            height: 38px;
+        }
+        li {
+            float: left;
+            font-size: 12px;
+            a {
+                display: block;
+                padding: 0 20px;
+                height: 38px;
+                line-height: 38px;
+                color: #555;
+                text-decoration: none;
+            }
+            a:hover {
+                color: $mainLink;
+            }
+            &.active {
+                a {
+                    color: $mainLink;
+                }
+            }
+        }
+    }
+}
+
+// 登录登出
+.header-login {
+    float: right;
+    max-width: 220px;
+    height: $headerHeight;
+    color: #888;
+    font-size: 14px;
+    a, span {
+        color: #888;
+    }
+    a:hover {
+        color: $mainLink;
+    }
+    .need-login, .login-out {
+        float: right;
+    }
+    .login-btn, .register-btn, .user-name, .login-out-btn {
+        float: left;
+        height: 20px;
+        line-height: 20px;
+        margin-top: 25px;
+    }
+    .login-btn {
+        margin-right: 10px;
+    }
+    .user-name {
+        max-width: 92px;
+        color: #f00;
+        @extend %ellipsis;
+        &.not-vip, &.outdate-vip {
+            color: #888;
+        }
+    }
+    i {
+        width: 22px;
+        height: 16px;
+        display: inline-block;
+        line-height: 16px;
+        margin: 25px 10px 0;
+        content: '';
+        float: left;
+        @include bg("vip-level-icons.png", "app", 0, 0);
+        &.no-vip-0-0 {
+            background: none;
+            width: 0;
+        }
+        &.light-1-1 {
+            background-position: 0px 0px;
+            width: 35px;
+        }
+        &.light-1-0 {
+            background-position: 0px 0px;
+        }
+        &.light-2-1 {
+            background-position: 0px -16px;
+            width: 35px;
+        }
+        &.light-2-0 {
+            background-position: 0px -16px;
+        }
+        &.light-3-1 {
+            background-position: 0px -32px;
+            width: 35px;
+        }
+        &.light-3-0 {
+            background-position: 0px -32px;
+        }
+        &.light-4-1 {
+            background-position: 0px -48px;
+            width: 35px;
+        }
+        &.light-4-0 {
+            background-position: 0px -48px;
+        }
+        &.light-5-1 {
+            background-position: 0px -64px;
+            width: 35px;
+        }
+        &.light-5-0 {
+            background-position: 0px -64px;
+        }
+        &.light-6-1 {
+            background-position: 0px -80px;
+            width: 35px;
+        }
+        &.light-6-0 {
+            background-position: 0px -80px;
+        }
+        &.light-7-1 {
+            background-position: 0px -96px;
+            width: 35px;
+        }
+        &.light-7-0 {
+            background-position: 0px -96px;
+        }
+        &.vip-1-1 {
+            background-position: 0px -112px;
+            width: 35px;
+        }
+        &.vip-1-0 {
+            background-position: 0px -112px;
+        }
+        &.vip-2-1 {
+            background-position: 0px -128px;
+            width: 35px;
+        }
+        &.vip-2-0 {
+            background-position: 0px -128px;
+        }
+        &.vip-3-1 {
+            background-position: 0px -144px;
+            width: 35px;
+        }
+        &.vip-3-0 {
+            background-position: 0px -144px;
+        }
+        &.vip-4-1 {
+            background-position: 0px -160px;
+            width: 35px;
+        }
+        &.vip-4-0 {
+            background-position: 0px -160px;
+        }
+        &.vip-5-1 {
+            background-position: 0px -176px;
+            width: 35px;
+        }
+        &.vip-5-0 {
+            background-position: 0px -176px;
+        }
+        &.vip-6-1 {
+            background-position: 0px -192px;
+            width: 35px;
+        }
+        &.vip-6-0 {
+            background-position: 0px -192px;
+        }
+        &.vip-7-1 {
+            background-position: 0px -208px;
+            width: 35px;
+        }
+        &.vip-7-0 {
+            background-position: 0px -208px;
+        }
+        &.no-vip-1-1 {
+            background-position: 0px -224px;
+            width: 35px;
+        }
+        &.no-vip-1-0 {
+            background-position: 0px -224px;
+        }
+        &.no-vip-2-1 {
+            background-position: 0px -240px;
+        }
+        &.no-vip-2-0 {
+            background-position: 0px -240px;
+        }
+        &.no-vip-3-1 {
+            background-position: 0px -256px;
+            width: 35px;
+        }
+        &.no-vip-3-0 {
+            background-position: 0px -256px;
+        }
+        &.no-vip-4-1 {
+            background-position: 0px -272px;
+            width: 35px;
+        }
+        &.no-vip-4-0 {
+            background-position: 0px -272px;
+        }
+        &.no-vip-5-1 {
+            background-position: 0px -288px;
+            width: 35px;
+        }
+        &.no-vip-5-0 {
+            background-position: 0px -288px;
+        }
+        &.no-vip-6-1 {
+            background-position: 0px -304px;
+            width: 35px;
+        }
+        &.no-vip-6-0 {
+            background-position: 0px -304px;
+        }
+        &.no-vip-7-1 {
+            background-position: 0px -320px;
+            width: 35px;
+        }
+        &.no-vip-7-0 {
+            background-position: 0px -320px;
+        }
+        .vip, .noad-vip {
+            &:after {
+                background-position: -5px -24px;
+            }
+        }
+    }
+    .u-small-img {
+        float: left;
+        position: relative;
+        margin-top: 20px;
+        .user-small-img {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        .crown {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: 10px;
+            bottom: 0;
+            z-index: 2;
+        }
+    }
+}

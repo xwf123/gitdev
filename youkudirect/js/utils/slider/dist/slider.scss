@@ -1,0 +1,229 @@
+@charset "utf-8";
+
+@import "../../../../css/common/scss/base";
+
+.m-slider {
+    position: relative;
+    .inner {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .slider-box {
+        position: absolute;
+        left: 0;
+        top: 0;
+        list-style: none;
+        width: 9999em;
+        overflow: hidden;
+    }
+    .slider-info-box {
+        position: relative;
+        overflow: hidden;
+    }
+    .slider-item {
+        position: relative;
+        float: left;
+        width: 200px;
+        margin-right: 20px;
+        .slider-info-box > a {
+            display: block;
+            overflow: hidden;
+            @extend %lazy-bg;
+        }
+        .info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: 40px;
+            color: #fff;
+            padding: 30px 5px 0;
+            z-index: 2;
+            @include bg("bg_video_small.png", "utils", left, top);
+            h2 {
+                font-size: 14px;
+                line-height: 24px;
+                padding-top: 3px;
+                @extend %ellipsis;
+            }
+            .txt {
+                font-size: 12px;
+                line-height: 18px;
+                @extend %ellipsis;
+            }
+            .watch-btn {
+                display: none;
+                cursor: pointer;
+                width: 68px;
+                height: 28px;
+                line-height: 28px;
+                text-align: center;
+                white-space: nowrap;
+                background-color: #2C8CE0;
+                background-image: linear-gradient(#47A4F4, #2E8EE2 5%, #2683D8);
+                background-repeat: no-repeat;
+                border-color: #1A67CB;
+                margin: 24px 0 10px 0;
+                color: #fff;
+                border-radius: 3px;
+            }
+            .v-url {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 0;
+                @extend %text-hide;
+            }
+            .filter {
+                display: none;
+                height: 110px;
+                left: 0;
+                right: 0;
+                position: absolute;
+                bottom: 0;
+                background: #000;
+                opacity: 0.5;
+                z-index: -1;
+            }
+        }
+        .date-line {
+            position: relative;
+            height: 25px;
+            margin-top: 14px;
+            font-size: 14px;
+            time {
+                position: absolute;
+                width: 118px;
+                text-align: center;
+                left: 50%;
+                margin-left: -59px;
+                z-index: 1;
+                background: $bodyBg;
+                // padding: 0 20px;
+                line-height: 25px;
+            }
+            &:before {
+                position: absolute;
+                content: '';
+                top: 12px;
+                width: 100%;
+                height: 1px;
+                overflow: hidden;
+                z-index: 0;
+            }
+            &:after {
+                position: absolute;
+                content: '';
+                right: -15px;
+                width: 9px;
+                height: 9px;
+                top: 7px;
+                border-radius: 100%;
+                z-index: 1;
+                background: $bodyBg;
+            }
+            &.out-date {
+                color: #555;
+                &:before {
+                    background: #555;
+                }
+                &:after {
+                    border: 1px solid #555;
+                }
+            }
+            &.coming-date {
+                color: #c1c1c1;
+                &:before {
+                    background: #c1c1c1;
+                }
+                &:after {
+                    border: 1px solid #c1c1c1;
+                }
+            }
+        }
+        &.active .info, &:hover .info {
+            height: 110px;
+            background: none;
+            .filter {
+                display: block;
+            }
+            .watch-btn {
+                display: block;
+            }
+        }
+    }
+    // 只有标题和描述，没有观看按钮浮层的模块
+    // 直接加simple类别即可
+    &.simple {
+        .slider-item {
+            &.active .info, &:hover .info {
+                height: auto;
+            }
+        }
+    }
+    // 即将上线模块，需要对背景图定位做特殊处理
+    // 因为有时间轴占位
+    &.coming-movie {
+        .move .prev, .move .next {
+            bottom: 37px;
+        }
+    }
+    .move .prev, .move .next {
+        display: none;
+        position: absolute;
+        top: 50%;
+        width: 90px;
+        top: 0;
+        bottom: 0;
+        @include bg("m-slider-filter.png", "utils");
+        // width: 32px;
+        // height: 32px;
+        // margin: -16px 0 0 0;
+        // filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000);
+        // background-image: url(#{$utilsBg}/slider-btns.png);
+        // @include bg("slider-btns.png", "utils", 0, 0);
+        // background-color: rgba(0, 0, 0, 0.5);
+        z-index: 3;
+        // background-repeat: no-repeat;
+        overflow: hidden;
+        @extend %text-hide;
+        &:before {
+            position: absolute;
+            content: '';
+            width: 45px;
+            height: 45px;
+            top: 50%;
+            margin-top: -23px;
+            @include bg("m-slider-btn.png", "utils");
+        }
+        &:hover {
+            @include bg("m-slider-hover-filter.png", "utils");
+        }
+    }
+    .move .prev {
+        left: 0;
+        background-position: 0 0;
+        &:hover {
+            background-position: 0 0;
+        }
+        &:before {
+            left: 0;
+            background-position: 0 0;
+        }
+    }
+    .move .next {
+        right: 0;
+        background-position: -90px 0;
+        &:hover {
+            background-position: -90px 0;
+        }
+        &:before {
+            right: 0;
+            background-position: -145px 0;
+        }
+    }
+}

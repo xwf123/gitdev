@@ -1,0 +1,96 @@
+/*样式请自行美化处理*/
+
+/*对于类名，若有冲突，自行更改css和js，配置js类名后，再更改css类名即可*/
+
+.switch-wrapper {
+    position: relative;
+    font-size: 12px;
+}
+.switch-wrapper * {
+    margin: 0;
+    padding: 0;
+}
+.switch-list {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.switch-list * {
+    margin: 0;
+    padding: 0;
+}
+/*注意此处的z-index设置*/
+
+.switch-list .switch-item {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    text-align: center;
+    font-size: 16px;
+    background: #333;
+    color: #fff;
+}
+.switch-list a img {
+    border: 0;
+}
+.switch-list li.prev {
+    display: block;
+    z-index: 1;
+}
+.switch-list li.current {
+    display: block;
+    z-index: 2;
+}
+.switch-number {
+    bottom: 10px;
+    height: 12px;
+    left: 0;
+    overflow: hidden;
+    padding: 10px 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 12;
+}
+.switch-number a {
+    background: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    margin: 0 5px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 12px;
+    *display: inline;
+    zoom: 1;
+    line-height: 200px;
+}
+.switch-number a.current {
+    background: #c81430;
+    /*color: #333;*/
+}
+.switch-prev, .switch-next {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    top: 50%;
+    margin-top: -23px;
+    z-index: 3;
+    text-indent: -9999em;
+    overflow: hidden;
+    text-decoration: none;
+}
+.switch-prev {
+    left: 7px;
+    background: url("http://res.mfs.ykimg.com/0510000051AD63E96714C04A1400547A") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.switch-next {
+    right: 7px;
+    background: url("http://res.mfs.ykimg.com/0510000051AD63F56714C04A1305CFEF") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}

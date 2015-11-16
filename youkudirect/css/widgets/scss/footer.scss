@@ -1,0 +1,78 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+
+/*尾部*/
+.gb-footer {
+    width: $mainWidth;
+    margin: 0 auto;
+    margin-top: 40px;
+    clear: both;
+    // 特权信息
+    .charainfor {
+        border-top: 2px solid #ebebeb;
+        color: #909090;
+        padding-top: 30px;
+        .chara_inner {
+            @extend %clearfix;
+        }
+        .item {
+            float: left;
+            width: 20%;
+            strong {
+                line-height: 24px;
+                font-size: 24px;
+                font-weight: normal;
+                position: relative;
+                span {
+                    position: absolute;
+                    left: 105px;
+                    top: 6px;
+                }
+            }
+            p {
+                margin: 20px 0 0;
+                font-size: 14px;
+            }
+            .contact {
+                line-height: 1.5;
+            }
+            a {
+                color: #555;
+            }
+            .tel {
+                font-size: 14px;
+            }
+        }
+        .item_inner {
+            height: 88px;
+            margin-right: 24px;
+        }
+    }
+    // 版权
+    .copyright-box {
+        width: 1190px;
+        margin: 40px auto 0;
+        font-size: 12px;
+        text-align: center;
+        border-top: 1px solid #E5E5E5;
+        .copyright {
+            display: inline-block;
+            height: 20px;
+            text-align: center;
+            padding: 20px 0 40px;
+            a, span {
+                float: left;
+            }
+            a {
+                text-decoration: underline;
+                color: #909090;
+            }
+        }
+        .icp {
+            padding-right: 20px;
+            height: 16px;
+            background: url(#{$appBg}/icp.png) right center no-repeat;
+        }
+    }
+}

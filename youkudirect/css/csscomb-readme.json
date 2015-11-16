@@ -1,0 +1,25 @@
+{
+  "remove-empty-rulesets": true,
+  "always-semicolon": true,//分号
+  "color-case": "upper",//色彩 lower
+  "block-indent": "    ",//块级缩进，也包括sass选择符嵌套的缩进
+  "color-shorthand": true,//颜色缩写#ffffff缩写为#fff
+  "element-case": "lower",//选择器大小写
+  "eof-newline": false,//文件结尾换行，不顶用，这个设置有问题
+  "leading-zero": true,//是否去掉零点几的零, 0.5em 缩写为.5em
+  "quotes": "single",//使用单引号
+  "space-before-colon": "",//冒号之前空格数
+  "space-after-colon": " ",//冒号之后空格数
+  "space-before-combinator": "",//选择器之前空格数
+  "space-after-combinator": "",//选择器之后空格数
+  "space-between-declarations": " ",
+  "space-before-opening-brace": " ",//左大括号之前空格数
+  "space-after-opening-brace": "\n",//左大括号之后空格数
+  "space-after-selector-delimiter": " ",//选择器分隔符 p > a > span
+  "space-before-selector-delimiter": "",
+  "space-before-closing-brace": " ",//右大括号之前
+  "strip-spaces": true,//去掉多余的空格
+  "tab-size": true,
+  "unitless-zero": true,//0px改为0
+  "vendor-prefix-align": true //是否增加css3前缀
+}

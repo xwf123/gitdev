@@ -1,0 +1,454 @@
+@charset "utf-8";
+
+@import "../../common/scss/base";
+@import "../../widgets/scss/header";
+@import "../../widgets/scss/footer";
+@import "../../../js/utils/dialog/dist/ui-dialog";
+@import "../../../js/utils/slider/dist/slider";
+
+.privilege-box {
+    width: 1190px;
+    margin: 60px auto 0;
+    padding: 0px 0px 50px;
+    overflow: hidden;
+    background: #fff;
+    .privilege-nav {
+        width: 180px;
+        float: left;
+        border-right: 1px solid #f1f1f1;
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+        dt {
+            font-size: 18px;
+            line-height: 20px;
+            padding-bottom: 10px;
+            margin: 10px 10px 5px;
+            text-align: center;
+            color: #444;
+            border-bottom: 1px dashed #f1f1f1;
+        }
+        dd {
+            height: 34px;
+            line-height: 34px;
+            cursor: pointer;
+            border-left: 2px solid #fff;
+            margin-top: 5px;
+            @extend %clearfix;
+            i {
+                width: 24px;
+                height: 24px;
+                float: left;
+                margin-right: 10px;
+                margin-top: 6px;
+                display: inline;
+                background: url("../../../images/privilege_icon.png") no-repeat center top;
+            }
+            a {
+                color: #888;
+                font-size: 14px;
+                padding: 0 0 0 18px;
+                display: block;
+            }
+        }
+        .film-lib i {
+            background-position: center 0;
+        }
+        .half-price i {
+            background-position: center -27px;
+        }
+        .view-coupons i {
+            background-position: center -50px;
+        }
+        .drama-see i {
+            background-position: center -74px;
+        }
+        .no-ad i {
+            background-position: center -101px;
+        }
+        .net-speed i {
+            background-position: center -129px;
+        }
+        .p1080 i {
+            background-position: center -154px;
+        }
+        .ident-vip i {
+            background-position: center -180px;
+        }
+        .red-name i {
+            background-position: center -199px;
+            height: 23px;
+        }
+        .exclusive-expression i {
+            background-position: center -218px;
+            height: 23px;
+        }
+        .level-acc i {
+            background-position: center -240px;
+        }
+        .live-see i {
+            background-position: center -263px;
+        }
+        .interactive-privilege i {
+            background-position: center -288px;
+        }
+        .look-privilege i {
+            background-position: center -310px;
+        }
+        .hour-24 i {
+            background-position: center -334px;
+        }
+        .all-day i {
+            background-position: center -360px;
+        }
+        .reply-privilege i {
+            background-position: center -389px;
+        }
+        .callback-privilege i {
+            background-position: center -416px;
+        }
+        .one-one i {
+            background-position: center -469px;
+        }
+        .upload-premisson i {
+            background-position: center -443px;
+        }
+        .current {
+            background: #ebf3f6;
+            border-left: 2px solid #06a7e1;
+            a {
+                color: #555;
+            }
+        }
+        dd:hover {
+            background: #f5f9fc;
+            border-left: 2px solid #06a7e1;
+            color: #555;
+        }
+    }
+    .privilege-content {
+        width: 1009px;
+        float: right;
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+    }
+    .privilege-content-title {
+        height: 60px;
+        padding: 20px;
+        border-bottom: 1px solid #f1f1f1;
+        @extend %clearfix;
+        .privilege-content-icon {
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin-right: 10px;
+            display: inline;
+            background: url("../../../images/pic_icon.png") no-repeat;
+        }
+        .vipdiscount {
+            background-position: -180px -60px;
+        }
+        .filmfree {
+            background-position: -300px -60px;
+        }
+        .freecoupon {
+            background-position: -120px -60px;
+        }
+        .vippgc {
+            background-position: -60px 0px;
+        }
+        .addfree {
+            background-position: -300px 0px;
+        }
+        .speedup {
+            background-position: -360px 0px;
+        }
+        .p1080 {
+            background-position: -420px -60px;
+        }
+        .vipidentity {
+            background-position: 0px -60px;
+        }
+        .redname {
+            background-position: -120px 0px;
+        }
+        .vipwinks {
+            background-position: -360px -60px;
+        }
+        .fasterupgrade {
+            background-position: -240px -60px;
+        }
+        .liveshow {
+            background-position: -180px 0px;
+        }
+        .liveinteract {
+            background-position: -60px -60px;
+        }
+        .liveplayback {
+            background-position: -421px 0px;
+        }
+        .liveinteract {
+            background-position: -60px -60px;
+        }
+        .vipsupport {
+            background-position: 0px 0px;
+        }
+        .vipline {
+            background-position: -240px 0px;
+        }
+        .vipreply {
+            background-position: -480px 0px;
+        }
+        .vipcallback {
+            background-position: -542px 0px;
+        }
+        .oneone {
+            background-position: -542px -61px;
+        }
+        .uploadicon {
+            background-position: -482px -60px;
+        }
+        .privilege-content-name h1 {
+            font-weight: normal;
+            font-size: 24px;
+            color: #888;
+            padding: 10px 0;
+            color: #555;
+        }
+        .privilege-content-name h2 {
+            font-weight: normal;
+            font-size: 14px;
+            color: #888;
+        }
+    }
+    .privileged-details-txt {
+        padding: 0 20px;
+        .details-box {
+            padding-top: 30px;
+            h3 {
+                font-size: 16px;
+                line-height: 25px;
+                color: #555;
+                padding-bottom: 20px;
+                .start-speed {
+                    background: #1c98e7;
+                    border: 1px solid #007dcc;
+                    color: #fff;
+                    padding: 0 15px;
+                    line-height: 25px;
+                    font-size: 14px;
+                    margin-left: 20px;
+                }
+                i {
+                    font-style: normal;
+                }
+            }
+            .details-box-p {
+                font-size: 14px;
+                line-height: 24px;
+                color: #888;
+                padding-bottom: 10px;
+                a {
+                    color: #00b9ff;
+                }
+            }
+            .privileged-table {
+                background: none repeat scroll 0 0 #e2e2e2;
+                border-spacing: 1px;
+                padding: 1px;
+                th, td {
+                    padding: 0 15px;
+                    line-height: 32px;
+                    text-align: center;
+                    font-size: 14px;
+                    color: #444;
+                    border: 1px solid #e2e2e2;
+                }
+            }
+        }
+    }
+    .vip-open-renewal {
+        width: 270px;
+        height: 55px;
+        float: right;
+        background: url("../../../images/privilege_main.png") no-repeat 0 0;
+        a {
+            width: 270px;
+            height: 55px;
+            line-height: 55px;
+            text-align: center;
+            color: #fff;
+            display: block;
+            font-size: 30px;
+        }
+    }
+    .ico-loading-16 {
+        background: url("http://r2.ykimg.com/05100000539194FD6737B35F3804450C") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+        display: inline-block;
+        height: 16px;
+        vertical-align: text-bottom;
+        width: 16px;
+        background-size: cover;
+        margin: 0 10px;
+    }
+    .details-loading {
+        display: none;
+    }
+    .main-title {
+        margin-top: 30px;
+        padding-bottom: 20px;
+        h1 {
+            font-size: 16px;
+            display: inline;
+            color: #555;
+        }
+    }
+}
+
+/*浮层*/
+
+.dialog-small-title {
+    padding: 0;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+/*pay-info*/
+.ui-dialog-title {
+    text-align: center;
+}
+
+.content-p-title {
+    padding: 0 20px;
+    height: 44px;
+    line-height: 30px;
+    font-size: 14px;
+    overflow: hidden;
+    .state-title {
+        float: right;
+        width: 115px;
+        text-align: center;
+    }
+    .p-state {
+        color: #0ec800;
+    }
+}
+
+.content-p-box {
+    padding: 0 20px;
+    .u-name {
+        width: 20%;
+    }
+    .u-time {
+        width: 32%;
+    }
+    .u-date {
+        width: 14%;
+    }
+    .u-method {
+        width: 20%;
+    }
+    .u-money {
+        width: 14%;
+    }
+    .hint {
+        color: #909090;
+    }
+    table {
+        border-left: 1px solid #e4e4e4;
+        border-spacing: 0;
+        border-top: 1px solid #e4e4e4;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    td {
+        background: #ffffff none repeat scroll 0 0;
+        border-bottom: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        color: #909090;
+        font-size: 14px;
+        padding: 0px 0px;
+        line-height: 32px;
+        text-align: center;
+    }
+    th {
+        background: #f5f5f5 none repeat scroll 0 0;
+        border-bottom: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        color: #909090;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 32px;
+        padding: 0 0px;
+        text-align: center;
+    }
+    .info-btn {
+        font-size: 12px;
+        line-height: 20px;
+        color: #909090;
+        margin-top: 20px;
+    }
+}
+
+/*coupon*/
+
+.content-ticket-box {
+    padding: 20px;
+    li {
+        line-height: 34px;
+        margin-bottom: 10px;
+        label {
+            width: 70px;
+            font-size: 14px;
+            line-height: 34px;
+            float: left;
+        }
+        .ticket-coupon {
+            width: 190px;
+            float: left;
+            line-height: 32px;
+            border: 1px solid #888;
+            padding: 0 10px;
+            font-size: 14px;
+        }
+        .ticket-code {
+            width: 85px;
+            float: left;
+            border: 1px solid #888;
+            line-height: 32px;
+            padding: 0 10px;
+            display: inline;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        img {
+            height: 34px;
+            cursor: pointer;
+        }
+    }
+    li:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+    .ticket-button {
+        padding: 10px 0 0 70px;
+    }
+    .ticket-button button {
+        background: #1c98e7;
+        border: 1px solid #007dcc;
+        color: #fff;
+        width: 133px;
+        line-height: 33px;
+        height: 33px;
+        text-align: center;
+        display: block;
+    }
+    #code-error {
+        padding-left: 70px;
+        color: #f00;
+    }
+}

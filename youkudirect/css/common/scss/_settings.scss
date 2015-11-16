@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+// 通用变量设置
+// ----------
+// 根字体大小，1.25*16px
+$rootFontSize: 12px;
+
+// main width
+$mainWidth: 1190px;
+
+// 文本字体
+$textColor: #909090;
+$bodyBg: #f7f8f9;
+
+// 通用字体族
+$fontFamily: "微软雅黑", "宋体", arial, sans-serif;
+
+// 链接默认颜色
+$linkColor: #555;
+$mainLink: #3399e0;
+
+// 背景图链接简写
+
+$appBg: "../../../images";
+$commonBg: "../../../images";
+$widgetsBg: "../../../images";
+$utilsBg: "../../../images";
