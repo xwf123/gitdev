@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><!--//强制让文档的宽度与设备的宽度保持1:1，并且文档最大的宽度比例是1.0，且不允许用户点击屏幕放大浏览-->
+    <meta content="yes" name="apple-mobile-web-app-capable"><!--iphone设备中的safari私有meta标签，它表示：允许全屏模式浏览；-->
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"><!--phone的私有标签，它指定的iphone中safari顶端的状态条的样式；-->
+    <meta content="telephone=no" name="format-detection"><!--告诉设备忽略将页面中的数字识别为电话号码-->
+    <title></title>
+    <link rel="stylesheet" href="../css/app/dist/mobilemask.css"/>
+</head>
+<style>
+    *{padding:0;margin:0;}h2, h3, h4, h5{font-weight: normal;}
+    html{font-size: 62.5%;min-width: 320px;overflow-x: hidden;}
+    body{
+        font-family: "Microsoft YaHei","微软雅黑", helvetica, arial, verdana, tahoma, sans-serif;
+        height:100%;-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;
+    }
+    img{ width: 100%;border: none; display: inline-block; vertical-align: middle;}
+    .mask{
+        width:100%;position: absolute;top:0;left:0;z-index: 6666;display: none;
+    }
+    .mask-over {
+        display: none;
+        width: 100%;
+        height: 10000px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: #000000;
+        opacity: 0.7;
+        -moz-opacity: 0.7;
+        filter: alpha(opacity=70);
+        z-index: 5555;
+    }
+
+    .mask-box, .maskimg{
+        margin: 1.5rem;
+        border:.25rem solid #000000;
+        -webkit-border-radius: 0.625rem;
+        -moz-border-radius: 0.625rem;
+        border-radius:  0.625rem;
+        background: #ffffff;
+        display:block;
+    }
+    .maskimg{margin: 0;border:0;background: none;display:block;height:100%;position: relative; overflow-x:hidden;overflow-y:auto; }
+    .mask-box.ptopimg2{
+        /*margin-top: 16rem;*/
+        margin-top:12rem;
+    }
+    .mask-box h2{
+        width: 100%;
+        border-bottom:.25rem solid #000000;
+        height:3.6rem;
+        line-height:3.6rem;
+        text-align: center;
+        background: #36a0fa;
+        position: relative;
+        font-size:1.6rem;
+        font-weight:normal;
+        display: block;
+    }
+    .mask-box h2 .closetop{
+        width: 1.5rem;
+        position:absolute ;
+        right:1.1rem;
+        top:0.5rem;
+    }
+
+    .header-img1{
+        width:110.496%;
+        position: absolute;
+        left:-10.496%;
+        top:-33rem;
+        z-index: 7777;
+    }
+    .header-img2{
+        width: 23.625rem;
+        position: absolute;
+        left:50%;
+        top: 0;
+        margin-left:-11.812rem;
+        z-index: 7777;
+    }
+    .header-img3{
+        width: 53.05%;
+        position: absolute;
+        left: 50%;
+        top: -15rem;
+        z-index: 7777;
+        margin-left:-11.8rem;
+    }
+    .form-box{width:80%;margin:0 auto;}
+
+    .form-box ul{list-style: none;}
+    .form-box p{line-height: 2.4rem;font-size: 1.6rem;color:#333333;padding:1.5rem 0;}
+    .form-box ul li{width:100%;position: relative; display:block;margin-bottom: 2rem;color:#333333; list-style: none;}
+    .form-box ul li .texdesc{width: 18%; position: absolute;left:0;top:0;height:3.2rem;line-height: 3.2rem;font-size:1.6rem;}
+    .form-box ul li .inputbox{width:100%;display: inline-block;padding-left:18%;box-sizing:border-box;font-size: 1.6rem;}
+    .form-box ul li .inputbox input, .form-box ul li .inputbox textarea{width:100%;font-size:1.6rem;border:1px solid #bbbbbb;border-radius:0;outline: none;box-sizing:border-box;height:3rem;line-height: 3rem;padding:0.156rem; vertical-align:middle;}
+    .form-box ul li .inputbox textarea{height:6.2rem;}
+    .btnclose, .closedbtn{width:10rem;margin:0 auto;padding-bottom: 2rem;}
+    .desc-lay{width: 100%;}
+    .desc-lay .lead{
+        padding:0.125rem;
+        width:65.116%;
+        margin:0 auto;
+        border:1px solid #000000;
+        margin-top: 2rem;
+        display:box;
+        display:-webkit-box;
+        display:-moz-box;
+    }
+    .desc-lay .lead{
+        -webkit-border-radius:.4rem;
+        -moz-border-radius:.4rem;
+        border-radius:.4rem;
+    }
+    .desc-lay .lead h3{ border-radius:inherit;}
+    .desc-lay .lead h3{
+        height: 2.5rem;
+        line-height:2.5rem;
+        text-align: center;
+        font-size:1.4rem;
+        box-flex:1;
+        -webkit-box-flex:1;
+        -moz-box-flex:1;
+    }
+    .desc-lay .lead h3.hover{
+        background: #000000;
+        color:#ffee35;
+        display:block;
+    }
+    .treasure-box{
+        width: 77.671%;
+        margin:0 auto;
+        margin-top: 2rem;
+    }
+
+    .treasure-box ul{
+        height:17.5rem;
+        width: 100%;
+        overflow:hidden;
+        overflow-y:scroll;
+        border-top:1px solid #c2c6c6;
+        border-bottom:1px solid #c2c6c6;
+        background: #f3f7f8;
+        list-style: none;
+        margin-bottom:2rem;
+        padding: 0 1rem;
+        box-sizing:border-box ;
+    }
+    .treasure-box ul li{
+        width:100%;
+        font-size:1.4rem;
+        line-height:2rem;
+        position: relative;
+        padding-left:2.5%;
+        box-sizing:border-box ;
+        color:#555555;
+        padding-top:0.4rem;
+    }
+    .treasure-box .ulbox1 li{border-bottom:1px dashed #b4b4b4;}
+    .treasure-box ul li .widdot{
+        position: absolute;
+        width:1%;
+        left:0;
+        top:0;
+    }
+    .btndiv:before, .btndiv:after{content: "";display: table; }
+    .treasure-box ul li:after, .listinfo:after, .btndiv:after{clear:both;}
+    .ulbox2{display: none;}
+    .treasure-info{width:100%;}
+    .treasure-info .img{width:10rem;height:10rem;margin:0 auto;padding:2rem 0;  -webkit-border-radius:.3rem;-moz-border-radius:.3rem;border-radius:.3rem;}
+    .treasure-info h3{font-size:1.6rem; line-height:2.4rem; text-align: center;}
+    .treasure-info p{font-size:1.4rem; line-height:2.4rem;text-align: center; padding-bottom:2rem;}
+    .doublebtn{width:100%;display:box;display:-webkit-box; display:-moz-box;padding-bottom:2rem;}
+    .doublebtn .antbox1, .doublebtn .antbox2{box-flex:1;-webkit-box-flex:1;-moz-box-flex:1; box-sizing:border-box; }
+    .doublebtn .antbox2{text-align:left; margin-left:1rem;}
+    .doublebtn .antbox1{text-align:right; margin-right:1rem;}
+    .doublebtn img{width: 11.25rem;margin:0 auto;}
+    .musicbox{width:100%;}
+    .musicbox .headtop{width:40rem;height:34.375rem;background:url(http://r3.ykimg.com/051000005602419A67BC3D3A8F09D17C) no-repeat; background-size: cover; position: relative; }
+    .playbox{width:300px;height:200px; margin: 0 auto;position: relative;}
+    .play{width:300px;height:200px; position:absolute;left:0;top:-1.5rem; background: #000000;}
+
+
+</style>
+<script type="text/javascript" src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script>
+    (function($){
+        $(document).ready(function($){
+            $(".lead h3, .treasure-box ul").each(function(i){
+                $(".lead h3").eq(i).click(function(){
+                    $(this).addClass("hover").siblings().removeClass("hover");
+                    $(".treasure-box ul").eq(i).show().siblings().hide();
+                })
+            });
+            //            弹出层的关闭图层close-mask
+            $(".close-mask").click(function() {
+                $(".mask-over").hide();
+                $(".mask").hide();
+            });
+
+        })
+    })(jQuery)
+</script>
+<body>
+<div class="mask-over"></div>
+<div class="mask" style="display: none;">
+    <!--zhongjiang-->
+    <div class="maskimg">
+        <div class="header-img2"><img src="http://r1.ykimg.com/0510000055DD5F5867BC3D419102426B"/></div>
+        <div class="mask-box ptopimg2">
+            <h2>
+                <div class="closetop close-mask"><img src="http://r3.ykimg.com/0510000055DD5F0E67BC3D7169058A04"></div>
+            </h2>
+            <div class="desc-lay">
+                <div class="lead">
+                    <h3 class="hover">我的宝藏</h3>
+                    <h3>奖品使用说明</h3>
+                </div>
+                <div class="treasure-box">
+                    <ul class="ulbox1">
+                        <li><span class="widdot"><img src="http://r4.ykimg.com/0510000055DD5F5767BC3D21BE0DCDC5"></span>我中了一张 去哪儿网的代金券<br>(卷码：0504089)</li>
+                        <li><span class="widdot"><img src="http://r4.ykimg.com/0510000055DD5F5767BC3D21BE0DCDC5"></span><span class="widdesc">我中了一张 去哪儿网的代金券<br>(卷码：0504089)</span></li>
+                        <li><span class="widdot"><img src="http://r4.ykimg.com/0510000055DD5F5767BC3D21BE0DCDC5"></span><span class="widdesc">我中了一张 去哪儿网的代金券</span></li>
+                        <li><span class="widdot"><img src="http://r4.ykimg.com/0510000055DD5F5767BC3D21BE0DCDC5"></span><span class="widdesc">我中了一张 去哪儿网的代金券<br>(卷码：0504089)</span></li>
+                        <li><span class="widdot"><img src="http://r4.ykimg.com/0510000055DD5F5767BC3D21BE0DCDC5"></span><span class="widdesc">我中了一张 去哪儿网的代金券</span></li>
+                    </ul>
+                    <ul class="ulbox2">
+                        <li>1)我中了一张 去哪儿网的代金券</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="closedbtn close-mask"><img src="http://r3.ykimg.com/0510000055DD5F0E67BC3D72EE032309"/></div>
+        </div>
+    </div>
+    <!--zhongjianginfo-->
+    <div class="maskimg">
+        <div class="header-img2"><img src="http://r1.ykimg.com/0510000055DD5F5867BC3D419102426B"/></div>
+        <div class="mask-box ptopimg2">
+            <h2>
+                <div class="closetop close-mask"><img src="http://r3.ykimg.com/0510000055DD5F0E67BC3D7169058A04"></div>
+            </h2>
+            <div class="desc-lay">
+                <div class="treasure-info">
+                    <div class="img"><img src="http://r3.ykimg.com/0510000055DD5FA267BC3D651A0C3518"/></div>
+                    <h3>恭喜您获得 去哪儿网300元抵用券</h3>
+                    <p>您还有“ 3 ”把钥匙开启宝箱</p>
+                </div>
+            </div>
+            <div class="doublebtn">
+                <div class="antbox1"><img src="http://r4.ykimg.com/0510000055DD5F5767BC3D6BB80527DE" width="100%" /></div>
+                <div class="antbox2"><img src="http://r4.ykimg.com/0510000055DD5FA267BC3D5E04085AE7" width="100%"/></div>
+            </div>
+        </div>
+    </div>
+    <!--form-->
+    <div class="mask-box">
+        <h2>
+            填写邮寄地址
+            <div class="closetop close-mask"><img src="http://r3.ykimg.com/0510000055DD5F0E67BC3D7169058A04"></div>
+        </h2>
+        <div class="form-box">
+            <p>您的礼品是：电视盒子</p>
+            <ul>
+                <li>
+                    <div class="texdesc">电话</div>
+                    <div class="inputbox"><input type="text"></div>
+                </li>
+                <li>
+                    <div class="texdesc">电话</div>
+                    <div class="inputbox"><textarea></textarea></div>
+                </li>
+            </ul>
+        </div>
+        <div class="btnclose close-mask"><img src="http://r3.ykimg.com/0510000055DD5F0E67BC3D72EE032309"/></div>
+    </div>
+</div>
+<div class="musicbox">
+  <div class="headtop"></div>
+</div>
+<div class="playbox">
+    <div class="play"></div>
+</div>
+</body>
+</html>

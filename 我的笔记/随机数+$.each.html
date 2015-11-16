@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var myData = {
+                "list": [
+                    {
+                        "title": "星海",
+                        "play_link": "http://v.youku.com/v_show/id_XMjk0MDQ5MDIw.html ",
+                        "sub_title": "献礼澳门回归十周年",
+                        "sthumburl": "http://r3.ykimg.com/0516000051931EE3670C4A5511062BB2",
+                        "alg_info": "1cf001-2-1api-2F0074",
+                        "dma": "1177",
+                        "dest_pos": 0,
+                        "dest_videoid": "52667"
+                    },
+                    {
+                        "title": "王朝的女人·杨贵妃",
+                        "play_link": "http://v.youku.com/v_show/id_XMTMyNDAxODQzNg==.html",
+                        "sub_title": "范冰冰黎明山盟海誓",
+                        "sthumburl": "http://r3.ykimg.com/0516000055B0905F67BC3C07C90D24B1",
+                        "alg_info": "1hot-2-1api-2F0074",
+                        "dma": "2000",
+                        "dest_pos": 7,
+                        "dest_videoid": "186005"
+                    },
+                    {
+                        "title": "夺命旅行",
+                        "play_link": "http://v.youku.com/v_show/id_XMTI3OTMwMTAxNg==.html",
+                        "sub_title": "辣妹杀手利箭凶残杀人",
+                        "sthumburl": "http://r3.ykimg.com/05160000559C8D1E67BC3C7CB1048ED4",
+                        "alg_info": "1hot-2-1api-2F0074",
+                        "dma": "2000",
+                        "dest_pos": 8,
+                        "dest_videoid": "298229"
+                    },
+                    {
+                        "title": "女神跟我走",
+                        "play_link": "http://v.youku.com/v_show/id_XMTI2ODg3MDg4OA==.html",
+                        "sub_title": "林永健化身暖男追韩雪",
+                        "sthumburl": "http://r3.ykimg.com/05160000552DC55E67379F6BC10A4ACD",
+                        "alg_info": "1hot-2-1api-2F0074",
+                        "dma": "2000",
+                        "dest_pos": 9,
+                        "dest_videoid": "296105"
+                    }
+                ],
+                "ver": "A",
+                "ord": "0",
+                "req_id": "NZXenrvS9_eBFX",
+                "rtlid": "NZXenrvS9_eBFX"
+            };
+            var list=myData.list;
+            var objlist="";
+            $.each(list,function(){
+//          console.log(this["title"])
+                objlist += "<h2>"+this["title"]+"</h2>";
+                objlist += "<p>"+this["sub_title"]+"</p>";
+                objlist += "<p>"+this["play_link"]+"</p><br><br>";
+            });
+            $("#myInfo").html(objlist);
+            // 随机数
+            var randnum="";
+            var letter="";
+            var chars=['a','b','c','d','e','f','g','h','i','g','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+            for(var i=0;i<3;i++){
+                randnum += Math.floor(Math.random()*10);
+            }
+            for(var j=0;j<5;j++){
+                var id=Math.floor(Math.random()*26);
+                letter += chars[id];
+            }
+            $(".rand").html(randnum+letter);
+        })
+    </script>
+</head>
+<body>
+<div id="myInfo"></div>
+<div class="rand"></div>
+</body>
+</html>

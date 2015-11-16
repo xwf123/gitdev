@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script type="text/javascript" src="http://r2.ykimg.com/0510000053C8B9B96737B3071802B364"></script>
+<body>
+<script>
+(function($) {
+
+    var error = function(id, info) {
+        jQuery('.error').hide();
+        jQuery('#' + id + '').html(info).show();
+    }
+
+
+    jQuery(document).ready(function() {
+        /*        function timer() {
+         var mydata = jQuery("#mytime").val();
+         var ts = (new Date("08/30/2015  10:00:00")) - (mydata); //计算剩余的毫秒数
+         var newmydata = parseInt(mydata) + 1000
+         jQuery("#mytime").attr("value", newmydata);
+         var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
+         var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10); //计算剩余的小时数
+         var mm = parseInt(ts / 1000 / 60 % 60, 10); //计算剩余的分钟数
+         var ss = parseInt(ts / 1000 % 60, 10); //计算剩余的秒数
+         hh = checkTime(hh);
+         mm = checkTime(mm);
+         ss = checkTime(ss);
+
+
+         function checkTime(i) {
+         return i < 10 ? i = '0' + i : '' + i
+         }
+         if (ts > 0) {
+         document.getElementById("time").innerHTML = hh + '：' + mm + '：' + ss;
+         } else {
+         jQuery(".timea, .rightbtn, .mask-white").hide()
+         jQuery(".timeb, .rightbtnrun").show();
+         return false;
+         }
+
+         }*/
+        //时间递减
+        /* setTimeout(function() {
+         var timeurl = "http://mini.cron.youku.com/vprize/currentTime.php?callback=?";
+         jQuery.getJSON(timeurl, function(timedata) {
+         jQuery("#mytime").attr("value", timedata.result * 1000);
+         setInterval(timer, 1000);
+         });
+         }, 52);
+         */
+
+        jQuery(".timea, .rightbtnrun, .mask-white").show()
+        jQuery(".timeb").hide();
+
+        jQuery(".close,.cuo,.maskclose").click(function() {
+            jQuery(".maskx,.info-one,.info-empty,.info-over,.none-member").hide();
+            jQuery(".mask-dree, .mask-win").hide();
+        });
+
+        jQuery(".addinfo").click(function() {
+            jQuery(".mask-win").hide();
+            jQuery(".maskx").show();
+            jQuery(".mask-dree").show();
+        })
+
+
+
+        jQuery(".rightbtnrun2").on('click', 'a', function() {
+            var Chourl = 'http://mini.cron.youku.com/vipactive/active/index.php?c=vprize&a=get&year=2&callback=?'
+            jQuery.getJSON(Chourl, function(json) {
+                if (json.code == 10000) { //领取成功
+                    jQuery(".mask-win, .info-one").show();
+                    // jQuery('.centent p').html('<p>您的礼品:优酷盒子畅享版</p>');
+                    jQuery(".addinfo").click(function() {
+                        jQuery(".mask-win").hide();
+                        jQuery(".maskx").show();
+                        jQuery(".mask-dree").show();
+                    });
+                } else if (json.code == 10010) {
+                    //没有登录
+                    login({
+                        'type': 'fee',
+                        'callBack': 'parent.location.reload()'
+                    });
+                    return false;
+                } else if (json.code == 10023) {
+                    //已领取
+                    //jQuery("#info_lingqu").html("亲您已经领取过了");
+                    jQuery(".mask-win, .info-over").show();
+                    jQuery(".maskx").show();
+                    jQuery(".info-one").hide();
+                } else if (json.code == 10025) {
+                    //没有资格
+                    //jQuery("#info_member").html("没有领取资格");
+                    jQuery(".mask-win, .none-member").show();
+                    jQuery(".maskx").show();
+                    jQuery(".info-one").hide();
+                } else if (json.code == 10022) {
+                    //已抢光
+                    //jQuery("#info_lingqu").html("亲，礼品已经抢光了");
+                    jQuery(".mask-win, .info-empty").show();
+                    jQuery(".maskx").show();
+                    jQuery(".info-one").hide();
+                } else if (json.code == 10012) {
+                    //已过期
+
+                } else if (json.code == 10020) {
+                    //参数错误
+                    alert("参数错误")
+                }
+
+
+            });
+        })
+
+
+
+        jQuery('.address').on('click',function(){
+            Myaddcontant();
+            var juryadd_url = 'http://mini.cron.youku.com/vipactive/active/index.php?c=vprize&a=getLog&callback=?'
+
+            jQuery.getJSON(juryadd_url, function(json) {
+                if (json.code == 10000) {
+                    if (json.result.pid==="1") {
+                        jQuery('.centent p').html('<p>您的礼品:优酷路由宝</p>');
+
+                    }
+                    else if (json.result.pid==="2") {
+                        jQuery('.centent p').html('<p>您的礼品:优酷盒子畅享版</p>');
+
+                    }
+                }
+            });
+
+
+
+
+        })
+
+
+
+
+
+        jQuery(".rightbtnrun1").on('click', 'a', function() {
+            var Chourlone = 'http://mini.cron.youku.com/vipactive/active/index.php?c=vprize&a=get&year=1&callback=?'
+            jQuery.getJSON(Chourlone, function(json) {
+                if (json.code == 10000) { //领取成功
+                    jQuery(".mask-win, .info-one").show();
+                    // jQuery('.centent p').html('<p>您的礼品:优酷路由宝</p>');
+                    jQuery(".addinfo").click(function() {
+                        jQuery(".mask-win").hide();
+                        jQuery(".maskx").show();
+                        jQuery(".mask-dree").show();
+                    });
+
+                } else if (json.code == 10010) {
+                    //没有登录
+                    login({
+                        'type': 'fee',
+                        'callBack': 'parent.location.reload()'
+                    });
+                    return false;
+                } else if (json.code == 10023) {
+                    //已领取
+                    jQuery("#info_lingqu").html("亲您已经领取过了");
+                    jQuery(".mask-win, .info-over").show();
+                    jQuery(".info-one").hide();
+                } else if (json.code == 10025) {
+                    //没有资格
+                    //jQuery("#info_member").html("没有领取资格");
+                    jQuery(".mask-win, .none-member").show();
+                    jQuery(".maskx").show();
+                    jQuery(".info-one").hide();
+                } else if (json.code == 10022) {
+                    //已抢光
+                    //jQuery("#info_lingqu").html("亲，礼品已经抢光了");
+                    jQuery(".mask-win, .info-empty").show();
+                    jQuery(".maskx").show();
+                    jQuery(".info-one").hide();
+                } else if (json.code == 10012) {
+                    //已过期
+
+                } else if (json.code == 10020) {
+                    //参数错误
+                    alert("参数错误")
+                }
+
+
+            });
+        });
+
+
+        var saveinfo = function(addUrl) {
+
+            jQuery.getJSON(addUrl, function(data) {
+                if (data.code == 10000) {
+                    //成功
+                    //alert('保存成功!');
+                    jQuery(".mask-dree,.maskx").fadeOut();
+                    jQuery(".mask-success,.maskx").show();
+                }
+            });
+        }
+
+
+
+
+        //验证
+        jQuery("#submitinfo").click(function() {
+
+            // var type = jQuery(".type").val();
+            var userName = jQuery("#txtName").val();
+            var mobile = jQuery("#txtTel").val();
+            var userAdd = jQuery("#txtdress").val();
+            var Url = "http://mini.cron.youku.com/vprize/saveInfo.php?actid=24";
+            if (userName == "") {
+                error("errorName", "请输入您的姓名");
+                return false;
+            };
+            if (userName.length > 10) {
+                error("errorName", "姓名最多可输入10个字符");
+                return false;
+            };
+
+            if (mobile == "") {
+                error("errorTel", "请输入您的电话");
+                return false;
+            };
+            var myreg = /^[0-9]{11}$/;
+            if (!(myreg.test(mobile))) {
+                error("errorTel", "请输入有效的电话！");
+                return false;
+            }
+            if (userAdd == "") {
+                error("errorAdd", "请输入您的地址");
+                return false;
+            };
+            if (userAdd.length > 25) {
+                error("errorAdd", "地址最多可输入25个字符");
+                return false;
+            };
+            var addUrl = Url + '&name=' + userName + '&phone=' + mobile + '&address=' + userAdd + '&callback=?';
+            saveinfo(addUrl);
+        })
+
+    });
+
+
+    var Myaddcontant = function() {
+
+        var adduserUrl ='http://mini.cron.youku.com/vprize/userInfo.php?actid=24&callback=?';
+
+        $.getJSON(adduserUrl, function(json) {
+
+            if (json.code == 10000) {
+
+                $("#txtName").attr('value',json.result.name);
+                $("#txtTel").attr('value',json.result.phone);
+                $("#txtdress").attr('value',json.result.address);
+            }
+        });
+
+    }
+
+})(jQuery)
+
+</script>
+<div id="mytime"></div>
+</body>
+</html>

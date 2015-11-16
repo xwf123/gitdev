@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/app/dist/layout.css"/>
+</head>
+<style>
+    @charset "UTF-8";
+    * { margin: 0; padding: 0; }
+
+    body { width: 100%; overflow-x: hidden; font-family: "微软雅黑", "宋体", arial, sans-serif; }
+
+    a { outline: medium none; text-decoration: none; }
+    a:active { outline: medium none; }
+
+    img { border: 0 none; max-width: 100%; vertical-align: middle; }
+
+    .wraperbox:before, .content:before, .column1:before, .column1 .laybox .descbox:before, .column1 .getmember-box .listbox:before, .about-column:before, .about-column p:before, .manage-money:before, .income:before, .income .incomeinfo:before, .income .btnbox:before, .wrapbg-bottom:before, .mask-mobile ul li:before, .wraperbox:after, .content:after, .column1:after, .column1 .laybox .descbox:after, .column1 .getmember-box .listbox:after, .about-column:after, .about-column p:after, .manage-money:after, .income:after, .income .incomeinfo:after, .income .btnbox:after, .wrapbg-bottom:after, .mask-mobile ul li:after { content: ''; display: table; }
+    .wraperbox:after, .content:after, .column1:after, .column1 .laybox .descbox:after, .column1 .getmember-box .listbox:after, .about-column:after, .about-column p:after, .manage-money:after, .income:after, .income .incomeinfo:after, .income .btnbox:after, .wrapbg-bottom:after, .mask-mobile ul li:after { clear: both; }
+
+    .header-banner { width: 100%; height: 542px; background: url("http://r3.ykimg.com/0510000055F118BA67BC3D7CDA0270BF") no-repeat center center; }
+
+    .wraperbox { width: 100%; margin: 0 auto; height: auto; background: url("http://r2.ykimg.com/0510000055F118B967BC3D7465076E6C") repeat-x; }
+
+    .content { width: 1100px; margin: 0 auto; background: #fcf1e0; padding: 40px 0; display: block; }
+
+    .content p, .content div, .content h1, .content h2, .content h3, .content span, .mask-mobile input, .mask-mobile h3, .mask-mobile p, .mask-mobile span, .footer-box p { font-family: "微软雅黑"; }
+
+    .content h1 { font-size: 28px; height: 62px; line-height: 62px; color: #ffffff; background: #f9573d; }
+
+    .content h2 { font-size: 26px; height: 60px; line-height: 60px; color: #f47b19; }
+
+    .content h3, .mask-mobile h3 { font-size: 22px; height: 60px; line-height: 60px; color: #ffffff; background: #f9573d; }
+
+    .content h1, .content h2, .content h3 { text-align: center; }
+
+    .content p { font-size: 16px; height: 24px; line-height: 24px; color: #727272; height: auto; }
+    .content p em { font-size: 18px; color: #f93b15; font-style: normal; }
+
+    .column1 { width: 1066px; margin: 0 auto; }
+    .column1 .laybox, .column1 .getmember-box { width: 250px; height: 340px; background: #ffffff; display: block; }
+    .column1 .laybox { float: left; margin-right: 10px; display: inline-block; }
+    .column1 .laybox .descbox { width: 220px; margin: 0 auto; padding-top: 20px; }
+    .column1 .laybox .descbox p span { float: left; display: inline; }
+    .column1 .laybox .descbox p span em { font-size: 18px; color: #f93b15; font-style: normal; }
+    .column1 .laybox .descbox p span.wid1 { width: 16px; height: 24px; background: url("http://r1.ykimg.com/0510000055F118F067BC3D5DA70949B2") no-repeat 0 5px; }
+    .column1 .laybox .descbox p span.wid2 { width: 204px; }
+    .column1 .laybox .imgbox { margin: 0 auto; }
+    .column1 .laybox .imgbox.oneimg { width: 223px; margin-top: 30px; }
+    .column1 .laybox .imgbox.twoimg { width: 124px; margin-top: 20px; }
+    .column1 .laybox .imgbox.threeimg { width: 115px; }
+    .column1 .getmember-box { height: 336px; border-radius: 3px; float: right; border: 4px solid #e72202; }
+    .column1 .getmember-box .leadtop { width: 192px; height: 67px; margin: 0 auto; margin-top: 15px; }
+    .column1 .getmember-box .listbox { width: 214px; margin: 0 auto; margin-top: 8px; }
+    .column1 .getmember-box .listbox p { line-height: 30px; }
+    .column1 .getmember-box .listbox p span { float: left; display: inline; }
+    .column1 .getmember-box .listbox p span em { font-size: 28px; color: #f15601; font-weight: bold; display: inline-block; vertical-align: middle; }
+    .column1 .getmember-box .listbox p span.wid1 { width: 14px; height: 24px; background: url("http://r2.ykimg.com/0510000055F118B967BC3D6D910C66EB") no-repeat 0 8px; }
+    .column1 .getmember-box .listbox p span.wid2 { width: 200px; line-height: 30px; }
+
+    .getmember { width: 166px; height: 47px; line-height: 47px; font-size: 20px; background: #f97811; border-radius: 3px; font-family: "微软雅黑"; box-shadow: 0 3px 3px #976666; text-align: center; letter-spacing: 2px; margin: 0 auto; margin-top: 20px; }
+    .getmember a, .getmember a:hover { display: block; color: #ffffff; cursor: pointer; line-height: 47px; text-decoration: none; }
+
+    .content-wrap { width: 1022px; margin: 0 auto; }
+
+    .about-column h2 { text-align: left; margin-top: 30px; }
+    .about-column p { display: block; height: auto; }
+
+    .lead-banner { width: 1021px; height: 143px; background: url("http://r4.ykimg.com/0510000055F118EF67BC3D31AB03AA54") no-repeat; margin-top: 40px; }
+
+    .lead-h2 { height: 91px; position: relative; margin-top: 75px; }
+    .lead-h2 h2 { height: 76px; line-height: 76px; text-align: left; color: #ffffff; padding-left: 58px; letter-spacing: 2px; }
+    .lead-h2 .posbg { width: 628px; height: 91px; position: absolute; left: -56px; top: 0; background: url("http://r4.ykimg.com/0510000055F118EF67BC3D0A3B0365B9"); }
+
+    .manage-money { width: 1018px; height: 364px; margin: 0 auto; border: 1px solid #bdbdbd; background: #ffffff; margin-top: 50px; }
+    .manage-money .getmember { font-weight: bold; margin-top: 40px; font-size: 23px; }
+    .manage-money .getmember a { font-size: 23px; }
+
+    .manage-money .laybox { width: 338px; height: 364px; float: left; display: inline-block; }
+    .manage-money .laybox h3 { width: 328px; margin: 0 auto; }
+    .manage-money .laybox h2 { line-height: 65px; height: 65px; }
+    .manage-money .laybox p { padding-left: 30px; padding-top: 16px; }
+    .manage-money .laybox p em { font-size: 18px; color: #f93b15; padding-right: 10px; }
+    .manage-money .laybox.brright { border-right: 2px solid #dcdcdc; }
+    .manage-money .laybox.box3 p { margin-left: 60px; }
+
+    .income { width: 1008px; height: auto; border: 1px solid #d9d8d8; padding: 0 6px; margin: 0 auto; margin-top: 30px; background: #ffffff; }
+    .income p { font-size: 18px; padding-top: 5px; text-align: center; }
+    .income .incomeinfo { margin-top: 25px; height: 331px; background: url("http://r4.ykimg.com/0510000055F118EF67BC3D72780B4660") no-repeat; }
+    .income .incomeinfo .descbox { width: 334px; float: left; padding-top: 50px; }
+    .income .incomeinfo .descbox p { width: 270px; margin: 0 auto; height: auto; font-size: 16px; text-align: left; }
+    .income .incomeinfo .descbox p em { color: #f93b15; }
+    .income .btnbox { width: 562px; margin: 0 auto; padding: 40px 0; display: block; }
+    .income .btnbox .lookup { width: 200px; height: 47px; line-height: 47px; font-size: 23px; background: #f97811; border-radius: 3px; font-family: "微软雅黑"; box-shadow: 0 3px 3px #976666; text-align: center; letter-spacing: 2px; float: left; font-weight: bold; }
+    .income .btnbox .lookup a, .income .btnbox .lookup a:hover { display: block; color: #ffffff; cursor: pointer; line-height: 47px; text-decoration: none; }
+    .income .btnbox .lookdown { width: 200px; height: 47px; line-height: 47px; font-size: 23px; background: #6293ad; border-radius: 3px; font-family: "微软雅黑"; box-shadow: 0 3px 3px #976666; text-align: center; letter-spacing: 2px; float: right; font-weight: bold; }
+    .income .btnbox .lookdown a, .income .btnbox .lookdown a:hover { display: block; color: #ffffff; cursor: pointer; line-height: 47px; text-decoration: none; }
+    .income .btnbox .lookup, .income .btnbox .lookdown { box-shadow: 0 3px 3px #6b6b6b; }
+
+    .content-bottom { width: 100%; height: 92px; background: url("http://r2.ykimg.com/0510000055F118B967BC3D64A20A5C76") no-repeat center center; }
+
+    .wrapbg-bottom { width: 100%; height: auto; background: url("http://r3.ykimg.com/0510000055F118BA67BC3D0FDB055E1A") repeat-x; }
+
+    .footer-box { width: 1020px; margin: 0 auto; padding-top: 70px; padding-bottom: 40px; }
+    .footer-box .privilegebg { height: 241px; background: url("http://r2.ykimg.com/0510000055F118F067BC3D10D00DF620") no-repeat; }
+    .footer-box h4 { height: 20px; background: url("http://r2.ykimg.com/0510000055F118B967BC3D43EF0EFBE4") no-repeat; margin-top: 65px; }
+    .footer-box p { color: #ffffff; padding-top: 25px; line-height: 24px; font-size: 16px; }
+
+    .maskx { display: none; width: 100%; height: 10000px; position: fixed; left: 0; top: 0; background: #000000; opacity: 0.7; -moz-opacity: 0.7; filter: alpha(opacity=70); z-index: 5555; }
+    .mask-mobile { display: none; background: #fff; width: 486px; height: auto; position: fixed; top: 50%; left: 50%; border: 1px solid #ff896d; margin-left: -200px; margin-top: -150px; padding-bottom: 30px; z-index: 6666; }
+    .mask-mobile p, .mask-mobile span { font-size: 16px; }
+    .mask-mobile p { text-align: center; line-height: 30px; padding: 5px 0; }
+    .mask-mobile h3 { font-weight: normal; text-align: center; position: relative; }
+    .mask-mobile h3 .close { width: 30px; height: 30px; display: block; color: #ffffff; font-size: 50px; position: absolute; right: 15px; top: -5px; cursor: pointer; }
+    .mask-mobile ul { width: 342px; margin: 0 auto; display: block; }
+    .mask-mobile ul .errorbox { color: #F00; font-size: 14px; line-height: 20px; padding-left: 90px; display: none; }
+    .mask-mobile ul li { padding-top: 15px; height: 40px; line-height: 40px; list-style: none; }
+    .mask-mobile ul li .texwid, .mask-mobile ul li .texwid2 { width: 230px; padding: 0 5px; border: 1px solid #ff896d; float: left; }
+    .mask-mobile ul li span { float: left; line-height: 40px; display: inline; }
+    .mask-mobile ul li span.wid1 { width: 80px; text-align: right; padding-right: 15px; }
+    .mask-mobile ul li span.wid2 { float: left; width: 245px; }
+    .mask-mobile ul li span.wid2 input { height: 30px; padding: 2px 0; line-height: 30px; font-size: 16px; }
+    .mask-mobile ul li span.wid2 input.texwid2 { width: 100px; }
+    .mask-mobile ul li span.wid2 input.waitcode { width: 120px; margin-left: 10px; float: left; height: 36px; white-space: nowrap; }
+    /*# sourceMappingURL=layout.css.map */
+</style>
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script type="text/javascript">
+    var j=jQuery.noConflict();
+    j(function(){
+        var  saveurl ='http://mini.cron.youku.com/vipactive/active/index.php?app=active&c=reg_partner&a=reg&code=10007';
+        var get_login = function(){
+            j.ajax(saveurl,
+                    {type:'get',dataType:'jsonp'}).done(function(choudata)
+                    {
+                        if(choudata.code==10000) {window.location.href="http://www.newbenben.com/active/site/youku?"+choudata.result.url; }
+                        else if(choudata.code==10010){login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                        else if(choudata.code==10023){alert("此手机号已经注册过了")}
+                        else if(choudata.code==10030){ j(".mask-mobile, .maskx").show(); }
+                    });
+        };
+        j(".btn-getmember").on("click",function(){
+            get_login();
+        });
+        //发送验证码倒计时间
+        var time = function(o,wait,maxwait) {
+            if (wait == 0) {
+                o.attr("disabled",false);
+                o.attr("value","发送验证码");
+                wait = maxwait;
+            } else {
+                o.attr("disabled",true);
+                o.attr("value","重新发送(" + wait + "s)");
+                wait--;
+                setTimeout(function() {
+                            time(o,wait,maxwait)
+                        },
+                        1000)
+            }
+        };
+        var getlink = {
+            //验证码
+            getcode:'http://pay.youku.com/ajax/sendsms.html',
+            //绑定手机
+            bindmobile:'http://pay.youku.com/ajax/bindmobile.html'
+        };
+        /*验证手机号*/
+        var checkIsMobile = function(mobile) {
+            if (mobile == '') {
+                //alert('手机号码不能为空');
+                j("#error_a").show().html("！手机号码不能为空");
+                return false;
+            }
+            if (isNaN(mobile) || (mobile.length != 11)) {
+                // alert('请输入正确的手机号码');
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+            if (!reg.test(mobile)) {
+                //alert('请输入正确的手机号码');
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            j("#error_a").hide();
+            return true;
+        };
+        var if_code = function(bind){
+            if(bind.error == 10021){alert("参数错误");}
+            else if(bind.error == 10022){alert("手机验证码发送失败");}
+            else if(bind.error == 10031){alert("手机验证码输入错误");}
+            else if(bind.error == 10032){
+                if(bind.msg=="此mobile已经存在"){alert("该手机号已绑定其他账号，请更换手机号绑定操作");}
+                else if(bind.msg=="用户被屏蔽！"){alert("很抱歉，该账号被屏蔽了，请更换账号尝试");}
+                else{alert(bind.msg);}
+            }
+            else if(bind.error == 10033){alert("手机号绑定失败");}
+            else if(bind.error == 10041){alert("无法获取用户信息");}
+            else if(bind.error == 10042){alert("用户没有绑定手机号");}
+        };
+        //绑定手机号
+        var bindmobile = function(){
+            var mobile = j("#mobile").val();
+            if (!checkIsMobile(mobile)) {
+                return false;
+            }
+            var code = j(".texwid2").val();
+            if(code==""){
+                //alert("请输入验证码");
+                j("#error_b").show().html("！请输入正确的验证码");
+                return false;
+            }
+            var blink = ""+getlink.bindmobile+"?mobile="+mobile+"&code="+code+"";
+            j.ajax(blink,
+                    {
+                        type: 'get',
+                        dataType: 'jsonp'
+                    }).done(function (bind) {
+                        if(bind.error == 0){
+                            j(".maskx, .mask-mobile").hide();
+                            get_login();
+                        }
+                        else{
+                            if_code(bind);
+                        }
+                    });
+        };
+        //获取验证码
+        var get_code = function(){
+            var o = j("#waitcode");
+            var mobile = j("#mobile").val();
+            if (!checkIsMobile(mobile)) {
+                return false;
+            }
+            var clink = ""+getlink.getcode+"?mobile="+mobile+"";
+            j.ajax(clink,{type: 'get',dataType: 'jsonp'}).done(function (code) {
+                if(code.error == 0){
+                    time(o,60,60);
+                }
+                else{
+                    if_code(code);
+                }
+            });
+        };
+        j("#waitcode").click(function(){
+            j(".texwid2").val("");
+            get_code();
+        });
+        //绑定手机
+        j("#bindtel").click(function(){
+            bindmobile();
+        });
+        //关闭弹层
+        j(".close").on("click",function(){
+            j(".maskx, .mask-mobile").hide();
+            j("#mobile").val("");
+            j(".texwid2").val("");
+        })
+    })
+</script>
+<!--弹层开始-->
+<div class="maskx"></div>
+<div class="mask-mobile">
+    <h3>请确认您的手机号 <span class="close">×</span></h3>
+    <p>为了更好的为您提供服务，请填写手机号码</p>
+    <ul>
+        <li>
+            <span class="wid1">手机号码:</span>
+            <span class="wid2"><input type="text"  class="texwid" id="mobile" ></span>
+        </li>
+        <div class="errorbox" id="error_a">！请输入正确的手机号</div>
+        <li>
+            <span class="wid1">验证码:</span>
+                    <span class="wid2">
+                       <input type="text" class="texwid2" value="">
+                       <input type="button" class="waitcode" id="waitcode" value="获取验证码">
+                    </span>
+        </li>
+        <div class="errorbox" id="error_b">！验证码输入错误</div>
+    </ul>
+    <div class="getmember"><a href="javascript:;" id="bindtel">提交</a></div>
+</div>
+<!--弹层结束-->
+<div class="header-banner"></div>
+<div class="wraperbox">
+    <div class="content">
+        <div class="column1">
+            <div class="laybox">
+                <h3>注册送1个月优酷会员</h3>
+                <div class="descbox">
+                    <p><span class="wid1"></span><span class="wid2"><em>成功注册</em>牛犇犇会员，即可得一个月优酷会员和100元牛犇犇红包</span></p>
+                </div>
+                <div class="imgbox oneimg">
+                    <img src="http://r2.ykimg.com/0510000055F118F167BC3D121D03D78D"/>
+                </div>
+            </div>
+            <div class="laybox">
+                <h3>8888元理财金免费送</h3>
+                <div class="descbox">
+                    <p><span class="wid1"></span><span class="wid2">只需1元, 可享<em>8888</em>元理财3天体验期</span></p>
+                </div>
+                <div class="imgbox twoimg">
+                    <img src="http://r1.ykimg.com/0510000055F118F067BC3D6C0B06A6AF"/>
+                </div>
+            </div>
+            <div class="laybox">
+                <h3>送2~14个月优酷会员</h3>
+                <div class="descbox">
+                    <p><span class="wid1"></span><span class="wid2">投资金额满100元，<em>加送</em>1个月优酷会员</span></p>
+                    <div class="imgbox threeimg">
+                        <img src="http://r1.ykimg.com/0510000055F118F067BC3D47780912B2"/>
+                    </div>
+                    <p><span class="wid1"></span><span class="wid2">投资金额满5000元，<em>再加送</em>12个月优酷会员</span></p>
+                </div>
+                <div class="imgbox threeimg">
+                    <img src="http://r2.ykimg.com/0510000055F118F167BC3D0FDB084C84"/>
+                </div>
+            </div>
+            <div class="getmember-box">
+                <div class="leadtop"><img src="http://r1.ykimg.com/0510000055F118EF67BC3D66AD01C0AC"></div>
+                <div class="listbox">
+                    <p><span class="wid1"></span><span class="wid2">最高年化收益<em>12.8%</em></span></p>
+                    <p><span class="wid1"></span><span class="wid2">1元即享<em>8888</em>元理财金</span></p>
+                    <p><span class="wid1"></span><span class="wid2">资金由招商银行全程监管</span></p>
+                    <p class=""><span class="wid1"></span><span class="wid2">优酷会员免广告，全程无扰，包月片库免费看</span></p>
+                </div>
+                <div class="getmember"><a class="btn-getmember" target="_blank">马上领取会员</a></div>
+            </div>
+        </div>
+        <div class="content-wrap">
+            <div class="about-column">
+                <h2>了解牛犇犇</h2>
+                <p>牛犇犇由杭州同方联合互联网金融服务有限公司运营,  经浙江省政府核准,  为首批拥有互联网金融服务等多项资质的专业互联网金融平台。
+                    牛犇犇背靠净资产百亿级的同方联合控股集团, 高管来自阿里、恒生、摩根士丹利等, 团队汇聚耶鲁、牛津、伦敦政经等名校博士, 是一家代
+                    表着80后精于专业、重于服务、勇于创新的执着理念的优质互联网金融服务公司。牛犇犇将为有资金需求和理财需求的个人搭建一个公平、
+                    透明、稳定的网络互动平台, 全程提供可靠、专业、高效的一站式金融服务, 确保您获得最安全、稳定、便捷的投资体验。
+                </p>
+            </div>
+            <div class="lead-banner"></div>
+            <div class="lead-h2">
+                <div class="posbg">
+                    <h2>牛犇犇满足您定活两种理财需求</h2>
+                </div>
+            </div>
+            <div class="manage-money">
+                <div class="laybox brright">
+                    <h3>牛牛 - 存钱即理财</h3>
+                    <h2>预期年化收益8%</h2>
+                    <p><em>稳健收益</em>七日年化收益保持在6%~8%</p>
+                    <p><em>安全保障</em>众安保险全额承保全额赔付</p>
+                    <p><em>随时存取</em>1元起投  可立即提现</p>
+                    <div class="getmember"><a href="#" target="_blank">立即加入</a></div>
+                </div>
+                <div class="laybox brright">
+                    <h3>牛金宝</h3>
+                    <h2>最高年化收益率16.8%</h2>
+                    <p><em>存取便活</em>最低100元起投</p>
+                    <p><em>期限可选</em>1~6个月投资期限任意选择</p>
+                    <p><em>全程监管</em>招商银行第三方托管</p>
+                    <div class="getmember"><a href="#" target="_blank">立即加入</a></div>
+                </div>
+                <div class="laybox box3">
+                    <h3>免费体验</h3>
+                    <h2>1元可享8888元理财本金</h2>
+                    <p><em>丰厚本金</em>1元即享</p>
+                    <p><em>超高收益</em>年化12%</p>
+                    <p><em>即时到账</em>3日体验期限</p>
+                    <div class="getmember"><a href="#" target="_blank">立即加入</a></div>
+                </div>
+            </div>
+            <div class="income">
+                <h3>30%高收益来袭 ——“涨跌乐”</h3>
+                <p>低门槛、保本型结构化理财产品</p>
+                <div class="incomeinfo">
+                    <div class="descbox">
+                        <p>理财期内您购买看涨乐/看跌乐任何一种产品，无论涨跌，您都将获得<em>5%</em>的保本收益</p>
+                    </div>
+                    <div class="descbox">
+                        <p>理财期内，您购买的看涨乐/看跌乐指定涨幅/跌幅未突破14.5%，您将获得<em>10%</em>的收益</p>
+                    </div>
+                    <div class="descbox">
+                        <p>理财期内，您购买的看涨乐/看跌乐指定涨/跌幅若突破14.5%, 您将获得最高<em>30%</em>的收益</p>
+                    </div>
+                </div>
+                <div class="btnbox">
+                    <div class="lookup"><a href="#" target="_blank">购买看涨乐</a></div>
+                    <div class="lookdown"><a href="#" target="_blank">购买看跌乐</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-bottom"></div>
+    <div class="wrapbg-bottom">
+        <div class="footer-box">
+            <div class="privilegebg"></div>
+            <h4></h4>
+            <p>1. 活动期间，用户通过活动页面免费注册牛犇犇账号，即可获得1个月优酷会员(会员服务将绑定至注t册牛犇犇的手机号，同一用户限参
+                与一次，注册时使用的优酷账号、支付宝ID、身份证号、手机号、银行卡号任一个相同均会视为同一用户)，并享有100元红包，更多收
+                益详情可咨询客服热线：400-850-2060。
+            </p>
+            <p>2. 活动期间：①在牛犇犇注册成功后, 购买1元理财产品尽享8888元投资收益；②自注册开始两周内在牛犇犇注册即可获得1个月优酷会
+                员+100元红包；③自注册开始两周内在牛犇犇投资100元，即可加送1个月优酷会员(共计1+1=2个优酷会员)；④在牛犇犇投资满5000
+                元，再加送12个月优酷会员（共计1+1+12=14个月优酷会员）。</p>
+            <p>3. 同一用户最多获得14个月优酷会员，完成每个步骤仅可获得一次奖励。注册奖励实时生效，投资奖励在活动结束后7个工作日内统一
+                发放，可前往优酷会员中心查看。</p>
+            <p>4. 本活动仅限牛犇犇新用户参加，如之前已经注册过牛犇犇的用户，则无法获得奖励；若发现盗取他人信息或恶意注册活动的行为，所
+                有奖励清零，并追究法律责任。</p>
+            <p>5. 活动时间：2015年9月15日~2015年9月22日。</p>
+            <p>6. 本活动最终解释权归牛犇犇所有。</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

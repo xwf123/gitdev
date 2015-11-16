@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .maskx { display: none; width: 100%; height: 10000px; position: fixed; left: 0; top: 0; background: #000000; opacity: 0.7; -moz-opacity: 0.7; filter: alpha(opacity=70); z-index: 5555; }
+        .mask-mobile { border-radius: 10px; background: #fff; width: 578px; height: auto; position: fixed; top: 50%; left: 50%; border: 1px solid #4160ba; margin-left: -289px; margin-top: -150px; padding-bottom: 30px; z-index: 6666; overflow-x: hidden; }
+        .mask-mobile p, .mask-mobile span { font-size: 15px; }
+        .mask-mobile h3 { width: 578px; background: #4c5c97; color: #ffffff; height: 66px; line-height: 66px; font-size: 24px; font-weight: normal; text-align: center; position: relative; }
+        .mask-mobile .close { width: 35px; height: 35px; display: inline-block; position: absolute; right: 15px; cursor: pointer; }
+        .mask-mobile ul { width: 382px; margin: 0 auto; display: block; }
+        .mask-mobile ul p { line-height: 30px; padding-top: 20px; padding-left: 10px; }
+        .mask-mobile ul li { padding-top: 25px; height: 40px; line-height: 40px; list-style: none; }
+        .mask-mobile ul li .texwid, .mask-mobile ul li .texwid2 { width: 260px; padding: 0 10px; border: 1px solid #586899; float: left; color: #476099; }
+        .mask-mobile ul li span { float: left; line-height: 40px; display: inline; }
+        .mask-mobile ul li span.wid1 { width: 60px; text-align: right; padding-right: 5px; }
+        .mask-mobile ul li span.wid2 { float: left; width: 307px; position: relative; }
+        .mask-mobile ul li span.wid2 .errorbox { color: #F00; position: absolute; left: 0; top: 40px; font-size: 14px; line-height: 22px; display: none; }
+        .mask-mobile ul li span.wid2 input { height: 40px; line-height: 40px; font-size: 24px; }
+        .mask-mobile ul li span.wid2 input.texwid2 { width: 100px; float: left; }
+        .mask-mobile ul li span.wid2 input.waitcode { width: 150px; float: left; margin-left: 10px; height: 40px; line-height: 40px; display: inline-block; white-space: nowrap; font-size: 18px; color: #ff1800; border: 1px solid #c4c4c4; background: #fbfbfb; }
+        .mask-mobile .getmember { width: 175px; height: 50px; line-height: 50px; font-size: 30px; background: #4c5c97; border-radius: 3px; font-family: "微软雅黑"; text-align: center; letter-spacing: 2px; margin: 0 auto; margin-top: 20px; border-radius: 10px; margin-top: 25px; }
+        .mask-mobile .getmember a, .mask-mobile .getmember a:hover { display: block; color: #ffffff; cursor: pointer; line-height: 50px; text-decoration: none; }
+    </style>
+</head>
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script type="text/javascript">
+    var j=jQuery.noConflict();
+    j(function(){
+        var  saveurl ='http://mini.cron.youku.com/vipactive/active/index.php?app=active&c=reg_partner&a=reg&code=10008';
+        var get_login = function(){
+            j.ajax(saveurl,
+                    {type:'get',dataType:'jsonp'}).done(function(choudata)
+                    { data = choudata.data;
+                        if(choudata.code==10000) {window.location.href="https://qa.jiuxinfinance.com/promoted.html?cid=t10029&"+choudata.result.url}
+                        else if(choudata.code==10010){login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                        else if(choudata.code==10023){alert("此手机号已经注册过了")}
+                        else if(choudata.code==10030){ j(".mask-mobile, .maskx").show(); }
+                    });
+        };
+        j(".getmemberbtn1, .getmemberbtn2").on("click",function(){
+            get_login();
+        });
+        //发送验证码倒计时间
+        var time = function(o,wait,maxwait) {
+            if (wait == 0) {
+                j(".waitcode").css(color,"#ff1800");
+                o.attr("disabled",false);
+                o.attr("value","发送验证码");
+                wait = maxwait;
+            } else {
+                j(".waitcode").css("color","#807e7e");
+                o.attr("disabled",true);
+                o.attr("value","重新发送(" + wait + "s)");
+                wait--;
+                setTimeout(function() {
+                            time(o,wait,maxwait)
+                        },
+                        1000)
+            }
+        };
+        var getlink = {
+            //验证码
+            getcode:'http://pay.youku.com/ajax/sendsms.html',
+            //绑定手机
+            bindmobile:'http://pay.youku.com/ajax/bindmobile.html'
+        };
+        /*验证手机号*/
+        var checkIsMobile = function(mobile) {
+            if (mobile == '') {
+                //alert('手机号码不能为空');
+                j("#error_a").show().html("！手机号码不能为空");
+                return false;
+            }
+            if (isNaN(mobile) || (mobile.length != 11)) {
+                // alert('请输入正确的手机号码');
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+            if (!reg.test(mobile)) {
+
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            j("#error_a").hide();
+            return true;
+        };
+        var if_code = function(bind){
+            if(bind.error == 10021){alert("参数错误");}
+            else if(bind.error == 10022){alert("手机验证码发送失败");}
+            else if(bind.error == 10031){alert("手机验证码输入错误");}
+            else if(bind.error == 10032){
+                if(bind.msg=="此mobile已经存在"){alert("该手机号已绑定其他账号，请更换手机号绑定操作");}
+                else if(bind.msg=="用户被屏蔽！"){alert("很抱歉，该账号被屏蔽了，请更换账号尝试");}
+                else{alert(bind.msg);}
+            }
+            else if(bind.error == 10033){alert("手机号绑定失败");}
+            else if(bind.error == 10041){alert("无法获取用户信息");}
+            else if(bind.error == 10042){alert("用户没有绑定手机号");}
+        };
+        //绑定手机号
+        var bindmobile = function(){
+            var mobile = j("#mobile").val();
+            if (!checkIsMobile(mobile)) {
+                return false;
+            }
+
+            var code = j(".texwid2").val();
+            if(code==""){
+                //alert("请输入验证码");
+                j("#error_b").show().html("！请输入正确的验证码");
+                return false;
+            }
+            var blink = ""+getlink.bindmobile+"?mobile="+mobile+"&code="+code+"";
+            j.ajax(blink,
+                    {
+                        type: 'get',
+                        dataType: 'jsonp'
+                    }).done(function (bind) {
+                        if(bind.error == 0){
+                            j(".maskx, .mask-mobile").hide();
+                            get_login();
+                        }
+                        else{
+                            if_code(bind);
+                        }
+                    });
+        };
+        //获取验证码
+        var get_code = function(){
+            var o = j("#waitcode");
+            var mobile = j("#mobile").val();
+            if (!checkIsMobile(mobile)) {
+                return false;
+            }
+            var clink = ""+getlink.getcode+"?mobile="+mobile+"";
+            j.ajax(clink,{type: 'get',dataType: 'jsonp'}).done(function (code) {
+                if(code.error == 0){
+                    time(o,60,60);
+                }
+                else{
+                    if_code(code);
+                }
+            });
+        };
+        j("#waitcode").click(function(){
+            j(".texwid2").val("");
+            get_code();
+        });
+        //绑定手机
+        j("#bindtel").click(function(){
+            bindmobile();
+        });
+        //关闭弹层
+        j(".close").on("click",function(){
+            j(".maskx, .mask-mobile").hide();
+            j("#mobile").val("");
+            j(".texwid2").val("");
+        })
+    })
+</script>
+<!--弹层开始绑定手机号发送验证码到手机上-->
+<div class="maskx"></div>
+<div class="mask-mobile">
+    <h3>请确认您的手机号 <div class="close"><img src="http://r3.ykimg.com/0510000055FBBB6267BC3D4249091463" /></div></h3>
+    <ul>
+        <p>为了更好的为您提供服务，请填写手机号码</p>
+        <li>
+            <span class="wid1">手机号:</span>
+            <span class="wid2"><input type="text"  class="texwid" id="mobile" > <div class="errorbox" id="error_a">！请输入正确的手机号</div></span>
+        </li>
+        <li>
+            <span class="wid1">验证码:</span>
+                    <span class="wid2">
+                       <input type="text" class="texwid2" value="">
+                       <input type="button" class="waitcode" id="waitcode" value="获取验证码">
+                        <div class="errorbox" id="error_b">！验证码输入错误</div>
+                    </span>
+        </li>
+
+    </ul>
+    <div class="getmember"><a href="javascript:;" id="bindtel">提交</a></div>
+</div>
+<!--弹层结束以上是绑定手机号发送验证码到手机上-->
+<!--一下是语音发送验证码-->
+<style>
+    .registerbox ul:before, .registerbox ul:after, .ulbox ul{ content: ''; display: table; }
+    .registerbox ul:after, .ulbox ul{ clear: both; }
+    .registerbox { width: 295px; height: 380px; position: absolute; right: 0; top: 102px; background:#2c3455; padding-left: 20px;}
+    .registerbox ul li, .ulbox ul li{ list-style: none; width: 295px; line-height: 30px; font-size: 13px; color: #ffffff; position: relative; }
+    .registerbox ul li span, .ulbox ul li span{ position: absolute; right: 36px; top: 0px; line-height: 30px; font-size: 12px; color: #ff0000; }
+    .registerbox ul li .righticon, .ulbox ul li .righticon{ display: none; width: 15px; height: 15px; position: absolute; top: 7px; right: 10px; background: url("http://r4.ykimg.com/0510000055FA2ECF67BC3D6D8408C280") no-repeat center center; }
+    .registerbox ul li input, .ulbox ul li input { height: 34px; line-height: 34px; border:0; background:#ffffff; color: #666666; margin-bottom: 15px; }
+    .registerbox ul li input.textwid { width: 222px; padding-left: 36px; }
+    .registerbox ul li input.codewid { width: 105px; display: inline; float: left; padding: 0 5px; margin-right: 10px; background: #ffffff; }
+    .registerbox ul li input.codeimgwid { width: 130px; float: left; color: #ffffff; background: #4dc970; text-align: center; font-size: 16px; cursor: pointer; }
+    .registerbox .registerbtn{ width: 190px; height: 46px;line-height: 46px;font-size: 30px;text-align: center; display: block; cursor: pointer; margin-top: 26px; margin-left: 39px; background:#efb71c;color:#ffffff;  }
+    .identcode{width:80px;font-size: 14px; height: 30px;text-align: center; display: block; cursor: pointer;}
+    .registerbox .agreement { padding-left: 35px; margin-top: 20px; font-size: 13px; color: #ffffff; display: inline-block; *line-height: 28px; }
+    .registerbox .agreement input { float: left; margin-right: 5px; margin-top: 3px; }
+</style>
+<script>
+var j=jQuery.noConflict();
+j(function(){
+    var urlinfo = {
+        //验证码
+        upcode: 'http://mini.cron.youku.com/qq_cdk/yl_send_code.php',
+        //效验
+        checkcode: 'http://mini.cron.youku.com/qq_cdk/yl_save_user.php'
+    };
+    function checkNameBeginByNum(str){
+        var number = str.substring(0,1);
+        var reg = /^\d+$/;
+        if(!number.match(reg)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+// 注册开始
+    function register(registurl){
+        j.ajax(registurl,
+                {
+                    Type : 'get',
+                    dataType:'jsonp'
+                }).done(function(registdata){
+                    if(registdata.error==0){
+                        window.location.href="https://www.yooli.com/secure/preactiveSuccess.action?token="+registdata.token+"&timestamp="+registdata.timestamp+"&sid=301&aid=YK1&utm_source=BD&utm_medium=cpa&utm_term=YK1&utm_content=%E4%BC%98%E9%85%B7%E7%BD%91&utm_campaign=%E4%BC%98%E9%85%B7%E7%BD%91&userid="+registdata.userid+"";
+                    }
+                    else if(registdata.error==1){
+                        j(".errormobile").hide();
+                        login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                    else if(registdata.error==2){
+                        j(".errorname").show();
+                        j(".errorname").html("此账号已经注册过了！");
+//                        alert("此帐号已经注册过了");
+                    }
+                    else if(registdata.error==3){
+                        j(".errorname").hide();
+                        j(".errormobile").show();
+                        j(".errormobile").html("手机号用户名与当前UID不匹配！");
+//                        alert("手机号用户名与当前UID不匹配");
+                    }
+                    else if(registdata.error==4){
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".errorcode").show();
+                        j(".errorcode").html("验证码错误！");
+//                        alert("验证码错误");
+                    }
+                    else if(registdata.error==5){
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".errorcode").show();
+                        j(".errorcode").html("验证码过期了！");
+//                        alert("验证码过期了");
+                    }
+                    else if(registdata.error==100){alert("活动已过期");}
+                    else if(registdata.error==101){alert("参数错误");}
+                });
+    }
+    //倒计时
+    var wait=120;
+    //发送验证码倒计时间
+    var time = function(o,wait,maxwait) {
+        if (wait == 0) {
+            o.attr("disabled",false);
+            o.attr("value","获取语音验证");
+            wait = maxwait;
+        } else {
+            o.attr("disabled",true);
+            o.attr("value","重新发送(" + wait + "s)");
+            wait--;
+            setTimeout(function() {
+                        time(o,wait,maxwait)
+                    },
+                    1000
+            );
+        }
+    };
+    function getcode(url){
+        var o=j(".voicecode");
+        j.ajax(url,
+                {
+                    Type : 'get',
+                    dataType:'jsonp'
+                }).done(function(codedata){
+                    if(codedata.error==0){
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".righticon").show();
+                        time(o,120,120);
+                    }
+                    else if(codedata.error==1){
+                        j(".errormobile").hide();
+                        login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                    else if(codedata.error==2){
+                        j(".errorname").show();
+                        j(".errorname").html("此账号已经注册过了！");
+//                alert("此账号已经注册过了");
+                    }
+                    else if(codedata.error==3){
+                        j(".errorname").hide();
+                        j(".errormobile").show();
+                        j(".errormobile").html("此手机号已经注册过了！");
+//                alert("此手机号已经注册过了");
+                    }
+                    else if(codedata.error==4){
+                        j(".errorname").show();
+                        j(".errorname").html("此用户名已经注册过了！");
+//                alert("此用户名已经注册过了");
+                    }
+                    else if(codedata.error==5){
+                        j(".righticon").show();
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".errorcode").show();
+                        j(".errorcode").html("语音验证已发送，请耐心等待！");
+//                alert("语音验证已发送，请耐心等待");
+                    }
+                    else if(codedata.error==-1){alert(codedata.des);}
+                    else if(codedata.error==100){alert("活动已过期");}
+                    else if(codedata.error==101){alert("参数错误");}
+                });
+    }
+    //语音获取
+    j(".voicecode").on("click",function(){
+        var username=j(".nametext").val();
+        var mobile=j(".mobiletext").val();
+        var code=j(".codetext").val();
+        var voicetext=j(".voicecode").val();
+        if(username==""||username=="输入字母、数字或中文"){
+            j(".errorname").show();
+            j(".errorname").html("请输入您的用户名！");
+//            alert("请输入您的用户名");
+            return false;
+        }
+        if(!checkNameBeginByNum(username)){
+            j(".errorname").show();
+            j(".errorname").html("不能数字开头！");
+//            alert("不能数字开头");
+            return false;
+        }
+        var myReg1 = /^[_A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if(!(myReg1.test(username)))
+        {
+            j(".errorname").show();
+            j(".errorname").html("昵称只能为字母、数字或中文！");
+//            alert("昵称只能为字母、数字或中文");
+            return false;
+        }
+        if(username.length<4){
+            j(".errorname").show();
+            j(".errorname").html("昵称太短了！");
+//            alert("昵称太短了");
+            return false;
+        }
+        if(username.length>18){
+            j(".errorname").show();
+            j(".errorname").html("昵称过长！");
+//            alert("昵称过长");
+            return false;
+        }
+        if(mobile==""||mobile=="请输入优酷账户绑定的手机号"){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入您的手机号！");
+//            alert("请输入您的手机号");
+            return false;}
+        var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if (!reg.test(mobile)||mobile.length!=11){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入正确的11位手机号码！");
+//            alert('请输入正确的11位手机号码');
+            return false;
+        }
+        var codeurl = ''+urlinfo.upcode+'?mobile='+mobile+'&username='+username+'&callback=?';
+        getcode(codeurl);
+    });
+//点击注册
+    j(".registerbtn").on("click",function(){
+        var username=j(".nametext").val();
+        var mobile=j(".mobiletext").val();
+        var code=j(".codetext").val();
+        var voicetext=j(".voicecode").val();
+        if(username==""||username=="输入字母、数字或中文"){
+            j(".errorname").show();
+            j(".errorname").html("请输入您的用户名");
+//            alert("请输入您的用户名");
+            return false;
+        }
+        if(!checkNameBeginByNum(username)){
+            j(".errorname").show();
+            j(".errorname").html("不能数字开头！");
+//            alert("不能数字开头");
+            return false;
+        }
+        var myReg1 = /^[_A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if(!(myReg1.test(username)))
+        {
+            j(".errorname").show();
+            j(".errorname").html("昵称只能为字母、数字或中文！");
+//            alert("昵称只能为字母、数字或中文");
+            return false;
+        }
+        if(username.length<4){
+            j(".errorname").show();
+            j(".errorname").html("昵称太短了！");
+//            alert("昵称太短了");
+            return false;
+        }
+        if(username.length>18){
+            j(".errorname").show();
+            j(".errorname").html("昵称过长！");
+//            alert("昵称过长");
+            return false;
+        }
+        if(mobile==""||mobile=="请输入优酷账户绑定的手机号"){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入您的手机号！");
+//            alert("请输入您的手机号");
+            return false;}
+        var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if (!reg.test(mobile)||mobile.length!=11){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入正确的11位手机号码！");
+//            alert('请输入正确的11位手机号码');
+            return false;
+        }
+        if(code==""){
+            j(".errorname").hide();
+            j(".errormobile").hide();
+            j(".errorcode").show();
+            j(".errorcode").html("请获取语音验证码！");
+//            alert("请获取验证码");
+            return false;
+        }
+        if(j("#checkbox").is(":checked")){
+            var registurl = ''+urlinfo.checkcode+'?mobile='+mobile+'&username='+username+'&code='+code+'&callback=?';
+            register(registurl);
+        }
+        else{alert("只有同意条款才能注册");}
+    });
+})
+</script>
+<div class="registerbox">
+    <ul>
+        <li>用户名<span class="errorname"></span></li>
+        <li>
+            <input type="text" class="textwid nametext" value="输入字母、数字或中文" onfocus="if(this.value=='输入字母、数字或中文'){this.value=''}" onblur="if(this.value==''){this.value='输入字母、数字或中文'}"/>
+            <div class="righticon"></div>
+        </li>
+        <li>手机号<span class="errormobile"></span></li>
+        <li>
+            <input type="text" class="textwid mobiletext" value="请输入优酷账户绑定的手机号" onfocus="if(this.value=='请输入优酷账户绑定的手机号'){this.value=''}" onblur="if(this.value==''){this.value='请输入优酷账户绑定的手机号'}"/>
+            <div class="righticon"></div>
+        </li>
+        <li>验证码<span class="errorcode"></span></li>
+        <li>
+            <label>
+                <input type="text" class="codewid codetext"/>
+                <input type="text" class="codeimgwid voicecode" value="获取语音验证" readonly/>
+            </label>
+        </li>
+    </ul>
+    <div class="registerbtn">立即注册</div>
+    <div class="agreement"><input type="checkbox" id="checkbox" checked>我已阅读并同意有利网服务协议</div>
+</div>
+<!--图形验证码开始-->
+<script>
+(function(){
+
+    var randstr = function(length){
+        var key = {
+            str : [
+                'a','b','c','d','e','f','g','h','i','j','k','l','m',
+                'o','p','q','r','s','t','x','u','v','y','z','w','n',
+                '0','1','2','3','4','5','6','7','8','9'
+            ],
+            randint : function(n,m){
+                var c = m-n+1;
+                var num = Math.random() * c + n;
+                return  Math.floor(num);
+            },
+            randStr : function(){
+                var _this = this;
+                var leng = _this.str.length - 1;
+                var randkey = _this.randint(0, leng);
+                return _this.str[randkey];
+            },
+            create : function(len){
+                var _this = this;
+                var l = len || 10;
+                var str = '';
+
+                for(var i = 0 ; i<l ; i++){
+                    str += _this.randStr();
+                }
+                return str;
+            }
+        };
+        length = length ? length : 10;
+        return key.create(length);
+    };
+    var randint = function(n,m){
+        var c = m-n+1;
+        var num = Math.random() * c + n;
+        return  Math.floor(num);
+    };
+    var vCode = function(dom, options){
+        this.codeDoms = [];
+        this.lineDoms = [];
+        this.initOptions(options);
+        this.dom = dom;
+        this.init();
+        this.addEvent();
+        this.update();
+        this.mask();
+    };
+    vCode.prototype.init = function(){
+        this.dom.style.position = "relative";
+        this.dom.style.overflow = "hidden";
+        this.dom.style.cursor = "pointer";
+        this.dom.title = "点击更换验证码";
+        this.dom.style.background = this.options.bgColor;
+        this.w = this.dom.clientWidth;
+        this.h = this.dom.clientHeight;
+        this.uW = this.w / this.options.len;
+    };
+    vCode.prototype.mask = function(){
+        var dom = document.createElement("div");
+        dom.style.cssText = [
+            "width: 100%",
+            "height: 100%",
+            "left:5px",
+            "top: 0",
+            "position: absolute",
+            "cursor: pointer",
+            "z-index: 9999999"
+        ].join(";");
+        dom.title = "点击更换验证码";
+        this.dom.appendChild(dom);
+    };
+    vCode.prototype.addEvent = function(){
+        var _this = this;
+//        点击它本身
+//        _this.dom.addEventListener("click", function(){
+//            _this.update.call(_this);
+//            看不清换一张
+            var refresh=document.getElementById('refresh');
+            refresh.addEventListener("click", function(){
+                _this.update.call(_this);
+        });
+    };
+    vCode.prototype.initOptions = function(options){
+
+        var f = function(){
+            this.len = 4;
+            this.fontSizeMin = 26;
+            this.fontSizeMax = 32;
+            this.colors = [
+                "#DDDDDD",
+                "#DDFF77",
+                "#77DDFF",
+                "#99BBFF",
+//                "#7700BB",
+                "#EEEE00",
+//                "green",
+//                "red",
+//                "blue",
+                "#53da33",
+                "#AA0000",
+                "#FFBB00"
+            ];
+            this.bgColor = "#444444";
+            this.fonts = [
+                "Times New Roman",
+                "Georgia",
+                "Serif",
+                "sans-serif",
+                "arial",
+                "tahoma",
+                "Hiragino Sans GB"
+            ];
+            this.lines =10;
+            this.lineColors = [
+                "#888888",
+                "#FF7744",
+                "#888800",
+                "#008888"
+            ];
+            this.lineHeightMin = 1;
+            this.lineHeightMax = 3;
+            this.lineWidthMin = 1;
+            this.lineWidthMax = 30;
+        };
+        this.options = new f();
+        if(typeof options === "object"){
+            for(i in options){
+                this.options[i] = options[i];
+            }
+        }
+    };
+    vCode.prototype.update = function(){
+        for(var i=0; i<this.codeDoms.length; i++){
+            this.dom.removeChild(this.codeDoms[i]);
+        }
+        for(var i=0; i<this.lineDoms.length; i++){
+            this.dom.removeChild(this.lineDoms[i]);
+        }
+        this.createCode();
+        this.draw();
+    };
+    vCode.prototype.createCode = function(){
+        this.code = randstr(this.options.len);
+    };
+    vCode.prototype.verify = function(code){
+        return this.code === code;
+    };
+    vCode.prototype.draw = function(){
+        this.codeDoms = [];
+        for(var i=0; i<this.code.length; i++){
+            this.codeDoms.push(this.drawCode(this.code[i], i));
+        }
+        this.drawLines();
+    };
+    vCode.prototype.drawCode = function(code, index){
+        var dom = document.createElement("span");
+        dom.style.cssText = [
+                    "font-size:" + randint(this.options.fontSizeMin, this.options.fontSizeMax) + "px",
+                    "color:" + this.options.colors[randint(0,  this.options.colors.length - 1)],
+                    "position: absolute",
+                    "left:" + randint(this.uW * index, this.uW * index + this.uW - 20) + "px",
+                    "top:" + randint(0, this.h -36) + "px",
+                    "transform:rotate(" + randint(-10, 10) + "deg)",
+                    "-ms-transform:rotate(" + randint(-10, 10) + "deg)",
+                    "-moz-transform:rotate(" + randint(-10, 10) + "deg)",
+                    "-webkit-transform:rotate(" + randint(-10, 10) + "deg)",
+                    "-o-transform:rotate(" + randint(-10, 10) + "deg)",
+                    "font-family:" + this.options.fonts[randint(0, this.options.fonts.length - 1)],
+                    "font-weight:" + randint(300, 900)
+        ].join(";");
+        dom.innerHTML = code;
+        this.dom.appendChild(dom);
+        return dom;
+    };
+    vCode.prototype.drawLines = function(){
+        this.lineDoms = [];
+        for(var i=0; i<this.options.lines; i++){
+            var dom = document.createElement("div");
+            dom.style.cssText = [
+                "position: absolute",
+                        "opacity: " + randint(3, 6) / 10,
+                        "width:" + randint(this.options.lineWidthMin, this.options.lineWidthMax) + "px",
+                        "height:" + randint(this.options.lineHeightMin, this.options.lineHeightMax) + "px",
+                        "background: " + this.options.lineColors[randint(0, this.options.lineColors.length - 1)],
+                        "left:" + randint(0, this.w - 20) + "px",
+                        "top:" + randint(0, this.h) + "px",
+                        "transform:rotate(" + randint(-20, 20) + "deg)",
+                        "-ms-transform:rotate(" + randint(-20, 20) + "deg)",
+                        "-moz-transform:rotate(" + randint(-20, 20) + "deg)",
+                        "-webkit-transform:rotate(" + randint(-20, 20) + "deg)",
+                        "-o-transform:rotate(" + randint(-20, 20) + "deg)",
+                        "font-family:" + this.options.fonts[randint(0, this.options.fonts.length - 1)],
+                        "font-weight:" + randint(300, 900)
+            ].join(";");
+            this.dom.appendChild(dom);
+            this.lineDoms.push(dom);
+        }
+    };
+    this.vCode = vCode;
+}).call(this);
+
+    onload = function () {
+        var container1 = document.getElementById("vCode1");
+        var code1 = new vCode(container1);
+        document.getElementById("btn1").addEventListener("click", function () {
+            if(document.getElementById("code1").value==""){
+                alert("验证码不能为空");
+                return false;
+            }
+            else if(document.getElementById("code1").value!==code1.code){
+                alert("请输入正确的验证码");
+                return false;
+            }
+            else{
+                alert('验证码输入正确，跳走');
+            }
+//            alert(code1.verify(document.getElementById("code1").value));
+        });
+//        var container2 = document.getElementById("vCode2");
+//        var code2 = new vCode(container2, {
+//            len: 4,
+//            bgColor: "#444444",
+//            colors: [
+//                "#DDDDDD",
+//                "#DDFF77",
+//                "#77DDFF",
+////                "#99BBFF",
+////                "#7700BB",
+//                "#EEEE00"
+//            ]
+//        });
+//        document.getElementById("btn2").addEventListener("click", function () {
+//           if(document.getElementById("code2").value==""){
+//              alert("验证码不能为空");
+//               return false;
+//           }
+//          else if(document.getElementById("code2").value!==code2.code){
+//               alert("请输入正确的验证码");
+//               return false;
+//           }
+//           else{
+//               alert('验证码输入正确，跳走');
+//           }
+////            alert(code2.verify(document.getElementById("code2").value))
+//        });
+    };
+</script>
+
+<div style="clear: both; height:60px;">
+    <h1 style="font-size: 14px;">验证码1</h1>
+    <input type="text" id="code1" style="float: left;height:30px;line-height: 30px;"/>
+    <div id="vCode1" style="width:90px; height: 32px; border: 1px solid #ccc; display: inline-block;float: left;"></div>
+    <div id="refresh" style="height: 32px; line-height:16px;font-size: 12px;color:#f5206e;cursor: pointer; display: inline-block;float: left;" >看不清<br/>换一张</div>
+
+</div>
+<button id="btn1" class="identcode">立即验证</button>
+
+<!--<div style="margin-top: 50px;clear: both;">-->
+    <!--<h1 style="font-size: 14px;">验证码2</h1>-->
+    <!--<input type="text" id="code2" style="height:30px;line-height: 30px;float: left;"/>-->
+    <!--<div id="vCode2" style="width:100px; height:32px; border: 1px solid #ccc; display: inline-block;float: left; "></div>-->
+    <!--<button id="btn2" class="identcode" style="height:30px;line-height: 30px;float: left;">立即验证</button>-->
+<!--</div>-->
+<!--图形验证码结束-->
+</body>
+</html>

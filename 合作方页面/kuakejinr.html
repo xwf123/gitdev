@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    * { margin: 0; padding: 0; }
+    body { width: 100%; overflow-x: hidden; font-family: "微软雅黑", "宋体", arial, sans-serif;background:#fffcf3;    }
+    a { outline: medium none; text-decoration: none; }
+    a:active { outline: medium none; }
+    img { border: 0 none; max-width: 100%; vertical-align: middle; }
+    .register_active p, h2, h3, span, .who_lead_bg, .time_text{ font-family: "微软雅黑";font-weight: normal; }
+    .register_active:before, .register_active:after, .about_mi ul:after, .about_mi ul:before, .mask-mobile ul li:before, .mask-mobile ul li:after  { content: ''; display: table; }
+    .register_active:after, .about_mi ul:after, .mask-mobile ul li:after{ clear: both; }
+    .header-banner { width:100%;height:231px;background:url(http://r4.ykimg.com/051000005645724767BC3D318A04D18E) no-repeat center center;background-color:#f3ca3f;}
+    .header-banner .time_text{width:360px;height:30px;line-height:30px;font-size:18px;margin:0 auto;padding-top:145px;color:#ffffff;}
+    .register_active{ width:952px;margin:0 auto; position: relative;background: #fbf5e0; height: 246px;}
+    .content{ width:933px;padding: 10px;background: #fbf5e0; margin:0 auto; }
+    .register_active .content{ position: absolute;top:-35px;width:932px;}
+    .content .laybox {width:228px;height: 264px; float: left;  display: inline-block;background: #ffffff; }
+    .register_active h3, .more_choose h3{width:228px;line-height: 48px; background:#f75a0e;font-size: 20px;color:#ffffff; text-align: center; font-weight: normal;}
+    .register_active h3.left{text-align: left;width:203px;padding-left: 25px;}
+    .register_active p{color:#2d2d2d;font-size: 12px; padding-left: 25px; line-height: 18px; }
+    .register_active p.p5top{ padding-top:10px;}
+    .register_active p em, .getmember_box h2, .getmember_box p em{font-style: normal; color:#f75a0e;}
+    .descbox{width:228px; margin-top: 10px;}
+    .descbox.br_rig{width:227px;border-right:1px dashed #f97f44; height: 190px;}
+    .laybox .img{display: block;text-align: center; padding-top:5px;}
+    .getmember_box{width: 234px;height:262px;border:1px solid #f97f44; float: right; background: #ffffff; position: relative;}
+    .pointer_ico{width:93px;height:90px;position: absolute;bottom:-55px;right:17px;}
+    .getmember_box h2{font-size: 24px; line-height:30px; text-align:center; padding:10px 0;}
+    .getmember_box p{width:204px;margin:0 auto;font-size: 15px; line-height:22px;color: #2d2d2d;text-align: center; padding: 0;}.getmember_box p em{font-size: 15px;}
+    .getmember_btn, .getmember_btn a, .getmember_btn a:hover{width: 196px;height:50px;line-height:50px;font-size: 20px;color:#ffffff;text-decoration: none;display:block;cursor:pointer;}
+    .getmember_btn, .now_joinbtn{margin:0 auto; box-shadow:0 4px 0 #d64a07;-moz-box-shadow:0 4px 0 #d64a07;-webkit-box-shadow:0 4px 0 #d64a07; background: #f75a0e;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; text-align: center; margin-top: 10px;}
+    .who_desc, .active_explain{width:952px; margin:0 auto;}
+    .who_lead{width: 594px; height: 52px; margin:0 auto; margin-top:30px; background:url(http://r4.ykimg.com/051000005645724767BC3D2D8C00D874) no-repeat; margin-bottom: 15px;}
+    .who_desc p{ font-size:14px;color:#2d2d2d; line-height:22px; }
+    .about_mi{width:868px;margin:0 auto; margin-bottom:40px; }
+    .about_mi .headtop{height:98px; background: url(http://r2.ykimg.com/051000005645724967BC3D33D3015783) no-repeat; margin-top: 20px;}
+    .about_mi ul{height:130px; display: block;}
+    .about_mi ul li{width:168px;float: left; list-style: none;text-align:center; padding-top:15px;height: auto; }
+    .about_mi ul li.mt_r{margin-right: 65px;display: inline;}
+    .about_mi ul li span{font-size: 22px; color:#f75a0e; line-height: 24px;}
+    .about_mi ul li p{ font-size: 14px;color:#666666; line-height: 20px;}
+    .privilege{ height: 260px; margin:0 auto; background: url(http://r1.ykimg.com/051000005645724867BC3D1A5A0DF447) no-repeat; margin-top:10px;}
+    .more_choose{width:933px; height:380px; background: #ffffff;}
+    .more_choose h3{width:933px;font-size: 24px;height:52px; line-height:52px;}
+    .more_choose .part_lay{width: 311px; float: left; padding-top: 15px;}
+    .part_lay h2, .part_lay h4{font-size: 24px; line-height:40px; text-align: center;font-weight: normal;  }
+    .part_lay h4, .part_lay p{width: 202px;margin:0 auto;text-align: left;padding-top: 10px;}
+    .part_lay h4{font-size: 20px;line-height:28px;}
+    .part_lay p{font-size: 14px;line-height:20px; height: 80px;}
+    .color_blue{color:#008aff;}.color_red{color:#eb355c;}.color_yel{color:#f75a0e;}
+    .now_joinbtn, .now_joinbtn a, .now_joinbtn a:hover{width:130px;height:36px;line-height:36px;font-size: 18px;color:#ffffff; margin-top: 40px;}
+    .mr_top{ margin-top: 30px;}
+    .who_lead.heigt{height: 40px;}
+    .who_lead_bg{width:308px; line-height:40px;font-weight:bold;color: #f75a0e;font-size: 20px; text-align: center; letter-spacing:3px; margin:0 auto;background: #fffcf3;}
+    .active_explain p{color:#8d8d8d; line-height:20px;font-size: 12px;}
+    .active_explain{ padding-bottom:15px; }
+    /*弹层*/
+    .maskx { /*display: none;*/ width: 100%; height: 10000px; position: fixed; left: 0; top: 0; background: #000000; opacity: 0.7; -moz-opacity: 0.7; filter: alpha(opacity=70); z-index: 5555; }
+    .mask-mobile {  background: #fff; width: 486px; height: auto; position: fixed; top: 50%; left: 50%; border: 1px solid #ff896d; margin-left: -200px; margin-top: -150px; padding-bottom: 30px; z-index: 6666; }
+    .mask-mobile p, .mask-mobile span { font-size: 16px; }
+    .mask-mobile p { text-align: center; line-height: 30px; padding: 5px 0; }
+    .mask-mobile h3 {font-size: 22px; height: 60px; line-height: 60px; color: #ffffff; background: #f9573d; font-weight: normal; text-align: center; position: relative; }
+    .mask-mobile h3 .close { width: 30px; height: 30px; display: block; color: #ffffff; font-size: 50px; position: absolute; right: 15px; top: -5px; cursor: pointer; }
+    .mask-mobile ul { width: 342px; margin: 0 auto; display: block; }
+    .mask-mobile ul .errorbox { color: #F00; font-size: 14px; line-height: 20px; padding-left:100px; display: none; }
+    .mask-mobile ul li { padding-top:15px; height: 40px; line-height: 40px; list-style: none; }
+    .mask-mobile ul li .texwid, .mask-mobile ul li .texwid2 { width: 230px; padding: 0 5px; border: 1px solid #ff896d; float: left; }
+    .mask-mobile ul li span { float: left; line-height: 40px; display: inline; }
+    .mask-mobile ul li span.wid1 { width: 80px; text-align: right; padding-right: 15px; }
+    .mask-mobile ul li span.wid2 { float: left; width: 245px; }
+    .mask-mobile ul li span.wid2 input { height: 30px; padding: 2px 0; line-height: 30px; font-size: 16px; }
+    .mask-mobile ul li span.wid2 input.texwid2 { width: 100px; }
+    .mask-mobile ul li span.wid2 input.waitcode { width: 120px; margin-left: 10px; float: left; height: 36px; white-space: nowrap; }
+    .getmember { width: 166px; height: 47px; line-height: 47px; font-size: 20px; background: #f97811; border-radius: 3px; font-family: "微软雅黑"; box-shadow: 0 3px 3px #976666; text-align: center; letter-spacing: 2px; margin: 0 auto; margin-top: 20px; }
+    .getmember a, .getmember a:hover { display: block; color: #ffffff; cursor: pointer; line-height: 47px; text-decoration: none; }
+
+</style>
+<body>
+<div class="header-banner"><div class="time_text">活动时间：2015年11月15日至11月30日</div></div>
+<div class="register_active">
+    <div class="content">
+        <div class="laybox">
+            <h3 class="left">注册送3重好礼</h3>
+            <div class="descbox br_rig">
+                <p><em>注册</em>才米公社<br/>即可获赠1个月优酷会员+最高<br/>8888元体验金+30元红包</p>
+                <div class="img">
+                    <img src="http://r1.ykimg.com/051000005645724867BC3D136E04BA5A"/>
+                </div>
+            </div>
+        </div>
+        <div class="laybox">
+            <h3>呼朋唤友薅羊毛</h3>
+            <div class="descbox br_rig">
+                <p>注册登录后，<br/>邀请每位好友使用体验金，<br/>邀请人可获得<em>30元红包</em>。</p>
+                <div class="img">
+                    <img src="http://r1.ykimg.com/051000005645724867BC3D0FCF052A00"/>
+                </div>
+            </div>
+        </div>
+        <div class="laybox">
+            <h3>送最高16个月会员</h3>
+            <div class="descbox">
+                <p><em>单笔投资才米公社满2000元，</em><br/>加赠3个月优酷会员；</p>
+                <div class="img">
+                    <img src="http://r1.ykimg.com/051000005645724867BC3D7B740AAD79"/>
+                </div>
+                <p class="p5top"><em>一个月内投资满8000元，</em><br/>加赠1年优酷会员。</p>
+                <div class="img">
+                    <img src="http://r2.ykimg.com/051000005645724867BC3D08D900966F"/>
+                </div>
+            </div>
+        </div>
+        <div class="getmember_box">
+            <div class="pointer_ico"><img src="pointer.png"></div>
+            <h2>才米公社</h2>
+            <p>
+                最高预期年化收益<em>16.00%</em><br/>中国人保<em>(PICC)</em>提供账户资金<br/>安全保障<br/><em>招商银行</em>提供<em>逾期风险补偿金</em><br/>托管服务<br/>100%本息保障<br/>
+            </p>
+            <div class="getmember_btn"><a>马上获取会员</a></div>
+        </div>
+    </div>
+</div>
+<div class="who_desc">
+    <div class="who_lead"></div>
+    <p>才米公社（原夸客理财）为夸客金融旗下独立的互联网金融平台，为互联网用户提供全方位的金融服务。才米公社以理财服务为起点，倡导快乐金融的理念，为公社社员提供开心、贴心、安心的服务。</p>
+    <p>平台于2015年4月推出，依托夸客金融专业的金融分析团队、卓越的风控能力和丰富的金融产品管理经验，在不到一年的时间里为数万名客户提供了理财服务，实现了财富增值。与此同时，更是通过娱乐化的形式为用户提供快乐理财新体验。</p>
+    <p>截至到2015年10月25日，平台累计注册用户超过15万，累计交易金额已突破2.5亿，单月交易额突破亿元，业务增长速度处于行业内领先水平。</p>
+</div>
+<div class="about_mi">
+    <div class="headtop"></div>
+    <ul>
+        <li class="mt_r">
+            <span>外部审计</span>
+            <p>平台引入全球四大会计事务<br/>所之一的安永，进行外部审<br/>计，通过外部监督令平台<br/>业务做到全面合规。</p>
+        </li>
+        <li class="mt_r">
+            <span>逾期风险补偿金</span>
+            <p>招商银行为平台提供逾期<br/>风险补偿金托管服务。</p>
+        </li>
+        <li class="mt_r">
+            <span>风险管理</span>
+            <p>信贷工厂、决策引擎、<br/>反欺诈体系等六大模块<br/>组成风险管理模式，使<br/>用户安心提升资产价值。</p>
+        </li>
+        <li>
+            <span>账户安全</span>
+            <p>中国人保为账户资金<br/>安全提供保障。</p>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <div class="more_choose">
+        <h3>才米公社为您提供多种理财选择</h3>
+        <div class="part_lay">
+            <h2 class="color_blue">月月续投</h2>
+            <h4 class="color_blue">最高预期年化15.78%期限灵活，收益累进 </h4>
+            <p class="color_blue">适宜人群：投资周期不确定，<br/>要求资金灵活，同时享受高收益<br/>起始预期年化收益率6.98%<br/>12期达峰值15.78%</p>
+            <div class="now_joinbtn"><a href="#">立即加入</a></div>
+        </div>
+        <div class="part_lay">
+            <h2 class="color_red">财富优加</h2>
+            <h4 class="color_red">最高年化12%<br/>定期理财，收益稳固</h4>
+            <p class="color_red">适宜人群：有确定的理财周期<br/>轻松拥有高收益<br/>预期年化收益率7%～12%</p>
+            <div class="now_joinbtn"><a href="#">立即加入</a></div>
+        </div>
+        <div class="part_lay">
+            <h2 class="color_yel">新手专享</h2>
+            <h4 class="color_yel">预期年化15% <br/>7天坐享新手福利</h4>
+            <p class="color_yel">适宜人群：仅限首次投资用户<br/>起投金额100元<br/>最高可享8888元体验金</p>
+            <div class="now_joinbtn"><a href="#">立即加入</a></div>
+        </div>
+    </div>
+    <div class="privilege"></div>
+</div>
+<div class="getmember_btn mr_top"><a>马上获取会员</a></div>
+<div class="who_lead heigt">
+    <div class="who_lead_bg">活动说明</div>
+</div>
+<div class="active_explain">
+    <p>1.活动期间，用户通过活动页面注册才米公社，即可获赠1个月优酷会员（会员服务将绑定至注册才米公社的手机号）与最高8888元新手体验金以及30元新手红包；如在才米公社注册、投资等过程中遇到问题，可咨询才米公社客服，热线电话400-680-0388，工作时间8:30-18:30；</p>
+    <p>2.活动所有红包奖励将以抵扣券形式发放至用户账户，可在下次购买产品时抵扣本金，但不会单独产生收益；</p>
+    <p>3.活动期间，在才米公社注册成功并一次性投资满2000元，即可加赠3个月优酷会员；自注册开始1个月内在才米公社累计投资满8000元，即可加赠12个月优酷会员；</p>
+    <p>4.成功注册才米公社的用户，通过邀请每位好友成功使用体验金，可获得30元红包；</p>
+    <p>5.同一用户最多获得16个月（1月+3月+12月）优酷会员，完成每个步骤仅可获得1次奖励；同一个IP每天只能注册5次，同一台网络设备每天只能注册一次。注册认证奖励实时生效，投资奖励在活动结束后7个工作日内统一发放，可前往优酷会员中心查看。</p>
+    <p>6.本活动仅限才米公社新用户参加，已注册才米公社的用户无法获得奖励；</p>
+    <p>7.若发现盗取他人信息或恶意注册活动的行为，则该用户所有奖励清零，并追究其法律责任；</p>
+    <p>8.活动时间：2015年11月15日至11月30日</p>
+    <p>9.在法律允许范围内，优酷及才米公社享有活动解释权</p>
+</div>
+<!--弹层开始-->
+<div class="maskx"></div>
+<div class="mask-mobile">
+    <h3>请确认您的手机号 <span class="close">×</span></h3>
+    <p>为了更好的为您提供服务，请填写手机号码</p>
+    <ul>
+        <li>
+            <span class="wid1">手机号码:</span>
+            <span class="wid2"><input type="text"  class="texwid" id="mobile" ></span>
+        </li>
+        <div class="errorbox" id="error_a"></div>
+        <li>
+            <span class="wid1">验证码:</span>
+                    <span class="wid2">
+                       <input type="text" class="texwid2" value="">
+                       <input type="button" class="waitcode" id="waitcode" value="获取验证码">
+                    </span>
+        </li>
+        <div class="errorbox" id="error_b">！验证码输入错误</div>
+    </ul>
+    <div class="getmember"><a href="javascript:;" id="bindtel">提交</a></div>
+</div>
+<!--弹层结束-->
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script>
+    (function($){
+        var getlink={
+            //验证码
+            getcode:'http://pay.youku.com/ajax/sendsms.html',
+            //绑定手机
+            bindmobile:'http://pay.youku.com/ajax/bindmobile.html'
+        };
+        var  saveurl ='http://act.vip.youku.com/vipactive/active/index.php?c=reg_partner&a=reg&code=10009';
+        var get_login = function(){
+            $.ajax(saveurl,
+                    {type:'get',dataType:'jsonp'}).done(function(data)
+                    {
+                        if(data.code==10000) {
+                            // $(".mask-mobile, .maskx").show();
+                            window.location.href="http://www.newbenben.com/active/site/youku?"+data.result.url;
+                        }
+                        else if(data.code==10010){login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                        else if(data.code==10023){alert("此手机号已经注册过了")}
+                        else if(data.code==10030){$(".mask-mobile, .maskx").show(); }
+                    });
+        };
+        $(".get_click").on("click",function(){
+            get_login();
+        });
+        $(".close").on("click",function(){
+            $(".maskx, .mask-mobile").hide();
+        });
+//验证手机号
+        function error(id,errorinfo){
+            $("#"+id).html(errorinfo).show();
+        }
+        var Moiblefun=function(){
+            var mobile=$("#mobile").val();
+            if(mobile==""){
+                error("error_a","手机号不能为空！");
+                return false;
+            }
+            var Mlength=mobile.length;
+            if(isNaN(mobile)||Mlength!=11){
+                error("error_a","请输入正确的手机号！");
+                return false;
+            }
+            var reg=/^1[|3|4|5|7|8][0-9](\d{8})$/;
+            if(!reg.test(mobile)){
+                error("error_a","请输入正确的手机号！");
+                return false;
+            }
+            $("#error_a").hide();
+        };
+        //返回值
+        var if_code = function(bind){
+            if(bind.error == 10021){
+                //alert("参数错误");
+            }
+            else if(bind.error == 10022){alert("手机验证码发送失败");}
+            else if(bind.error == 10031){alert("手机验证码输入错误");}
+            else if(bind.error == 10032){
+                if(bind.msg=="此mobile已经存在"){alert("该手机号已绑定其他账号，请更换手机号绑定操作");}
+                else if(bind.msg=="用户被屏蔽！"){alert("很抱歉，该账号被屏蔽了，请更换账号尝试");}
+                else{alert(bind.msg);}
+            }
+            else if(bind.error == 10033){alert("手机号绑定失败");}
+            else if(bind.error == 10041){alert("无法获取用户信息");}
+            else if(bind.error == 10042){alert("用户没有绑定手机号");}
+        };
+//获取验证码
+        var textcode = $("#waitcode");
+        var mobile = $("#mobile").val();
+        //倒计时
+        var time=function(textcode,wait,t){
+            if(wait==0){
+                $(".waitcode").css("color","#333333")
+                        .attr({"disabled":false,"value":"发送验证码"});
+                wait=t;
+            }
+            else{
+                $(".waitcode").css("color","#807e7e")
+                        .attr({"disabled":true,"value":"重新发送("+wait+"s)"});
+                wait--;
+                setTimeout(function(){
+                    time(textcode,wait,t);
+                },1000)
+            }
+        };
+        $(".waitcode").on("click",function(){
+            var mobile = $("#mobile").val();
+            Moiblefun();
+            var clink = ""+getlink.getcode+"?mobile="+mobile+"";
+            $.ajax(clink,{type: 'get',dataType: 'jsonp'}).done(function (code) {
+                if(code.error == 0){
+                    time(textcode,60,60);
+                }
+                else{
+                    if_code(code);
+                }
+            });
+        });
+        //绑定手机号
+        var bindmobile = function(){
+            var mobile = $("#mobile").val();
+            Moiblefun();
+            var code = $(".texwid2").val();
+            if(code==""){
+                //alert("请输入验证码");
+                $("#error_b").show().html("！请输入正确的验证码");
+                return false;
+            }
+            var blink = ""+getlink.bindmobile+"?mobile="+mobile+"&code="+code+"";
+            $.ajax(blink,
+                    {
+                        type: 'get',
+                        dataType: 'jsonp'
+                    }).done(function (bind) {
+                        if(bind.error == 0){
+                            $(".maskx, .mask-mobile").hide();
+                            get_login();
+                        }
+                        else{
+                            if_code(bind);
+                        }
+                    });
+        };
+
+        $("#bindtel").on("click",function(){
+            bindmobile();
+        });
+    })(jQuery);
+</script>
+</body>
+</html>

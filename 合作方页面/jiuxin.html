@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/app/dist/jiuxin.css"/>
+</head>
+<!--[if lt IE 9]>
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script type="text/javascript">
+
+    var j=jQuery.noConflict();
+    j(function(){
+
+        var  saveurl ='http://mini.cron.youku.com/vipactive/active/index.php?app=active&c=reg_partner&a=reg&code=10008';
+        var get_login = function(){
+            j.ajax(saveurl,
+                    {type:'get',dataType:'jsonp'}).done(function(choudata)
+                    { data = choudata.data;
+                        if(choudata.code==10000) {window.location.href="https://qa.jiuxinfinance.com/promoted.html?cid=t10029&"+choudata.result.url}
+                        else if(choudata.code==10010){login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                        else if(choudata.code==10023){alert("此手机号已经注册过了")}
+                        else if(choudata.code==10030){ j(".mask-mobile, .maskx").show(); }
+                    });
+        };
+        j(".getmemberbtn1, .getmemberbtn2").on("click",function(){
+            get_login();
+        });
+        //发送验证码倒计时间
+        var time = function(o,wait,maxwait) {
+            if (wait == 0) {
+                j(".waitcode").css(color,"#ff1800");
+                o.attr("disabled",false);
+                o.attr("value","发送验证码");
+                wait = maxwait;
+            } else {
+                 j(".waitcode").css("color","#807e7e");
+                o.attr("disabled",true);
+                o.attr("value","重新发送(" + wait + "s)");
+                wait--;
+                setTimeout(function() {
+                            time(o,wait,maxwait)
+                        },
+                        1000)
+            }
+        };
+        var getlink = {
+            //验证码
+            getcode:'http://pay.youku.com/ajax/sendsms.html',
+            //绑定手机
+            bindmobile:'http://pay.youku.com/ajax/bindmobile.html'
+        };
+        /*验证手机号*/
+        var checkIsMobile = function(mobile) {
+            if (mobile == '') {
+                //alert('手机号码不能为空');
+                j("#error_a").show().html("！手机号码不能为空");
+                return false;
+            }
+            if (isNaN(mobile) || (mobile.length != 11)) {
+                // alert('请输入正确的手机号码');
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+            if (!reg.test(mobile)) {
+
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            j("#error_a").hide();
+            return true;
+        };
+        var if_code = function(bind){
+            if(bind.error == 10021){alert("参数错误");}
+            else if(bind.error == 10022){alert("手机验证码发送失败");}
+            else if(bind.error == 10031){alert("手机验证码输入错误");}
+            else if(bind.error == 10032){
+                if(bind.msg=="此mobile已经存在"){alert("该手机号已绑定其他账号，请更换手机号绑定操作");}
+                else if(bind.msg=="用户被屏蔽！"){alert("很抱歉，该账号被屏蔽了，请更换账号尝试");}
+                else{alert(bind.msg);}
+            }
+            else if(bind.error == 10033){alert("手机号绑定失败");}
+            else if(bind.error == 10041){alert("无法获取用户信息");}
+            else if(bind.error == 10042){alert("用户没有绑定手机号");}
+        };
+        //绑定手机号
+        var bindmobile = function(){
+            var mobile = j("#mobile").val();
+            if (!checkIsMobile(mobile)) {
+                return false;
+            }
+            var code = j(".texwid2").val();
+            if(code==""){
+                //alert("请输入验证码");
+                j("#error_b").show().html("！请输入正确的验证码");
+                return false;
+            }
+            var blink = ""+getlink.bindmobile+"?mobile="+mobile+"&code="+code+"";
+            j.ajax(blink,
+                    {
+                        type: 'get',
+                        dataType: 'jsonp'
+                    }).done(function (bind) {
+                        if(bind.error == 0){
+                            j(".maskx, .mask-mobile").hide();
+                            get_login();
+                        }
+                        else{
+                            if_code(bind);
+                        }
+                    });
+        };
+        //获取验证码
+        var get_code = function(){
+            var o = j("#waitcode");
+            var mobile = j("#mobile").val();
+            if (!checkIsMobile(mobile)) {
+                return false;
+            }
+            var clink = ""+getlink.getcode+"?mobile="+mobile+"";
+            j.ajax(clink,{type: 'get',dataType: 'jsonp'}).done(function (code) {
+                if(code.error == 0){
+                    time(o,60,60);
+                }
+                else{
+                    if_code(code);
+                }
+            });
+        };
+        j("#waitcode").click(function(){
+            j(".texwid2").val("");
+            get_code();
+        });
+        //绑定手机
+        j("#bindtel").click(function(){
+            bindmobile();
+        });
+        //关闭弹层
+        j(".close").on("click",function(){
+            j(".maskx, .mask-mobile").hide();
+            //j("#mobile").val("");
+           // j(".texwid2").val("");
+        })
+    })
+</script>
+<!--弹层开始-->
+<div class="maskx"></div>
+<div class="mask-mobile">
+    <h3>请确认您的手机号 <div class="close"><img src="http://r3.ykimg.com/0510000055FBBB6267BC3D4249091463" /></div></h3>
+    <ul>
+        <p>为了更好的为您提供服务，请填写手机号码</p>
+        <li>
+            <span class="wid1">手机号:</span>
+            <span class="wid2"><input type="text"  class="texwid" id="mobile" > <div class="errorbox" id="error_a">！请输入正确的手机号</div></span>
+        </li>
+        <li>
+            <span class="wid1">验证码:</span>
+                    <span class="wid2">
+                       <input type="text" class="texwid2" value="">
+                       <input type="button" class="waitcode" id="waitcode" value="获取验证码">
+                        <div class="errorbox" id="error_b">！验证码输入错误</div>
+                    </span>
+        </li>
+
+    </ul>
+    <div class="getmember"><a href="javascript:;" id="bindtel">提交</a></div>
+</div>
+<!--弹层结束-->
+<div class="wraperbox">
+    <div class="header-box">
+        <div class="content">
+            <div class="time">活动时间：2015.8.6-9.9</div>
+            <div class="column1">
+                <div class="column1-left"></div>
+                <div class="getmemberbox">
+                    <div class="lead"><img src="http://r2.ykimg.com/0510000055FBB02967BC3D234608223D"></div>
+                    <div class="descbox">
+                        <p>·&nbsp;<em>100%本息保障</em>立体业务及<br/>&nbsp;&nbsp;风控体系</p>
+                        <p>·&nbsp;优质的金融资产担保物</p>
+                        <p>·&nbsp;优酷免广告，全程无干扰</p>
+                        <p>·&nbsp;优酷包月片库免费看</p>
+                        <div class="getmemberbtn1"><a>马上领取会员</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="descbox">
+            <ul>
+                <li>注册资金20亿元<br/>九鼎投资独资子公司</li>
+                <li>独有高资质借款人<br/>近300家企业提供项目源</li>
+                <li>100%本息保障<br/>多层次立体业务及风控体系</li>
+                <li>年化收益率超8%<br/>投资期限最低1个月</li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="investbox">
+            <div class="img"><img src="http://r3.ykimg.com/0510000055F7C4BD67BC3D3BA00C1745"/><a href="#" target="_blank"><div class="investbtn1">马上领取</div></a></div>
+            <div class="img marleft"><img src="http://r3.ykimg.com/0510000055F7C4BE67BC3D0BAD01316F"/><a href="#" target="_blank"><div class="investbtn2">马上领取</div></a></div>
+            <div class="img marleft"><img src="http://r3.ykimg.com/0510000055F7C4BE67BC3D0AB009AD81"/><a href="#" target="_blank"><div class="investbtn3">马上领取</div></a></div>
+        </div>
+        <div class="privilege"></div>
+        <div class="getmemberbtn2"><a>马上领取会员</a></div>
+        <fieldset>
+            <legend>活动规则</legend>
+        </fieldset>
+        <div class="active-info">
+            <p>1.活动期间，用户通过活动页面免费注册并认证九信金融账号，即可获得优酷1个月会员(会员服务将绑定至注册九信金融的手机号)与2000元九信金融增值红包，如在九信金融注册、充值、
+                投资等遇到问题，可咨询客服，热线电话：400-100-0099（工作时间 9:00-21:00）。</p>
+            <p>2.活动期间内：①在九信金融单笔投资达到3000元，即可加送3个月优酷会员（共计1+3＝4个月优酷会员）；②完成在九信金融累计投资满10000元，即可直接获得16个月优酷会员（共
+                计1+3+12=16个月优酷会员）。同时用户可以获得更多的九信用户活动大礼。</p>
+            <p>3.同一用户最多获得16个月优酷会员，完成每个步骤仅可获得1次奖励。注册认证、投资奖励实时生效，可前往优酷会员中心查看。</p>
+            <p>4.本活动仅限九信金融新用户参加，如之前已经注册过九信金融的用户，则无法获得奖励；九信金融7天及15天的短期理财产品投资不会记录到本次会员活动；若发现盗取他人信息或恶意
+                注册活动的行为，所有奖励清零，并追究法律责任。</p>
+            <p>5.活动时间：2015年8月6日-9月9日。</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

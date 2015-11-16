@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/app/dist/layout.css"/>
+</head>
+<style>
+    #qheader_nav{display:none;}
+    body{background-color:#002e50;}
+    .s-body{ background:url(http://r2.ykimg.com/0510000055472BDD67BC3D7A340A6FCA) no-repeat center 0;}
+    .yk-con { background-color:transparent;padding: 0 10px;}
+    .clearfix:after {visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0;}
+    .clearfix { display: inline-table; }
+    /* Hides from IE-mac \*/
+    * html .clearfix { height: 1%; }.clearfix { display: block; }/* End hide from IE-mac */
+    .yooli_banner{height:574px; overflow:hidden;}
+    .yooli_login{background-image:url(); background-repeat:no-repeat; background-position:-1px -1px;height:514px; overflow:hidden;width:1190px;margin:0 auto;}
+    .yooli_info{width:1190px;margin:0 auto;}
+    .yooli_link{background-image:url(http://r4.ykimg.com/0510000055499ED667BC3D3CA708A4CE); background-repeat:no-repeat; background-position:0 0px;height:177px; overflow:hidden;width:1190px;margin:0 auto; position:relative;}
+    .getlink{width:250px;height:80px;display:block; position:absolute;top:15px;left:470px;}
+    .guize_info{width:1190px;margin:0 auto;font-size:16px;line-height:22px;color:#73c1fe;font-family:'microsoft yahei','微软雅黑';background-image:url(http://r3.ykimg.com/0510000055238A266737B34B7A0BDFEB); background-repeat:no-repeat; background-position:0 0px;padding-top:108px;}
+    .guize_info p{font-size:16px;line-height:22px;color:#73c1fe;font-family:'microsoft yahei','微软雅黑';padding-bottom:20px;}
+    .guize_info p span {color:#e5f3fe;}
+    .guize_info p a {color:#ffc21c; text-decoration:underline;}
+    .login_info{width:300px;float:right;padding-top:90px;}
+
+    .login_info dt,.login_info dd{padding-right:20px;}
+    .login_info dl{width:280px;margin:0 auto;}
+    .login_info dt{padding-top:20px;line-height:24px;font-size:12px;color:#fff;}
+    .login_info dt span{float:right; text-align:right;color:#f00;display:none;}
+    .login_info dd{height:33px; overflow:hidden;}
+    .ad_name{width:215px;height:33px;line-height:33px; background:url(http://r2.ykimg.com/051000005524910C6737B349A6015D73) no-repeat 0 0 #fff;padding-left:45px;border:0;color:#6e6e6e;}
+    .ad_phone{width:215px;height:33px;line-height:33px; background:url(http://r2.ykimg.com/051000005524910C6737B349A6015D73) no-repeat 0 -34px #fff;padding-left:45px;border:0;color:#6e6e6e;}
+    .ad_code{width:90px;height:33px;line-height:33px; padding:0 10px;border:0;color:#6e6e6e;}
+    .ic_on{ background:url(http://r2.ykimg.com/051000005524910D6737B345ED0544F4) no-repeat right center;}
+    .sound_code{margin-left:15px;display:inline-block;}
+    #btn{margin-left:15px;display:inline-block;width:130px;height:31px;border:1px solid #ccc; text-align:center;color:#ccc;display:none;}
+    .login_info dd.vipregist{padding:40px 0 0 40px;height:47px;}
+    .login_info dd.agree_check{padding:24px 0 0 40px;color:#fff;}
+    .login_info dd.agree_check input{margin-right:5px;}
+
+</style>
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<div class="yooli_banner"></div>
+<div class="yooli_login">
+    <div class="login_info">
+        <dl>
+            <dt><span id="name_error">用户名不合法</span>用户名</dt>
+            <dd><input type="text" class="ad_name" value="输入字母、数字或中文" onclick="if(this.value='输入字母、数字或中文'){this.value=''}"></dd>
+            <dt><span id="mobile_error">手机号不合法</span>手机号</dt>
+            <dd><input type="tel" class="ad_phone" value="请输入优酷账户绑定的手机号" onclick="if(this.value='请输入优酷账户绑定的手机号'){this.value=''}"></dd>
+            <dt>验证码</dt>
+            <dd><input type="text" class="ad_code" value=""><a href="javascript:;" class="sound_code"><img src="http://r2.ykimg.com/051000005524910D6737B3635F02D9C7"></a><input type="text" value="重新发送" id="btn"></dd>
+            <dd class="vipregist"><a href="javascript:;" ><img src="http://r1.ykimg.com/051000005524910C6737B370C10A38BB"></a></dd>
+            <dd class="agree_check"><input name="agreeyooli" id="agreeyooli" type="checkbox" value="" checked>我已阅读并同意有利网服务协议</dd>
+        </dl>
+    </div>
+</div>
+<script type="text/javascript" src="http://r1.ykimg.com/0510000054D08B986737B312D40EA9D1.js"></script>
+<script>
+jQuery.noConflict();
+var wait=120;
+function time(o) {
+    var o = jQuery("#btn");
+    if (wait == 0) {
+        o.attr("value",o);
+        jQuery(".sound_code").show();
+        o.hide();
+        wait = 120;
+    } else {
+        o.attr("disabled",false);
+        o.attr("value","重新发送(" + wait + ")")
+        wait--;
+        setTimeout(function() {
+                    time(o)
+                },
+                1000)
+    }
+}
+
+function nameerror(error){
+    jQuery("#name_error").show();
+    jQuery("#name_error").html(error);
+}
+
+function mobileerror(error){
+    jQuery("#mobile_error").show();
+    jQuery("#mobile_error").html(error);
+}
+
+function getcode(url){
+    jQuery.ajax(url,
+            {
+                Type : 'get',
+                dataType:'jsonp'
+            }).done(function(codedata){
+                if(codedata.error==0){
+                    jQuery(".sound_code").hide();
+                    var o = jQuery("#btn");
+                    jQuery(".ad_name").parent().addClass('ic_on');
+                    jQuery(".ad_phone").parent().addClass('ic_on');
+                    o.show();
+                    time(o);
+                }
+                else if(codedata.error==1){login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                else if(codedata.error==2){nameerror("此帐号已经注册过了");}
+                else if(codedata.error==3){
+                    //alert("此手机号已经注册过了"
+                    mobileerror("此手机号已经注册过了");
+                    jQuery("#mobile_error").show();
+                }
+                else if(codedata.error==4){
+                    //alert("此用户名已经注册过了");
+                    nameerror("此用户名已经注册过了");
+                    jQuery("#name_error").show();
+                }
+                else if(codedata.error==5){
+                    jQuery(".ad_name").parent().addClass('ic_on');
+                    jQuery(".ad_phone").parent().addClass('ic_on');
+                    alert("语音验证已发送，请耐心等待");
+                }
+                else if(codedata.error==-1){alert(codedata.des);}
+                else if(codedata.error==100){alert("活动已过期");}
+                else if(codedata.error==101){alert("参数错误");}
+            });
+}
+//注册
+function register(curl){
+
+    jQuery.ajax(curl,
+            {
+                Type : 'get',
+                dataType:'jsonp'
+            }).done(function(registdata){
+                if(registdata.error==0){
+                    window.location.href="https://www.yooli.com/secure/preactiveSuccess.action?token="+registdata.token+"&timestamp="+registdata.timestamp+"&sid=301&aid=YK1&utm_source=BD&utm_medium=cpa&utm_term=YK1&utm_content=%E4%BC%98%E9%85%B7%E7%BD%91&utm_campaign=%E4%BC%98%E9%85%B7%E7%BD%91&userid="+registdata.userid+"";
+                }
+                else if(registdata.error==1){login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                else if(registdata.error==2){nameerror("此帐号已经注册过了");}
+                else if(registdata.error==3){
+                    mobileerror("手机号用户名与当前UID不匹配");
+                }
+                else if(registdata.error==4){
+                    alert("验证码错误");
+                }
+                else if(registdata.error==5){
+                    alert("验证码过期了");
+                }
+                else if(registdata.error==100){alert("活动已过期");}
+                else if(registdata.error==101){alert("参数错误");}
+            });
+}
+
+
+
+function checkNameBeginByNum(str){
+    var number = str.substring(0,1);
+    var reg = /^\d+$/;
+    if(!number.match(reg)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+jQuery(function(){
+    var urlinfo = {
+        //验证码
+        upcode: 'http://mini.cron.youku.com/qq_cdk/yl_send_code.php',
+        //效验
+        checkcode: 'http://mini.cron.youku.com/qq_cdk/yl_save_user.php'
+    };
+    jQuery(".sound_code").click(function(){
+        var username = jQuery(".ad_name").val();
+        var mobile =  jQuery(".ad_phone").val();
+        jQuery("#name_error,#mobile_error").html("");
+        jQuery("#name_error,#mobile_error").hide();
+        if(username==""||username=="输入字母、数字或中文"){alert("请输入您的用户名");return false;}
+        if(!checkNameBeginByNum(username)){
+            nameerror("不能数字开头");
+            return false;}
+        var myReg1 = /^[_A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if(!(myReg1.test(username)))
+        {
+            nameerror("昵称只能为字母、数字或中文");
+            return false;
+        }
+        if(username.length<4){
+            nameerror("昵称太短了");
+            return false;
+        }
+        if(username.length>18){
+            nameerror("昵称过长");
+            return false;
+        }
+        if(mobile==""||mobile=="请输入优酷账户绑定的手机号"){alert("请输入您的手机号");return false;};
+        var myreg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if(!(myreg.test(mobile)))
+        {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+
+
+        if (mobile.length!=11) {
+            alert("请输入11位手机号码");
+            return false;
+        }
+        var codeurl = ''+urlinfo.upcode+'?mobile='+mobile+'&username='+username+'&callback=?';
+
+        getcode(codeurl);
+
+    });
+
+
+    jQuery(".vipregist a").click(function(){
+        jQuery("#name_error,#mobile_error").html("");
+        jQuery("#name_error,#mobile_error").hide();
+        var username = jQuery(".ad_name").val();
+        var mobile =  jQuery(".ad_phone").val();
+        var code =  jQuery(".ad_code").val();
+        if(username==""||username=="输入字母、数字或中文"){alert("请输入您的用户名");return false;}
+        if(!checkNameBeginByNum(username)){
+            nameerror("不能数字开头");
+            return false;}
+        var myReg1 = /^[_A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if(!(myReg1.test(username)))
+        {
+            nameerror("昵称只能为字母、数字或中文");
+            return false;
+        }
+        if(username.length<4){
+            nameerror("昵称太短了");
+            return false;
+        }
+        if(username.length>18){
+            nameerror("昵称过长")
+            return false;
+        }
+        if(mobile==""||mobile=="请输入优酷账户绑定的手机号"){alert("请输入您的手机号");return false;}
+        var myreg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if(!(myreg.test(mobile)))
+        {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+        if (mobile.length!=11) {
+            alert("请输入11位手机号码");
+            return false;
+        }
+        if(code==""){alert("请输入您的语音验证码");return false;}
+        if(jQuery("#agreeyooli").is(":checked")){
+            var registurl = ''+urlinfo.checkcode+'?mobile='+mobile+'&username='+username+'&code='+code+'&callback=?';
+            register(registurl);
+        }else{alert("只有同意条款才能注册");}
+    })
+})
+</script>
+
+<div class="yooli_info">
+    <div><img src="http://r3.ykimg.com/05100000553DF34667BC3D705F05C020"></div>
+    <div class="yooli_link"><a href="https://www.yooli.com/?sid=301&aid=YK2&utm_source=BD&utm_medium=cpa&utm_term=YK2&utm_content=%E4%BC%98%E9%85%B7%E7%BD%91&utm_campaign=%E4%BC%98%E9%85%B7%E7%BD%91" target="_blank" class="getlink"></a></div>
+    <div><img src="http://r4.ykimg.com/0510000055238A266737B33FA302A91F"></div>
+</div>
+<div class="guize_info">
+    <p>
+        1、活动期间，用户通过活动页面免费注册有利网账号，即可获得优酷1个月优酷会员(会员服务将绑定至注册有利网的手机号)与40元有利网现金红包，如在有利网注册、充值、投资等遇到问题，可咨询有利网客服，<span>热线电话：400-890-3980</span>（工作时间 8:00-22:00）。<Br><Br>
+        2、活动期间：①在有利网注册成功后24小时内，充值任意金额可再得60元有利网现金红包；②在有利网完成首次投资（50元起投），即可加送2个月会员（共计1+2＝3个月优酷会员）；③在有利网累计投资金额≥1万元，即可直接获得12个月优酷会员（共计1+12=13个月优酷会员）。<Br><Br>
+        3、本次活动“无忧宝”投资金额不计入累计投资金额。<Br><Br>
+        4、同一用户最多获得13个月优酷会员，完成每个步骤仅可获得1次奖励。注册及充值奖励实时生效，投资奖励在活动结束后7个工作日内统一发放，可前往优酷<a href="http://vip.youku.com/" target="_blank">会员中心</a>查看。<Br><Br>
+        5、本活动仅限有利网新用户参加，如之前已经注册过有利网的用户，则无法获得奖励；若发现盗取他人信息或恶意注册活动的行为，所有奖励清零，并追究法律责任。<Br><Br>
+        6、活动时间：5月5日-5月20日。<Br><Br>
+        7、本活动最终解释权归有利网所有。
+    </p>
+</div>
+</body>
+</html>

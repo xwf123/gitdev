@@ -1,0 +1,972 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1" />
+    <title>优酷音乐节</title>
+</head>
+
+<script type="text/javascript" src="http://r2.ykimg.com/0510000053C8B9B96737B3071802B364"></script>
+<script>
+    (function(doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
+                };
+        // Abort if browser does not support addEventListener
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+
+
+<body style="backgroud:#0b609f;">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .addWrap {
+        margin: auto;
+        position: relative;
+    }
+    .addWrap .swipe {
+        visibility: hidden;
+        position: relative;
+    }
+    .addWrap .swipe-wrap {
+        position: relative;
+    }
+    .addWrap .swipe-wrap > div {
+        float: left;
+        width: 100%;
+        position: relative;
+    }
+    .addWrap .swipe-wrap img {
+        width: 100%;
+    }
+    #position {
+        padding: 0;
+        text-align: center;
+    }
+    #position li {
+        width: 10px;
+        height: 10px;
+        margin: 0 3px;
+        display: inline-block;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-color: #AFAFAF;
+    }
+    #position li.cur {
+        background-color: #FF0000;
+    }
+</style>
+
+
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script>
+    $(function() {
+        _h = $(window).height();
+        $('.swipehe').height(_h);
+        // 分享到朋友圈
+        var title = '';
+        var wxDesc = '';
+        var wxImg = '';
+        var shareLink = '';
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            // 发送给好友
+            WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "img_url": wxImg,
+                    "link": shareLink,
+                    "desc": wxDesc,
+                    "title": title
+                }, function(res) {
+                    _report('send_msg', res.err_msg);
+                })
+            });
+
+            // 分享到朋友圈
+            WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                WeixinJSBridge.invoke('shareTimeline', {
+                    "img_url": wxImg,
+                    "link": shareLink,
+                    "desc": title,
+                    "title": wxDesc,
+                }, function(res) {
+                    _report('timeline', res.err_msg);
+                });
+            });
+        }, false);
+
+        //选项卡
+        $('.swip_subnav').on('click', 'li', function() {
+            var $self = $(this),
+                    index = $self.index();
+            $self.addClass('active').siblings().removeClass('active');
+            $('.swip_subnav_box').eq(index).show().siblings('.swip_subnav_box').hide();
+        });
+
+
+    })
+</script>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+.swipehe {
+    overflow: hidden;
+    position: relative;
+}
+.gomenber {
+    width: 18rem;
+    height: 5.6rem;
+    display: block;
+    position: absolute;
+    top:40rem;
+    background: url(http://r1.ykimg.com/0510000055EFE82467BC3D2258004A50?5772);
+    background-size: cover;
+    margin-left: -9rem;
+    left: 50%;
+    -webkit-animation: 2s tada ease-in-out infinite;
+    animation: 2s tada ease-in-out infinite;
+}
+.gomenber1 {
+    width: 18rem;
+    height: 5.6rem;
+    display: block;
+    position: absolute;
+    top: 40rem;
+    background: url(http://r1.ykimg.com/0510000055EFE82467BC3D2258004A50?5772);
+    background-size: cover;
+    margin-left: -9rem;
+    left: 50%;
+}
+.gomenber2 {
+    width: 9rem;
+    height: 4.1rem;
+    display: block;
+    background: url(http://r1.ykimg.com/0510000055EFE82467BC3D37340D2D1E);
+    background-size: cover;
+}
+.mber_1 {
+    position: absolute;
+    top: 13rem;
+    left: 21rem;
+}
+.mber_2 {
+    position: absolute;
+    top: 22rem;
+    left: 21rem;
+}
+.mber_3 {
+    position: absolute;
+    top: 31.5rem;
+    left: 21rem;
+}
+/*晃动动画*/
+@-webkit-keyframes tada {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    10%,
+    20% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        -webkit-transform: scale(1.1) rotate(3deg);
+    }
+    40%,
+    60%,
+    80% {
+        -webkit-transform: scale(1.1) rotate(-3deg);
+    }
+    100% {
+        -webkit-transform: scale(1) rotate(0);
+    }
+}
+@-moz-keyframes tada {
+    0% {
+        -moz-transform: scale(1);
+    }
+    10%,
+    20% {
+        -moz-transform: scale(1.1) rotate(-3deg);
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        -moz-transform: scale(1.1) rotate(3deg);
+    }
+    40%,
+    60%,
+    80% {
+        -moz-transform: scale(1.1) rotate(-3deg);
+    }
+    100% {
+        -moz-transform: scale(1) rotate(0);
+    }
+}
+@-o-keyframes tada {
+    0% {
+        -o-transform: scale(1);
+    }
+    10%,
+    20% {
+        -o-transform: scale(1.1) rotate(-3deg);
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        -o-transform: scale(1.1) rotate(3deg);
+    }
+    40%,
+    60%,
+    80% {
+        -o-transform: scale(1.1) rotate(-3deg);
+    }
+    100% {
+        -o-transform: scale(1) rotate(0);
+    }
+}
+@keyframes tada {
+    0% {
+        transform: scale(1);
+    }
+    10%,
+    20% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: scale(1.1) rotate(3deg);
+    }
+    40%,
+    60%,
+    80% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+.animated.tada {
+    -webkit-animation-name: tada;
+    -moz-animation-name: tada;
+    -o-animation-name: tada;
+    animation-name: tada;
+}
+.pet {
+    background: url(http://r2.ykimg.com/0510000055EFF7A167BC3D383801A224);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    width: 2rem;
+    height: 8rem;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -4.2rem;
+    -webkit-animation: 2s fadeOutl ease-in-out infinite;
+    animation: 2s fadeOutl ease-in-out infinite;
+}
+.gift_main {
+    position: absolute;
+    -webkit-animation: 2s pulse ease-in-out infinite;
+    animation: 2s pulse ease-in-out infinite;
+    animation-delay: 1s;
+    background-size: cover;
+    font-family: "Microsoft YaHei";
+}
+.gift_01 {
+    font-size: 2.7rem;
+    width: 9rem;
+    height: 3.5rem;
+    top: 5rem;
+    left: 2rem;
+}
+.gift_02 {
+    font-size: 2.2rem;
+    width: 8rem;
+    height: 2.5rem;
+    top: 10rem;
+    left: 2rem;
+}
+.gift_03 {
+    font-size: 2.7rem;
+    width: 9rem;
+    height: 3.5rem;
+    top: 15rem;
+    left: 5rem;
+}
+.gift_04 {
+    font-size: 2.9rem;
+    width: 18rem;
+    height: 4rem;
+    top: 19rem;
+    left: 12rem;
+}
+.gift_05 {
+    font-size: 2.5rem;
+    width: 8rem;
+    height: 3rem;
+    top: 25rem;
+    left: 8rem;
+}
+.gift_06 {
+    font-size: 2rem;
+    width: 5rem;
+    height: 2.5rem;
+    top: 26rem;
+    left: 23rem;
+}
+.gift_07 {
+    font-size: 2.7rem;
+    width: 7rem;
+    height: 3rem;
+    top: 34rem;
+    left: 22rem;
+}
+/*动画*/
+@-webkit-keyframes fadeOutl {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+    50% {
+        opacity: 0.3;
+        -webkit-transform: translateX(-15px);
+        transform: translateX(-15px);
+    }
+}
+@keyframes fadeOutl {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 0.3;
+        -webkit-transform: translateX(-15px);
+        -ms-transform: translateX(-15px);
+        transform: translateX(-15px);
+    }
+}
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    50% {
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+@-moz-keyframes pulse {
+    0% {
+        -moz-transform: scale(1);
+    }
+    50% {
+        -moz-transform: scale(1.1);
+    }
+    100% {
+        -moz-transform: scale(1);
+    }
+}
+@-o-keyframes pulse {
+    0% {
+        -o-transform: scale(1);
+    }
+    50% {
+        -o-transform: scale(1.1);
+    }
+    100% {
+        -o-transform: scale(1);
+    }
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.animated.pulse {
+    -webkit-animation-name: pulse;
+    -moz-animation-name: pulse;
+    -o-animation-name: pulse;
+    animation-name: pulse;
+}
+.swip_subnav {
+    height: 4.2rem;
+    background: #fff;
+    width: 25.3rem;
+    left: 3.3rem;
+    position: absolute;
+    top: 1.4rem;
+    border: 0.1rem solid #372710;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.close-slot {
+    width: 2.5rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+.swip_subnav ul li {
+    width: 33%;
+    float: left;
+    list-style: none;
+    text-align: center;
+    line-height: 4.2rem;
+    font-size: 1.4rem;
+    border-right: 0.1rem solid #372710;
+}
+.swip_subnav ul li.active {
+    background: #80d6ff;
+    border-bottom: 0.1rem solid #372710;
+}
+.swip_subnav_box {
+    width: 90%;
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -45%;
+    top: 15%;
+}
+.mber_4 {
+    position: absolute;
+    top: 38.5rem;
+    left: 14rem;
+    font-size: 1.4rem;
+    color: #fff;
+    text-decoration: underline;
+}
+.mber_5 {
+    position: absolute;
+    top: 38.5rem;
+    left: 25rem;
+    font-size: 1.4rem;
+    color: #fff;
+    text-decoration: underline;
+}
+.save-search-slot {
+    width: 90%;
+    position: absolute;
+    z-index: 100px;
+    height: 35rem;
+    background: #fff;
+    left: 5%;
+    top: 50%;
+    margin-top: -20rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    display: none;
+}
+.no_gift_top {
+    height: 13rem;
+    border-bottom: 0.1rem solid #d8d8d8;
+}
+.no_gift_top_t {
+    font-size: 1.4rem;
+    position: absolute;
+    top: 3.5rem;
+    left: 10%;
+    width: 85%;
+    font-weight: bold;
+}
+.no_gift_top_img {
+    width: 11rem;
+    position: absolute;
+    top: 7rem;
+    left: 10rem;
+}
+.no_gift_zhong {
+    height: 10rem;
+}
+.no_gift_top_ns {
+    font-size: 1.4rem;
+    position: absolute;
+    top: 14rem;
+    left: 40%;
+    width: 80%;
+    font-weight: bold;
+}
+.search-time {
+    width: 93%; background: url(http://r1.ykimg.com/0510000055F1374467BC3D65E3020674); background-repeat: no-repeat;background-size: cover; height: 5rem; position: absolute; left: 3%; margin-top: 4rem; overflow: hidden; border-radius: 0.5rem;}
+.search-ul {
+    width: 96%;
+    margin-left: 2%;
+    height: 4.5rem;
+    border: 0.1rem solid #372710;
+}
+.search-ul li {
+    width: 33%;
+    float: left;
+    list-style: none;
+    text-align: center;
+    line-height: 4.5rem;
+    font-size: 1.4rem;
+    border-right: 0.1rem solid #372710;
+    height: 4.5rem;
+    background: #fff;
+}
+.search-ul li.current {
+    background: #80d6ff;
+}
+.no_gift_xia {
+    height: 12rem;
+    background: #f1f1f1;
+}
+.no_gift_zf {
+    width: 11rem;
+    position: absolute;
+    top: 25rem;
+    left: 9rem;
+}
+.f-txt-tit {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    position: absolute;
+    top: 31rem;
+    left: 8rem;
+}
+.nosearch-ul {
+    width: 96%;
+    margin-left: 2%;
+    height: 4.5rem;
+    border: 0.1rem solid #372710;
+}
+.nosearch-ul li {
+    width: 33%;
+    float: left;
+    list-style: none;
+    text-align: center;
+    line-height: 4.5rem;
+    font-size: 1.4rem;
+    border-right: 0.1rem solid #372710;
+    height: 4.5rem;
+    background: #80d6ff;
+}
+.nosearch-ul li.current {
+    background: #80d6ff;
+}
+.mber_5 a {
+    color: #fff;
+}
+.box_ding{ position: fixed; bottom: 0; background: url(http://r4.ykimg.com/0510000055F1997B67BC3D49470C9145); background-repeat: no-repeat;background-size: cover; width:100%; height: 5rem; z-index: 100;}
+</style>
+<div class="addWrap">
+    <div class="swipe" id="mySwipe">
+        <div class="swipe-wrap">
+
+            <div class="swipehe" id="swipehe1" style="background:url(http://r2.ykimg.com/0510000055EFE7DD67BC3D2B3E0AB20E?85797); background-repeat:no-repeat; background-size:cover;">
+
+                <span class="pet"></span>
+                <div class="box_ding"></div>
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+            <!--第一屏-->
+            <div class="swipehe" id="swipehe2" style="background:url(http://r2.ykimg.com/0510000055EFE7DD67BC3D01FC0AA8DD?3352); background-repeat:no-repeat;background-size:cover;">
+                <span class="pet"></span>
+                <a href="http://svip.youku.com/dream/index" class="gomenber"></a>
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+            <!--&lt;!&ndash;第二屏&ndash;&gt;-->
+            <!--<div class="swipehe" id="swipehe3" style="background:url(http://r3.ykimg.com/0510000055EFE7DD67BC3D32340BB288?3375); background-repeat:no-repeat;background-size:cover;">-->
+                <!--<span class="pet"></span>-->
+
+                <!--<a href="http://svip.youku.com/dream/index" class="gomenber"></a>-->
+                <!--<a href="javascript:;">-->
+                    <!--<img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--第三屏-->
+            <div class="swipehe" id="swipehe4" style="background:url(http://r3.ykimg.com/0510000055EFE7DE67BC3D7E65026702?3403); background-repeat:no-repeat;background-size:cover;">
+                <span class="pet"></span>
+
+                <a href="http://svip.youku.com/dream/index" class="gomenber"></a>
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+            <!--第四屏-->
+            <div class="swipehe" id="swipehe5" style="background:url(http://r3.ykimg.com/0510000055EFE7DE67BC3D56D702CAA5?3429); background-repeat:no-repeat;background-size:cover;">
+                <span class="pet"></span>
+
+                <a href="http://svip.youku.com/dream/index" class="gomenber"></a>
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+            <!--&lt;!&ndash;第五屏&ndash;&gt;-->
+            <!--<div class="swipehe" id="swipehe6" style="background:url(http://r3.ykimg.com/0510000055EFE7DE67BC3D297103FFF4?3453); background-repeat:no-repeat;background-size:cover;">-->
+                <!--<span class="pet"></span>-->
+
+                <!--<a href="http://svip.youku.com/dream/index" class="gomenber"></a>-->
+                <!--<a href="javascript:;">-->
+                    <!--<img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--第六屏-->
+            <div class="swipehe" id="swipehe7" style="background:url(http://r4.ykimg.com/0510000055EFE7DE67BC3D6F13073760?3477); background-repeat:no-repeat;background-size:cover;">
+                <span class="pet"></span>
+                <div class="gift_main gift_01">戴佩妮</div>
+                <div class="gift_main gift_02">任贤齐</div>
+                <div class="gift_main gift_03">曾轶可</div>
+                <div class="gift_main gift_04">扭曲机器乐队</div>
+                <div class="gift_main gift_05">黄贯中</div>
+                <div class="gift_main gift_06">秦勇</div>
+                <div class="gift_main gift_07">李志</div>
+
+                <a href="http://svip.youku.com/dream/index" class="gomenber1"></a>
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+            <!--第七屏-->
+
+            <div class="swipehe" id="swipehe8" style="background:url(http://r4.ykimg.com/0510000055EFE7DF67BC3D7B9302F094?3742); background-repeat:no-repeat;background-size:cover;">
+                <span class="pet"></span>
+                <input type='hidden' value="1" id='serachArea'>
+                <input type='hidden' value="1" id='serachTime'>
+                <div class="gomenber2 mber_1" data-url="dayticket"></div>
+                <div class="gomenber2 mber_2" data-url="allticket"></div>
+                <div class="gomenber2 mber_3" data-url="studuentticket"></div>
+                <div class="mber_5"><a href="http://svip.youku.com/dream/add">填写地址</a>
+                </div>
+
+                <div class="save-search-slot">
+                    <div class="close-slot">
+                        <img src="http://r2.ykimg.com/0510000055F1374467BC3D18C80192BA">
+                    </div>
+                    <div class="no_gift_top">
+                        <div class="no_gift_top_t">优酷·土豆 理想音乐节学生门票</div>
+                        <div class="no_gift_top_img">
+                            <img src="http://r2.ykimg.com/0510000055F1374567BC3D5EB8094C7C">
+                            <input type="hidden" value="1">
+                        </div>
+                    </div>
+                    <div class="no_gift_zhong">
+                        <div class="no_gift_top_ns">选择时间</div>
+                        <div class="search-time">
+                            <ul class="search-ul" style="display:none;">
+                                <li class="current">10.1
+                                    <input type="hidden" value="1">
+                                </li>
+                                <li>10.2
+                                    <input type="hidden" value="2">
+                                </li>
+                                <li style="border-right:none;">10.3
+                                    <input type="hidden" value="3">
+                                </li>
+                            </ul>
+                            <ul class="nosearch-ul">
+                                <li class="current">10.1
+                                    <input type="hidden" value="0">
+                                </li>
+                                <li class="current">10.2
+                                    <input type="hidden" value="0">
+                                </li>
+                                <li class="current" style="border-right:none;">10.3
+                                    <input type="hidden" value="0">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="no_gift_xia">
+                        <div class="no_gift_zf">
+                            <a href="#" target="_blank" class="confirm-button" id='confirm-link'>
+                                <img src="http://r1.ykimg.com/0510000055F137C867BC3D2D540E31BF">
+                            </a>
+                        </div>
+                        <div class="f-txt-tit">入场需要出示学生证</div>
+                    </div>
+                </div>
+
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+            <!--第八屏-->
+
+            <div class="swipehe" id="swipehe8" style="background:url(http://r4.ykimg.com/0510000055EFE7DF67BC3D42B8005E58?2953); background-repeat:no-repeat;background-size:cover;">
+
+                <div class="swip_subnav">
+                    <ul>
+                        <li class="active">10.1</li>
+                        <li>10.2</li>
+                        <li style="border-right:none;">10.3</li>
+                    </ul>
+                </div>
+                <div class="swip_subnav_box" style="display:block">
+                    <img src="http://r4.ykimg.com/0510000055EFE82367BC3D1B2408A14A?100418" width="100%">
+                </div>
+                <div class="swip_subnav_box">
+                    <img src="http://r1.ykimg.com/0510000055EFE82367BC3D1EF304E652?100440" width="100%">
+                </div>
+                <div class="swip_subnav_box">
+                    <img src="http://r1.ykimg.com/0510000055EFE82467BC3D73DE0AE0AF?100463" width="100%">
+                </div>
+
+                <a href="javascript:;">
+                    <img src="http://r1.ykimg.com/0510000053C7391C6737B3018D0212D1" width="100%" height="100%" />
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <ul id="position" style="display:none;">
+        <li class="cur"></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+        <li class=""></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var bullets = document.getElementById('position').getElementsByTagName('li');
+    var banner = Swipe(document.getElementById('mySwipe'), {
+        //auto: 4440,
+        continuous: true,
+        disableScroll: false,
+        callback: function(pos) {
+            var i = bullets.length;
+            while (i--) {
+                bullets[i].className = ' ';
+            }
+            bullets[pos].className = 'cur';
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    (function($) {
+
+        $(document).ready(function() {
+
+
+            var ACTION_SET = {
+                userInfo: 'http://mini.cron.youku.com/vprize/userInfo.php?actid=1&callback=?',
+                saveInfo: 'http://mini.cron.youku.com/vprize/saveInfo.php?actid=1',
+                userList: 'http://mini.cron.youku.com/vipactive/active/index.php?app=active&c=music&a=musicOrder&callback=?',
+                saveTel: 'http://mini.cron.youku.com/concert_live/pre_yyh.php',
+                votenum: 'http://mini.cron.youku.com/concert_live/pre_yyhl.php?type=21&callback=?',
+                getvote: 'http://mini.cron.youku.com/vipactive/active/index.php?app=active&c=music&a=musicVote',
+                getticket: 'http://zhoulian.mini.cron.youku.com/vipactive/active/index.php?app=active&c=music&a=getMusicTicket',
+                myticket: 'http://zhoulian.mini.cron.youku.com/vipactive/active/index.php?app=active&c=music&a=myTicket&callback=?',
+            };
+
+
+
+            /*获取列表链接*/
+            $('.gomenber2').on('click', function(e) {
+
+                e.preventDefault();
+                var $self = $(this);
+                var onlick = $self.data('url');
+                var ticketinfo = checklink(onlick);
+                $('.search-ul,.nosearch-ul').hide();
+                $('.tit-name').html(ticketinfo.fname);
+                $('.save-txt-tit').html(ticketinfo.name);
+                $('.f-txt-tit').html(ticketinfo.studuent);
+                if (onlick === 'allticket') {
+                    $('.nosearch-ul').show();
+                    $('#serachTime').attr('value', '0')
+                } else {
+                    $('.search-ul').show();
+                }
+                $('.save-search-slot').show();
+                $('#confirm-link').attr('href', checkurl(ticketinfo) + cs);
+                $('.search-area li').on('click', function() {
+                    $('.search-area li').removeClass('current');
+                    $(this).addClass('current');
+                    $('#serachArea').attr('value', $(this).find('input').val())
+                    $('#confirm-link').attr('href', checkurl(ticketinfo) + cs);
+                })
+
+                $('.search-time li').on('click', function() {
+                    $('.search-time li').removeClass('current');
+                    $(this).addClass('current');
+                    $('#serachTime').attr('value', $(this).find('input').val())
+                    $('#confirm-link').attr('href', checkurl(ticketinfo) + cs);
+                })
+
+            })
+
+            $('.close-slot').on('click', function(e) {
+                e.preventDefault();
+                $('.save-search-slot').hide();
+            });
+
+
+            //获取票的ID
+
+            var checkname = function(id) {
+              var  numid=Math.floor("10000200"+id);
+                if (1000020046>= id >=1000020041 ) {
+                    name = '单日票';
+                    return name;
+                } else if (id === '1000020053' || id === '1000020054') {
+                    name = '三日票';
+                    return name;
+                } else if (1000020052>= id >=1000020047) {
+                    name = '学生票';
+                    return name;
+                }
+            };
+            var checkarea = function(id) {
+                if (id === '1000020041' || id === '1000020042' || id === '1000020043' || id === '1000020047' || id === '1000020048' || id === '1000020049' || id === '1000020053') {
+                    area = '北京';
+                    return area;
+                } else if (id === '1000020044' || id === '1000020045' || id === '1000020046' || id === '1000020050' || id === '1000020051' || id === '1000020052' || id === '1000020054') {
+                    area = '上海';
+                    return area;
+                }
+            }
+
+            var checktime = function(id) {
+                if (id === '1000020041' || id === '1000020044' || id === '1000020047' || id === '1000020050') {
+                    time = '2015/10/1';
+                    return time;
+                } else if (id === '1000020042' || id === '1000020045' || id === '1000020048' || id === '1000020051') {
+                    time = '2015/10/2';
+                    return time;
+                } else if (id === '1000020043' || id === '1000020046' || id === '1000020049' || id === '1000020052') {
+                    time = '2015/10/3';
+                    return time;
+                } else if (id === '1000020053' || id === '1000020054') {
+                    time = '10/1-10/3';
+                    return time;
+                }
+            }
+
+            //返回链接
+
+            var checkurl = function(info) {
+                var area = $('#serachArea').val(),
+                        time = $('#serachTime').val();
+                if (area === '1' && time === '0') {
+                    return info.beijing.url;
+                }
+                if (area === '2' && time === '0') {
+                    return info.shanghai.url;
+                }
+                if (area === '1' && time === '1') {
+                    return info.beijing.url;
+                }
+                if (area === '1' && time === '2') {
+                    return info.beijing.url2;
+                }
+                if (area === '1' && time === '3') {
+                    return info.beijing.url3;
+                }
+                if (area === '2' && time === '1') {
+                    return info.shanghai.url;
+                }
+                if (area === '2' && time === '2') {
+                    return info.shanghai.url2;
+                }
+                if (area === '2' && time === '3') {
+                    return info.shanghai.url3;
+                }
+            }
+
+            var cs = '&onlineurl=http%3a%2f%2fsvip.youku.com%2fdream%2fadd&backurl=http%3A%2F%2Fmini.cron.youku.com%2Fvipactive%2Factive%2Findex.php%3Fapp%3Dactive%26c%3Dmusic%26a%3DgetMusicOrder'
+
+            var checklink = function(name) {
+                var dayticket = {
+                    'name': '优酷土豆理想音乐节单日门票189元',
+                    'fname': '单日门票',
+                    'beijing': {
+                        url: 'http://pay.youku.com/buy/member.html?productid=1000020041',
+                        url2: 'http://pay.youku.com/buy/member.html?productid=1000020042',
+                        url3: 'http://pay.youku.com/buy/member.html?productid=1000020043',
+                    },
+                    'shanghai': {
+                        url: 'http://pay.youku.com/buy/member.html?productid=1000020044',
+                        url2: 'http://pay.youku.com/buy/member.html?productid=1000020045',
+                        url3: 'http://pay.youku.com/buy/member.html?productid=1000020046',
+                    },
+                    'studuent': '',
+                };
+                var allticket = {
+                    'name': '优酷土豆理想音乐节三日通票450元',
+                    'fname': '三日通票',
+                    'beijing': {
+                        url: 'http://pay.youku.com/buy/member.html?productid=1000020053',
+                    },
+                    'shanghai': {
+                        url: 'http://pay.youku.com/buy/member.html?productid=1000020054',
+                    },
+                    'studuent': '',
+                };
+                var studuentticket = {
+                    'name': '优酷土豆理想音乐节学生单日票150元',
+                    'fname': '学生单日门票',
+                    'beijing': {
+                        url: 'http://pay.youku.com/buy/member.html?productid=1000020047',
+                        url2: 'http://pay.youku.com/buy/member.html?productid=1000020048',
+                        url3: 'http://pay.youku.com/buy/member.html?productid=1000020049',
+                    },
+                    'shanghai': {
+                        url: 'http://pay.youku.com/buy/member.html?productid=1000020050',
+                        url2: 'http://pay.youku.com/buy/member.html?productid=1000020051',
+                        url3: 'http://pay.youku.com/buy/member.html?productid=1000020052',
+                    },
+                    'studuent': '入场时需出示学生证',
+                };
+                if (name === 'dayticket') {
+                    return dayticket;
+                }
+                if (name === 'allticket') {
+                    return allticket;
+                }
+                if (name === 'studuentticket') {
+                    return studuentticket;
+                }
+            }
+
+
+
+
+        });
+    })(jQuery);
+</script>
+</body>
+
+</html>

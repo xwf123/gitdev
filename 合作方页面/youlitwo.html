@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/app/dist/youlitwo.css"/>
+</head>
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script>
+var j=jQuery.noConflict();
+j(function(){
+    var urlinfo = {
+        //验证码
+        upcode: 'http://mini.cron.youku.com/qq_cdk/yl_send_code.php',
+        //效验
+        checkcode: 'http://mini.cron.youku.com/qq_cdk/yl_save_user.php'
+    };
+    function checkNameBeginByNum(str){
+        var number = str.substring(0,1);
+        var reg = /^\d+$/;
+        if(!number.match(reg)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+// 注册开始
+    function register(registurl){
+        j.ajax(registurl,
+                {
+                    Type : 'get',
+                    dataType:'jsonp'
+                }).done(function(registdata){
+                    if(registdata.error==0){
+                        window.location.href="https://www.yooli.com/secure/preactiveSuccess.action?token="+registdata.token+"&timestamp="+registdata.timestamp+"&sid=301&aid=YK1&utm_source=BD&utm_medium=cpa&utm_term=YK1&utm_content=%E4%BC%98%E9%85%B7%E7%BD%91&utm_campaign=%E4%BC%98%E9%85%B7%E7%BD%91&userid="+registdata.userid+"";
+                    }
+                    else if(registdata.error==1){
+                        j(".errormobile").hide();
+                        login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                    else if(registdata.error==2){
+                        j(".errorname").show();
+                        j(".errorname").html("此账号已经注册过了！");
+//                        alert("此帐号已经注册过了");
+                    }
+                    else if(registdata.error==3){
+                        j(".errorname").hide();
+                        j(".errormobile").show();
+                        j(".errormobile").html("手机号用户名与当前UID不匹配！");
+//                        alert("手机号用户名与当前UID不匹配");
+                    }
+                    else if(registdata.error==4){
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".errorcode").show();
+                        j(".errorcode").html("验证码错误！");
+//                        alert("验证码错误");
+                    }
+                    else if(registdata.error==5){
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".errorcode").show();
+                        j(".errorcode").html("验证码过期了！");
+//                        alert("验证码过期了");
+                    }
+                    else if(registdata.error==100){alert("活动已过期");}
+                    else if(registdata.error==101){alert("参数错误");}
+                });
+    }
+    //倒计时
+    var wait=120;
+    //发送验证码倒计时间
+    var time = function(o,wait,maxwait) {
+        if (wait == 0) {
+            o.attr("disabled",false);
+            o.attr("value","获取语音验证");
+            wait = maxwait;
+        } else {
+            o.attr("disabled",true);
+            o.attr("value","重新发送(" + wait + "s)");
+            wait--;
+            setTimeout(function() {
+                        time(o,wait,maxwait)
+                    },
+                    1000
+            );
+        }
+    };
+    function getcode(url){
+        var o=j(".voicecode");
+        j.ajax(url,
+                {
+                    Type : 'get',
+                    dataType:'jsonp'
+                }).done(function(codedata){
+                    if(codedata.error==0){
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".righticon").show();
+                        time(o,120,120);
+                    }
+                    else if(codedata.error==1){
+                        j(".errormobile").hide();
+                        login({'type':'fee','callBack':'parent.location.reload()'});return false;}
+                    else if(codedata.error==2){
+                        j(".errorname").show();
+                        j(".errorname").html("此账号已经注册过了！");
+//                alert("此账号已经注册过了");
+                    }
+                    else if(codedata.error==3){
+                        j(".errorname").hide();
+                        j(".errormobile").show();
+                        j(".errormobile").html("此手机号已经注册过了！");
+//                alert("此手机号已经注册过了");
+                    }
+                    else if(codedata.error==4){
+                        j(".errorname").show();
+                        j(".errorname").html("此用户名已经注册过了！");
+//                alert("此用户名已经注册过了");
+                    }
+                    else if(codedata.error==5){
+                        j(".righticon").show();
+                        j(".errorname").hide();
+                        j(".errormobile").hide();
+                        j(".errorcode").show();
+                        j(".errorcode").html("语音验证已发送，请耐心等待！");
+//                alert("语音验证已发送，请耐心等待");
+                    }
+                    else if(codedata.error==-1){alert(codedata.des);}
+                    else if(codedata.error==100){alert("活动已过期");}
+                    else if(codedata.error==101){alert("参数错误");}
+                });
+    }
+    //语音获取
+    j(".voicecode").on("click",function(){
+        var username=j(".nametext").val();
+        var mobile=j(".mobiletext").val();
+        var code=j(".codetext").val();
+        var voicetext=j(".voicecode").val();
+        if(username==""||username=="输入字母、数字或中文"){
+            j(".errorname").show();
+            j(".errorname").html("请输入您的用户名！");
+//            alert("请输入您的用户名");
+            return false;
+        }
+        if(!checkNameBeginByNum(username)){
+            j(".errorname").show();
+            j(".errorname").html("不能数字开头！");
+//            alert("不能数字开头");
+            return false;
+        }
+        var myReg1 = /^[_A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if(!(myReg1.test(username)))
+        {
+            j(".errorname").show();
+            j(".errorname").html("昵称只能为字母、数字或中文！");
+//            alert("昵称只能为字母、数字或中文");
+            return false;
+        }
+        if(username.length<4){
+            j(".errorname").show();
+            j(".errorname").html("昵称太短了！");
+//            alert("昵称太短了");
+            return false;
+        }
+        if(username.length>18){
+            j(".errorname").show();
+            j(".errorname").html("昵称过长！");
+//            alert("昵称过长");
+            return false;
+        }
+        if(mobile==""||mobile=="请输入优酷账户绑定的手机号"){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入您的手机号！");
+//            alert("请输入您的手机号");
+            return false;}
+        var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if (!reg.test(mobile)||mobile.length!=11){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入正确的11位手机号码！");
+//            alert('请输入正确的11位手机号码');
+            return false;
+        }
+        var codeurl = ''+urlinfo.upcode+'?mobile='+mobile+'&username='+username+'&callback=?';
+        getcode(codeurl);
+    });
+//点击注册
+    j(".registerbtn").on("click",function(){
+        var username=j(".nametext").val();
+        var mobile=j(".mobiletext").val();
+        var code=j(".codetext").val();
+        var voicetext=j(".voicecode").val();
+        if(username==""||username=="输入字母、数字或中文"){
+            j(".errorname").show();
+            j(".errorname").html("请输入您的用户名");
+//            alert("请输入您的用户名");
+            return false;
+        }
+        if(!checkNameBeginByNum(username)){
+            j(".errorname").show();
+            j(".errorname").html("不能数字开头！");
+//            alert("不能数字开头");
+            return false;
+        }
+        var myReg1 = /^[_A-Za-z0-9\u4e00-\u9fa5]+$/;
+        if(!(myReg1.test(username)))
+        {
+            j(".errorname").show();
+            j(".errorname").html("昵称只能为字母、数字或中文！");
+//            alert("昵称只能为字母、数字或中文");
+            return false;
+        }
+        if(username.length<4){
+            j(".errorname").show();
+            j(".errorname").html("昵称太短了！");
+//            alert("昵称太短了");
+            return false;
+        }
+        if(username.length>18){
+            j(".errorname").show();
+            j(".errorname").html("昵称过长！");
+//            alert("昵称过长");
+            return false;
+        }
+        if(mobile==""||mobile=="请输入优酷账户绑定的手机号"){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入您的手机号！");
+//            alert("请输入您的手机号");
+            return false;}
+        var reg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if (!reg.test(mobile)||mobile.length!=11){
+            j(".errorname").hide();
+            j(".errormobile").show();
+            j(".errormobile").html("请输入正确的11位手机号码！");
+//            alert('请输入正确的11位手机号码');
+            return false;
+        }
+        if(code==""){
+            j(".errorname").hide();
+            j(".errormobile").hide();
+            j(".errorcode").show();
+            j(".errorcode").html("请获取语音验证码！");
+//            alert("请获取验证码");
+            return false;
+        }
+        if(j("#checkbox").is(":checked")){
+            var registurl = ''+urlinfo.checkcode+'?mobile='+mobile+'&username='+username+'&code='+code+'&callback=?';
+            register(registurl);
+        }
+        else{alert("只有同意条款才能注册");}
+    });
+})
+</script>
+<div class="headertop">
+    <div class="section">
+        <p>2015年7月12日-7月18日</p>
+    </div>
+</div>
+<div class="column1">
+    <div class="section">
+        <div class="registerbox">
+            <ul>
+                <li>用户名<span class="errorname"></span></li>
+                <li>
+                    <input type="text" class="textwid nametext" value="输入字母、数字或中文" onfocus="if(this.value=='输入字母、数字或中文'){this.value=''}" onblur="if(this.value==''){this.value='输入字母、数字或中文'}"/>
+                    <div class="righticon"></div>
+                </li>
+                <li>手机号<span class="errormobile"></span></li>
+                <li>
+                    <input type="text" class="textwid mobiletext" value="请输入优酷账户绑定的手机号" onfocus="if(this.value=='请输入优酷账户绑定的手机号'){this.value=''}" onblur="if(this.value==''){this.value='请输入优酷账户绑定的手机号'}"/>
+                    <div class="righticon"></div>
+                </li>
+                <li>验证码<span class="errorcode"></span></li>
+                <li>
+                    <label>
+                        <input type="text" class="codewid codetext"/>
+                        <input type="text" class="codeimgwid voicecode" value="获取语音验证" readonly/>
+                    </label>
+                </li>
+            </ul>
+            <div class="registerbtn"></div>
+            <div class="agreement"><input type="checkbox" id="checkbox" checked>我已阅读并同意有利网服务协议</div>
+        </div>
+    </div>
+</div>
+<div class="column2">
+    <div class="section">
+        <ul>
+            <p>有利网致力于为各位投资人提供安全、有担保、高收益的互联网理财服务,通过有利网的推荐，您可以将手中的富余资金，出借给由小额贷款金融机构担保的、信用良好的小微企业，并获得利息回报。截至目前，有利网获得市场高度认可，先后获得软银（中国）资本、晨兴资本的数千万美元级别投资，已经有超过330万理财人成为有利网的注册用户，并完成了超过110亿元人民币投资。</p>
+            <li>个人用户“点对点”的出借富余资<br/>金给有担保的借款人，资金收益<br/>11-13%</li>
+            <li>多重风险把控<br/>100%本金保障计划</li>
+            <li>50元即可网上理财<br/>小投资也有大回报</li>
+            <li>随时随地地赎回投资<br/>突然急用钱想收回投资<br/>2步搞定，最快当天到账</li>
+        </ul>
+    </div>
+</div>
+<div class="column3">
+    <div class="section">
+        <div class="makemoney"><a href="http://www.yooli.com/?sid=322&aid=YK2&utm_source=BD&utm_medium=cpa&utm_term=YK2&utm_content=优酷网&utm_campaign=优酷网" target="_blank"></a></div>
+    </div>
+</div>
+<div class="column4"></div>
+<div class="column5">
+    <div class="section">
+        <div class="activeinfo">
+            <ul>
+                <li>活动期间，用户通过活动页面免费注册有利网账号并实名认证，即可获得优酷1个月优酷土豆黄金会员与40元有利网现金红包。如在有利网注册、充值、投资等遇到问题，可咨询有利网客服，热线电话：<em>400-890-3980</em>（工作时间 8:00-22:00）。</li>
+                <li>活动期间：①在有利网注册成功后24小时内，充值任意金额可再得60元有利网现金红包；②在有利网注册成功后7日内完成首次投资（50元起投），即可加送2个月优酷土豆黄金会员（共计1+2＝3个月优酷土豆黄金会员）；③在有利网注册成功后7日内累计投资金额≥1万元，即可直接获得12个月优酷土豆黄金会员（共计1+12=13个月优酷土豆黄金会员）。</li>
+                <li>本次活动“无忧宝”投资金额不计入累计投资金额。</li>
+                <li>同一用户最多获得13个月优酷土豆黄金会员，完成每个步骤仅可获得1次奖励。注册及充值奖励实时生效，投资奖励在活动结束后7个工作日内统一发放，可前往优酷<a href="http://vip.youku.com/" target="_blank">会员中心</a>查看。</li>
+                <li>本活动仅限有利网新用户参加，如之前已经注册过有利网的用户，则无法获得奖励；若发现盗取他人信息或恶意注册活动的行为，所有奖励清零，并追究法律责任。</li>
+                <li>活动时间： 月    日—  月   日。</li>
+                <li>本活动最终解释权归有利网所有。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

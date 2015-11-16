@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+</head>
+<script>
+    // getCookie('__ysuid');
+    function getCookie(objName){
+        var arrStr = document.cookie.split(";");
+        for(var i = 0;i < arrStr.length;i ++){
+            var temp = arrStr[i].split("=");
+            // console.log(temp[0],objName);
+            if($.trim(temp[0])===$.trim(objName)){
+                return temp[1];
+            }
+        }
+        return false;
+    }
+    //设置cookies
+    function setCookie(name,value,days,path){
+        var t = new Date(),
+                sCookie= name + "=" + escape(value);
+        t.setTime(t.getTime()+days*24*3600*1000);
+        sCookie += ";expires="+t.toGMTString();
+        if(path){
+            sCookie += ";path="+path;
+        }
+        document.cookie = sCookie;
+    }
+    //查询cookies
+    function getCookie(name){
+        var preg = new RegExp("(^| )"+name+"=([^;]*)(;|$)","g");
+        if(preg.test(document.cookie)){
+            return RegExp.$2;
+        }else{
+            return "";
+        }
+    }
+    //删除cookie
+    function delCookie(name){
+        setCookie(name,"",-1);
+    }
+    //清空cookie
+    function clearCookie(){
+        var cookieArr = document.cookie.split(";");
+        for(var i=0;i<cookieArr.length;i++){
+            var preg = /([^;]*)=([^;]*)/;
+            var match = preg.exec(document.cookie);
+            delCookie(match[1]);
+        }
+    }
+    //简单的优化封装
+    var cookie = {
+        set : function(name,value,days,path){
+            var t = new Date(),
+                    sCookie= name + "=" + escape(value);
+            t.setTime(t.getTime()+days*24*3600*1000);
+            sCookie += ";expires="+t.toGMTString();
+            sCookie += path && ";path="+path || "";
+            document.cookie = sCookie;
+        },
+        get : function(name){
+            var preg = new RegExp("(^| )"+name+"=([^;]*)(;|$)","g");
+            return preg.test(document.cookie) && RegExp.$2 || "";
+        },
+        del : function(name){
+            cookie.set(name,"",-1);
+        },
+        cls : function(){
+            var cookieArr = document.cookie.split(";");
+            for(var i=0;i<cookieArr.length;i++){
+                delCookie(/([^;]*)=([^;]*)/.exec(document.cookie)[1]);
+            }
+        }
+    }
+</script>
+<body>
+
+</body>
+</html>

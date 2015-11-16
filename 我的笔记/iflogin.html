@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        /*mark*/
+        .maskx { display: none; width: 100%; height: 10000px; position: fixed; left: 0; top: 0; background: #000000; opacity: 0.3; -moz-opacity: 0.3; filter: alpha(opacity=30); z-index: 5555; }
+        .mask-mobile p, .mask-mobile a, .mask-mobile span, .mask-mobile div, h2, input{ font-family: "微软雅黑"; }
+        .mask-mobile{display: none; width:448px; padding-bottom: 35px; border: 10px solid #cbcbcb; text-align: center; position: fixed; top: 50%; left: 50%; background: #ffffff; margin-left:-224px; margin-top:-127px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;z-index: 6666;}
+        .mask-mobile p, .mask-mobile h2{width:310px; text-align: center;color:#555555;margin:0 auto;font-size:14px; line-height: 36px;}
+        .mask-mobile h2{width:266px;font-weight: normal;font-size: 20px; padding-top: 10px;}
+        .mask-mobile p.color9{color: #999999;}
+        .mask-mobile .firstpage{width:100%;height:36px; text-align: center;}
+        .mask-mobile .firstpage a, .mask-mobile .firstpage a:hover{font-size: 12px;height:36px;line-height:36px; text-decoration: none;display: inline; color: #00b9ff;cursor: pointer;}
+        .mask-mobile .closetop{width:20px;display:block;height:24px;font-size:20px;color: #cacaca;cursor: pointer; line-height:24px; padding:10px 0 10px 415px;}
+        .mask-mobile .btnlogin { border: 1px solid #007dcc; padding: 0 30px; text-align: center; margin: 0 auto; margin-top: 10px; height: 38px; line-height: 38px; display: inline-block; font-size: 14px; color: #ffffff; background: #1c98e7; cursor: pointer; }
+
+        .mask-mobile .setmtop { margin-top: 35px; }
+
+        .open-member { width: 270px; height: 55px; line-height: 55px; text-align: center; color: #fff; display: inline-block; font-size: 30px; background: url("../../../images/privilege_main.png") no-repeat 0 0; }
+
+        /*绑定手机*/
+        .mask-mobile ul { width:400px; margin: 0 auto; display: block; }
+        .mask-mobile ul p {width:400px;font-size: 16px; line-height: 30px; text-align: center; padding-bottom: 15px; }
+        .mask-mobile ul li { padding-bottom: 20px; height: 40px; line-height: 40px; list-style: none;color:#555555; }
+        .mask-mobile ul li .texwid, .mask-mobile ul li .texwid2 { width: 260px; padding: 0 10px; border: 1px solid #586899; float: left; color: #476099; }
+        .mask-mobile ul li span { float: left; line-height: 40px; display: inline; }
+        .mask-mobile ul li span.wid1 { width: 60px; text-align: right; padding-right: 5px; }
+        .mask-mobile ul li span.wid2 { float: left; width: 307px; position: relative; }
+        .mask-mobile ul .errorbox { color: #F00; position: absolute; left: 0; top: 40px; font-size: 14px; line-height: 22px; display: none; }
+        .mask-mobile ul li span.wid2 input { height: 40px; line-height: 40px; font-size: 24px; }
+        .mask-mobile ul li span.wid2 input.texwid2 { width: 100px; float: left; }
+        .mask-mobile ul li span.wid2 input.waitcode { width: 150px; float: left; margin-left: 10px; height: 40px; line-height: 40px; display: inline-block; white-space: nowrap; font-size: 18px; color: #ff1800; border: 1px solid #c4c4c4; background: #fbfbfb; }
+    </style>
+</head>
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script type="text/javascript">
+    var j=jQuery.noConflict();
+    j(function() {
+        /** 获取cookie*/
+        var getCookie = function(objName) {
+            var arrStr = document.cookie.split("; ");
+            for (var i = 0; i < arrStr.length; i++) {
+                var temp = arrStr[i].split("=");
+                if (temp[0] == objName) {
+                    return 1;
+                }
+            }
+            return 0;
+        };
+//html变量
+//        var error = function(id, info) {
+//            jQuery('.error').hide();
+//            jQuery('#' + id + '').html(info).show();
+//        };
+
+        var  saveurl ='http://mini.cron.youku.com/vipactive/active/index.php?app=active&c=reg_partner&a=reg&code=10008';
+        var memberH=function(){
+//            if(choudata.result==""){//未绑定手机号
+//                j(".mask-mobile, .maskx").show();
+//                j('.oksubscription').on('click',function(){
+//                    bindmobile();
+//                });
+//            }
+            if(choudata.code==黄金会员&choudata.code==绑定的手机号){//已绑定订阅成功
+                j('.mask-mobile').html("");
+                j('.mask-mobile').html(Innerhtml3);
+                j('.mask-mobile, .maskx').show();
+            }
+            else if(choudata.code==黄金会员&choudata.code==10030){//未绑定手机号
+                j(".mask-mobile, .maskx").show();
+                j('.oksubscription').on('click',function(){
+                    bindmobile();
+                });
+                return false;
+            }
+            else if(choudata.code!=黄金会员){
+                j('.mask-mobile').html("");
+                j('.mask-mobile, .maskx').show();
+                j('.mask-mobile').html(Innerhtml2);
+                return false;
+            }
+        };
+
+        var get_login = function(){
+            j.ajax(saveurl,
+                    {type:'get',dataType:'jsonp'}).done(function(choudata)
+                    { data = choudata.data;
+                        if(choudata.code==10000){//登录
+                            memberH();
+                            return false;
+                        }
+                        else if(choudata.code==10010){//未登录
+                            j('.mask-mobile').html("");
+                            j('.mask-mobile').html(Innerhtml1);
+                            j('.mask-mobile, .maskx').show();
+//                            login({'type':'fee','callBack':'parent.location.reload()'});
+                            return false;
+                        }
+                    });
+        };
+            var getlink = {
+                //验证码
+                getcode:'http://pay.youku.com/ajax/sendsms.html',
+                //绑定手机
+                bindmobile:'http://pay.youku.com/ajax/bindmobile.html'
+            };
+            //发送验证码倒计时间
+            var time = function(textcode,wait,maxwait) {
+                if (wait == 0) {
+                    j("#waitcode").css(color,"#ff1800");
+                    j('#waitcode').attr("disabled",false);
+                    j('#waitcode').attr("value","发送验证码");
+                    wait = maxwait;
+                } else {
+                    j("#waitcode").css("color","#807e7e");
+                    j("#waitcode").attr("disabled",true);
+                    j("#waitcode").attr("value","重新发送(" + wait + "s)");
+                    wait--;
+                    setTimeout(function() {
+                                time(textcode,wait,maxwait)
+                            },
+                            1000)
+                }
+            };
+            //返回值
+            var if_code = function(bind){
+                if(bind.error == 10021){alert("参数错误");}
+                else if(bind.error == 10022){alert("手机验证码发送失败");}
+                else if(bind.error == 10031){alert("手机验证码输入错误");}
+                else if(bind.error == 10032){
+                    if(bind.msg=="此mobile已经存在"){alert("该手机号已绑定其他账号，请更换手机号绑定操作");}
+                    else if(bind.msg=="用户被屏蔽！"){alert("很抱歉，该账号被屏蔽了，请更换账号尝试");}
+                    else{alert(bind.msg);}
+                }
+                else if(bind.error == 10033){alert("手机号绑定失败");}
+                else if(bind.error == 10041){alert("无法获取用户信息");}
+                else if(bind.error == 10042){alert("用户没有绑定手机号");}
+            };
+        j('#bindtel').on('click',function(){
+            var mobile=j('.texwid').val();
+            var code=j('.texwid2').val();
+            if(mobile==""){
+                j('#error_a').show();
+                return false;
+            }
+            if (isNaN(mobile) || (mobile.length != 11)) {
+                // alert('请输入正确的手机号码');
+                j('#error_a').show();
+                j("#error_a").html("！请输入正确的手机号码");
+                return false;
+            }
+            var reg=/^1[|3|4|5|7|8][0-9](\d{8})$/;
+            if(!reg.test(mobile)){
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            if(code==""){
+                j("#error_a").hide();
+                j("#error_b").show().html("请输入正确的验证码！");
+                return false;
+            }
+            var blink = ""+getlink.bindmobile+"?mobile="+mobile+"&code="+code+"";
+            j.ajax(blink,
+                    {
+                        type: 'get',
+                        dataType: 'jsonp'
+                    }
+            ).done(function (bind){
+                        if(bind.error == 0){//订阅成功
+//                            j(".maskx, .mask-mobile").hide();
+                            j(".mask-mobile").html(Innerhtml3);
+                        }
+                        else{
+                            if_code(bind);
+                        }
+                    });
+        });
+        j('#waitcode').on('click',function(){
+            var mobile=j('.texwid').val();
+            var code=j('.texwid2').val();
+            if(mobile==""){
+                j('#error_a').show();
+                return false;
+            }
+            if (isNaN(mobile) || (mobile.length != 11)) {
+                // alert('请输入正确的手机号码');
+                j('#error_a').show();
+                j("#error_a").html("！请输入正确的手机号码");
+                return false;
+            }
+            var reg=/^1[|3|4|5|7|8][0-9](\d{8})$/;
+            if(!reg.test(mobile)){
+                j("#error_a").show().html("！请输入正确的手机号码");
+                return false;
+            }
+            j('#error_a, #error_b').hide();
+            j(".texwid2").val("");
+            get_code();
+        });
+            //点击获取验证码验证表单
+            var get_code=function(){
+//                time(textcode,60,60);
+                var textcode=j("#waitcode");
+                var mobile = j("#mobile").val();
+                if (!checkIsMobile(mobile)) {
+                    return false;
+                }
+                var clink = ""+getlink.getcode+"?mobile="+mobile+"";
+                j.ajax(clink,{type: 'get',dataType: 'jsonp'}).done(function (code) {
+                    if(code.code == 20000){
+                        time(textcode,60,60);
+                    }
+                    else{
+                        if_code(code);
+                    }
+                });
+
+            }
+    })
+</script>
+<div class="maskx"></div>
+<div class="mask-mobile">
+    <div class="closetop">×</div>
+    <ul class="ul">
+        <li>
+            <span class="wid1">手机号:</span>
+            <span class="wid2"><input type="text"  class="texwid" id="mobile" > <div class="errorbox" id="error_a">！请输入正确的手机号</div></span>
+        </li>
+        <li>
+            <span class="wid1">验证码:</span>
+                    <span class="wid2">
+                       <input type="text" class="texwid2" value="">
+                       <input type="button" class="waitcode" id="waitcode" value="获取验证码">
+                        <div class="errorbox" id="error_b">！验证码输入错误</div>
+                    </span>
+        </li>
+        <div class="getmember" id="bindtel">确定订阅</div>
+    </ul>
+</div>
+<input type="text" id="nameval">
+<input type="button" value="订阅" class="subscription">
+<script>
+    j(function(){
+        var j=jQuery.noConflict();
+        var Innerhtml1="";//当前页面会黄金会员专享，请登录会员帐号后观看
+        Innerhtml1+="<p class='closetop'>×</p>";
+        Innerhtml1+="<h2>当前页面会黄金会员专享，请登录会员帐号后观看.</h2>";
+        Innerhtml1+="<div class='firstpage'><a href='http://www.youku.com/'>优酷首页</a></div>";
+        Innerhtml1+="<div class='btnlogin'><a href='http://www.youku.com/user_login/'>登录</a></div>";
+        var Innerhtml2="";//当前页面会黄金会员专享，请登录会员帐号后观看
+        Innerhtml2+="<p class='closetop'>×</p>";
+        Innerhtml2+="<h2>当前页面会黄金会员专享，请登录会员帐号后观看.</h2>";
+        Innerhtml2+="<div class='firstpage'><a href='http://www.youku.com/'>优酷首页</a></div>";
+        Innerhtml2+="<div class='open-member'><a href='http://cps.youku.com/redirect.html?id=00014696'>开通黄金会员</a></div>";
+        var Innerhtml3="";//已绑定好手机号订阅成功
+        Innerhtml3+="<p class='closetop'>×</p>";
+        Innerhtml3+="<p>订阅成功</p>";
+        Innerhtml3+="<p class='color9'>节目单更新后，会以短信的形式发送的您的手机。</p>";
+        Innerhtml3+="<div class='btnlogin okbtn'>确定</div>";
+        var Innerhtml4="";//重复订阅提示
+        Innerhtml4+="<p class='closetop'>×</p>";
+        Innerhtml4+="<p>您已订阅过，请在手机短信查收节目单</p>";
+        Innerhtml4+="<div class='btnlogin okbtn setmtop'>确定</div>";
+        var Innerhtml6="";//表单
+        Innerhtml6+="<p class='closetop'>×</p>";
+        Innerhtml6+="<ul>";
+        Innerhtml6+="<p>绑定手机号后，节目单会在更新后以短信的方式推送给您</p>"
+                +"<li>" +
+                "<span class='wid1'>手机号:</span>"+
+                "<span class='wid2'>" +
+                    "<input type='text'  class='texwid' id='mobile' >" +
+                    "<div class='errorbox' id='error_a'>！请输入正确的手机号</div>" +
+                "</span>"+
+                "</li>"+
+                "<li>"+
+                "<span class='wid1'>验证码:</span>"+
+                "<span class='wid2'>"+
+                    "<input type='text' class='texwid2' value=''>"+
+                    "<input type='button' class='waitcode' id='waitcode' value='获取验证码'>"+
+                    "<div class='errorbox' id='error_b'>！验证码输入错误</div>"+
+                "</span>"+
+                "</li>"+
+                "<div class='btnlogin' id='bindtel'>确定订阅</div>"+
+                "</ul>";
+        var closemark=function(){
+            j('.okbtn, .closetop').on('click',function(){
+                j('.mask-mobile, .maskx').hide();
+            })
+        };
+        j(".subscription").on("click", function () {
+            var nameval = j('#nameval').val();
+            if (nameval == 1) {//未登录
+                j('.mask-mobile').html("");
+                j('.mask-mobile, .maskx').show();
+                j('.mask-mobile').html(Innerhtml1);
+                closemark();
+                return false;
+            }
+            else if (nameval == 2) {//普通会员和白银会员
+                j('.mask-mobile').html("");
+                j('.mask-mobile, .maskx').show();
+                j('.mask-mobile').html(Innerhtml2);
+                closemark();
+                return false;
+            }
+            else if (nameval == 3) {//订阅成功弹层
+                j('.mask-mobile').html("");
+                j('.mask-mobile').html(Innerhtml3);
+                j('.mask-mobile, .maskx').show();
+                closemark();
+                return false;
+            }
+            else if (nameval == 33) {//重复订阅成功弹层
+                j('.mask-mobile').html("");
+                j('.mask-mobile').html(Innerhtml4);
+                j('.mask-mobile, .maskx').show();
+                closemark();
+                return false;
+            }
+            else if (nameval == 4) {//未绑定表单
+                j('.mask-mobile').html("");
+                j('.mask-mobile').html(Innerhtml6);
+                j('.mask-mobile, .maskx').show();
+                closemark();
+                j('#bindtel').click(function(){//验证通过的情况下，直接弹出'订阅成功,否则显示错误信息
+                    alert("验证通过的情况下，直接弹出'订阅成功'，否则显示错误信息")
+                });
+                return false;
+            }
+        });
+    })
+</script>
+</body>
+</html>

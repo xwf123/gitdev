@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/app/dist/jiuxin.css"/>
+</head>
+<body>
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<!--弹层开始-->
+<script>
+    var j=jQuery.noConflict();
+    j(function(){
+        var Innerhtml1="";//你已经是会员可以直接加速
+        Innerhtml1+="<p>您已经是黄金会员，可直接使用加速特权。</p><br/>";
+        Innerhtml1+="<div class='submitbtn addspeed'><a>立即去加速</a></div>";
+        var Innerhtml2="";//剩余次数
+        Innerhtml2+="<p>剩余免费加速体验次数：5 次</p><br/>";
+        Innerhtml2+="<div class='submitbtn addspeed'><a>立即加速</a></div>";
+        var Innerhtml3="";//次数用完
+        Innerhtml3+="<p>免费加速次数已用完，立即开通黄金会员，享无限次加速及其他多项特权！</p><br/>";
+        Innerhtml3+="<div class='submitbtn addmember'><a>立即开通</a></div>";
+        var Innerhtml4="";//加速成功
+        Innerhtml4+="<p>加速成功！祝您观影愉快！</p><br/>";
+        Innerhtml4+="<div class='submitbtn addmember'><a>立即开通</a></div>";
+        var Innerhtml5="";//加速失败
+        Innerhtml5+="<p>加速失败！原因：运营商网络繁忙。<br/>请稍后再试。<a href='#'>查看详情</a></p><br/>";
+        Innerhtml5+="<div class='submitbtn close'><a>关闭</a></div>";
+        var Innerhtml6="";//表单
+        Innerhtml6+="<ul>"
+                + "<li>"
+                +"<span class='wid1'>姓名:</span>"
+                +"<span class='wid2'><input type='text'  class='texwid'></span>"
+                +"</li>"
+                +"<div class='errorbox'>！请输入姓名</div>"
+                + "<li>"
+                +"<span class='wid1'>电话:</span>"
+                +"<span class='wid2'><input type='text'  class='texwid'></span>"
+                +"</li>"
+                +"<div class='errorbox'>！请输入正确的电话</div>"
+                + "<li>"
+                +"<span class='wid1'>收货地址:</span>"
+                +"<span class='wid2'><textarea></textarea></span>"
+                +"</li>"
+                +"<div class='errorbox'>！请输入地址</div>"
+                +"</ul>";
+        Innerhtml6+=" <div class='submitbtn submitinfo'><a>提交</a></div>";
+//关闭弹层
+        j(".close").on("click",function(){
+            j(".maskx, .mask-box").hide();
+        });
+        j(".Click").on("click",function(){
+            j(".maskx, .mask-box").show();
+            j(".descbox").empty();
+            j(".descbox").html(Innerhtml1);//你已经是会员可以直接加速
+            j(".addspeed").click(function(){
+                alert("立即加速")
+            })
+        })
+    })
+</script>
+<div class="maskx"></div>
+<div class="mask-box">
+    <h3>请确认您的手机号 <span class="close">×</span></h3>
+    <div class="descbox">
+            <!--<ul>-->
+                <!--<li>-->
+                    <!--<span class="wid1">姓名:</span>-->
+                    <!--<span class="wid2"><input type="text"  class="texwid"></span>-->
+                <!--</li>-->
+                <!--<div class="errorbox">！请输入正确的手机号</div>-->
+                <!--<li>-->
+                    <!--<span class="wid1">电话:</span>-->
+                    <!--<span class="wid2"><input type="text"  class="texwid"></span>-->
+                <!--</li>-->
+                <!--<div class="errorbox">！请输入正确的手机号</div>-->
+                <!--<li>-->
+                    <!--<span class="wid1">收货地址:</span>-->
+                    <!--<span class="wid2"><textarea></textarea></span>-->
+                <!--</li>-->
+                 <!--<div class="errorbox">！请输入正确的手机号</div>-->
+            <!--</ul>-->
+    </div>
+</div>
+<!--弹层结束-->
+<div class="header-banner"></div>
+<p class="Click">dianjiaw</p>
+</body>
+</html>

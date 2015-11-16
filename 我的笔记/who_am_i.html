@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        .yk-nav{display: none;}
+        *{ margin: 0;padding:0;}
+        img{border: 0;}
+        body { width:100%; background:#ccc8c1;overflow-x: hidden; }
+        .section{width:1190px;margin: 0 auto;}
+        p, h2, h3, .section div, .mark_btn, .close_btn, .adressbox ul li span, .explains, .wid2 input, .heigt, .adressbox .errorbox{font-family: "微软雅黑";}
+        .header_top{width:100%;height:432px; background: url("http://r3.ykimg.com/05100000562DF65E67BC3D57750D9D58") no-repeat center center;}
+        .header_top_sticket{width:100%;height:170px; background: url("http://r3.ykimg.com/05100000562DF65E67BC3D6286006678") no-repeat center center; padding-top: 15px;}
+        .header_top_sticket .open_member{width:290px;margin-left: 216px; float: left; display: inline-block;}
+        .header_top_sticket .get_sticket{width:290px;margin-left:280px; float: left; display: inline-block;}
+        .header_top_sticket p{ color: #deddd8;font-size: 18px; line-height:40px; text-align: center;}
+        .header_top_sticket p em{color:#ffffff; font-style: normal; padding-right:5px;}
+        .header_top_sticket .open_member_btn{margin-top: 5px;text-align:center;box-shadow:0 1px 1px #4c4949;-webkit-box-shadow:0 1px 1px #4c4949;-moz-box-shadow:0 1px 1px #4c4949; }
+        .open_member_btn a, .open_member_btn{width:288px; height: 72px; line-height:72px;display: block; font-size:26px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px; text-decoration: none;}
+        .open_member_btn.bg1, .open_member_btn a{ background: #b6975b; color:#1f1509;cursor: pointer;}
+        .open_member_btn.bg2{ background: #b4b1ab;color:#898989;}
+        .active_lead{width:100%;height:107px; background: url("http://r2.ykimg.com/05100000562DF65D67BC3D6FC505E4A3") no-repeat center center;}
+        .active_desc_box{width: 1120px;background: #3a3a3a; margin: 0 auto; padding:25px;}
+        .active_desc_box p{ line-height: 28px;font-size: 16px; color: #ffffff; padding-left: 30px;}
+        .all_star{width:100%;height:388px; background: url("http://r3.ykimg.com/05100000562DF65D67BC3D5D130ED6B9") no-repeat center center;}
+        .privilege_box{width:100%;height:416px; background: url("http://r4.ykimg.com/05100000562DF66B67BC3D43130B8C85") no-repeat center center;}
+        .column_desc{width:100%;height:372px; background: url("http://r3.ykimg.com/05100000562DF65E67BC3D5A3D04622A") no-repeat center center;}
+        .column_desc p{width:280px;color: #ffffff; line-height: 26px; font-size: 16px; margin-left: 870px; padding-top: 144px; letter-spacing:3px; }
+        /*弹层*/
+        .mark_big {display: none;  width: 100%; height: 10000px; position: fixed; left: 0; top: 0; background: #000000; opacity: 0.5; -moz-opacity: 0.5; filter: alpha(opacity=50); z-index: 5555; }
+        .mark_box {min-width:368px;width:auto;display: none; background: #ffffff; position: fixed; top: 50%; left: 50%; margin-left: -182px; margin-top:-120px; padding-bottom: 40px;z-index:6666; box-shadow:0 1px 1px #4c4949;-webkit-box-shadow:0 1px 1px #4c4949;-moz-box-shadow:0 1px 1px #4c4949; border:1px solid #d7d7d7;}
+        .mark_box h2, .mark_box p{ padding: 0 54px; text-align: center;}
+        .mark_box p { font-size: 16px; line-height: 28px; padding-top: 10px;  }
+        .mark_box h2 { font-size:20px; line-height:40px;color: #333333; padding-top: 20px; }
+        .top_closebox{ width:100%; height: 24px;  position: relative; }
+        .top_closebox .close_btn{ font-size:30px;width:20px; height: 20px; line-height:20px; color: #909090; position: absolute;top:5px;right:10px;cursor: pointer;display: block; }
+        .mark_box h3{ font-size: 20px;color: #333333; text-align: center; padding-bottom: 15px;}
+        .adressbox{width:530px; border-top:1px solid #e4e4e4; padding-top:15px; }
+        .adressbox ul{width:384px;margin:0 auto; }
+        .adressbox ul li{display: inline-block; padding-top:20px;}
+        .adressbox ul li:before, .adressbox ul li:after, .adressbox:before, .adressbox:after{display: table; content: "";}
+        .adressbox ul li:after, .adressbox:after{clear: both;}
+        .adressbox ul li span{float: left;line-height: 40px; position: relative;font-size:14px;}
+        .adressbox ul li span .txt{ width:70px;font-size: 14px;  }
+        .adressbox ul li span .wid2{ width:310px; display: inline-block;}
+        .adressbox ul li .wid2 input, .heigt{ width:306px;height: 38px; font-size: 14px; border: 1px solid #d7d7d7; line-height:38px; padding:0 5px; }
+        .adressbox ul li .wid2 .heigt{height:60px; line-height:30px;}
+        .explains{ line-height:28px; color: #ff1b2d;text-align: center; font-size: 14px; padding-top: 10px;}
+        .adressbox .errorbox{ color: #F00; position: absolute; left: 0; top: 40px; font-size: 14px; line-height: 22px;display: none;}
+        .p_stiket{display: none;}
+        .mark_box .mark_btn{margin:0 auto;background: #b6975b;  margin-top: 25px; text-align:center;box-shadow:0 1px 1px #4c4949;-webkit-box-shadow:0 1px 1px #4c4949;-moz-box-shadow:0 1px 1px #4c4949; }
+        .go_on a, .mark_box .mark_btn{width:150px; height:40px; line-height:40px; text-decoration:none;display: block;color:#000000;cursor: pointer; font-size:16px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;}
+        #errorAdd{top: 60px;}
+    </style>
+</head>
+<body>
+<!--弹出层-->
+<div class="mark_big"></div>
+<div class="mark_box"></div>
+<!--弹出层结束-->
+<div class="header_top"></div>
+<div class="header_top_sticket">
+    <div class="section">
+        <div class="open_member">
+            <p>本页面开通年费会员</p>
+            <div class="open_member_btn bg1" id="open_member"><a>开通会员</a></div>
+        </div>
+        <div class="get_sticket">
+            <p>领取明星见面会门票(限100张)</p>
+            <div class="open_member_btn bg2" id="get_sticket">领取门票</div>
+            <p class="p_stiket">今日还剩：<em>20</em>张</p>
+            <p class="timebox" id="timebox"></p>
+        </div>
+    </div>
+</div>
+<div class="all_star"></div>
+<div class="active_lead"></div>
+<div class="active_desc_box">
+    <p>1. 活动期间在本页面购买年费黄金会员，即可获得《我是谁》发布会门票一张，限量150张，发完截止</p>
+    <p>2. 门票领取流程：本页面开通会员成功后，返回页面点击“领取门票”按钮，填写相关信息后，我们的客服同学会进行联系派发门票</p>
+    <p>3. 明星见面会时间：2015年11月11日，地点：北京；</p>
+    <p>4. .....................................................</p>
+    <p>5. .....................................................</p>
+    <p>6. .....................................................</p>
+    <p>7. .....................................................</p>
+</div>
+<div class="privilege_box"></div>
+<div class="column_desc">
+    <div class="section">
+        <p>优酷出品•首档互联网大型纪实类真人秀 我是谁素人与明星同行，陌生的环境，全新的身份<br/>六地，三人，七天，开始一段寻找自我的旅程</p>
+    </div>
+</div>
+<input type="hidden" value="" id="mytime">
+<script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<script>
+var j=jQuery.noConflict();
+j(function(){
+    var close_top="<div class='top_closebox'>"+
+            "<div class='close_btn'>×</div>"+
+            "</div>";
+    var no_sticket=" <h2>今日门票已抢光咯～！</h2>" +
+            "<p>继续开通会员明日10：00可继续抢票</p>"+
+            "<div class='mark_btn go_on'><a href='http://pay.youku.com/buy/member.html?productid=1000020008&backurl=http%3A%2F%2Fact.vip.youku.com%2Fvipactive%2Factive%2Findex.php%3Fc%3Dmusic%26a%3DgetMusicOrder' target='_blank'>继续</a></div>";
+    var no_status=" <h2>Sorry～</h2>" +
+            "<p>您还没有领取资格，请在本页面购买年费会员后点击领取门票</p>"+
+            "<div class='mark_btn closedbtn'>确定</div>";
+    var success_sticket=" <h2>恭喜您！</h2>" +
+            "<p>成功抢到看片会 · 见面门票，请填写信息等待收取门票呦～！</p>"+
+            "<div class='mark_btn toaddress'>去填写</div>";
+    var hasbeen_sticket=" <h2>不要调戏我～</h2>" +
+            "<p>您已领过看片会 · 见面门票，请确认已填写收货地址</p>"+
+            "<div class='mark_btn toaddress'>去填写</div>";
+    var over_sticket=" <h2>Sorry~！</h2>" +
+            "<p>门票已被抢空</p>"+
+            "<div class='mark_btn closedbtn'>确定</div>";
+    var add_adress="<h3>填写个人信息</h3>"+
+            "<div class='adressbox'>"+
+            "<p>请准确填写个人信息，确保正常发货</p>"+
+            "<ul>"+
+            "<li><span class='txt'>姓名：</span><span class='wid2'><input type='text' id='textname'/><div class='errorbox' id='errorName'>*请输入您的姓名</div></span></li>"+
+            "<li><span class='txt'>电话：</span><span class='wid2'><input type='text' id='textmobile'/><div class='errorbox' id='errorTel'>*请输入正确的手机号</div></span></li>"+
+            "<li><span class='txt'>地址：</span><span class='wid2'><textarea class='heigt' id='txtdress'></textarea><div class='errorbox' id='errorAdd'>*请输入地址</div></span></li>"+
+            "</ul>"+
+            "</div>"+
+            "<div class='mark_btn submit_address'>提交</div>"+
+            "<div class='explains'>*请准确填写相关信息，以便收取门票</div>";
+    var apiurl="http://act.vip.youku.com/";// 线上接口
+    // var apiurl="http://zhoulian.mini.cron.youku.com/";// 线下接口
+    function timer() {
+        var mydata = j("#mytime").val();
+        var ts = (new Date("10/31/2015  10:00:00")) - (mydata); //计算剩余的毫秒数
+        var newmydata = parseInt(mydata) + 1000;
+        j("#mytime").attr("value", newmydata);
+        var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
+        var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10); //计算剩余的小时数
+        var mm = parseInt(ts / 1000 / 60 % 60, 10); //计算剩余的分钟数
+        var ss = parseInt(ts / 1000 % 60, 10); //计算剩余的秒数
+        hh = checkTime(hh);
+        mm = checkTime(mm);
+        ss = checkTime(ss);
+        function checkTime(i) {
+            return i < 10 ? i = '0' + i : '' + i
+        }
+        if (ts > 0) {
+            j("#timebox").html("距领取时间有："+ hh + ":" + mm + ":" + ss);
+            return false;
+        } else {
+            var emhtml=j(".p_stiket em").html();
+            if(emhtml=="0"){
+                j("#get_sticket").html("领取门票");
+                j("#get_sticket").css({background:"#b4b1ab",color:"#898989"});
+                return false;
+            }
+            else if(emhtml>0){
+                j(".p_stiket").show();
+                j("#timebox").hide();
+                j("#get_sticket").css({background:"#b6975b",color:"#1f1509",cursor:"pointer"});
+                j("#get_sticket").html("<a>领取门票</a>");
+            }
+            return false;
+        }
+    }
+    //时间递减
+    setTimeout(function() {
+        var timeurl = apiurl+"vprize/currentTime.php?callback=?";
+        j.getJSON(timeurl, function(data) {
+            j("#mytime").attr("value",data.result * 1000);
+            setInterval(timer, 1000);
+        });
+    }, 52);
+
+    //    关闭弹层
+    var closefun=function(){
+        j(".close_btn, .closedbtn").on("click",function(){
+            j(".mark_big, .mark_box").hide();
+        })
+    };
+    //领取门票
+    var error = function(id, info) {
+        j('.error').hide();
+        j('#' + id + '').html(info).show();
+    };
+
+    //saveinfo
+    var saveinfo = function(editor) {
+        j.getJSON(editor, function(data) {
+            if (data.code ==10000) {//
+                j(".mark_big, .mark_box").show();
+                j(".mark_box").html(close_top+over_sticket);
+                j(".mark_box").css({"margin-top":"-95px"});
+                j(".mark_box h2").html("");
+                j(".mark_box p").html("保存成功！");
+                closefun();
+            }
+        });
+    };
+    var submit_result=function(){
+        var userName=j("#textname").val();
+        var mobile=j("#textmobile").val();
+        var userAdd =j("#txtdress").val();
+        var Url =apiurl+"vprize/saveInfo.php?actid=2";
+        if (userName == "") {
+            error("errorName", "*请输入您的姓名");
+            return false;
+        }
+        if (userName.length > 10) {
+            error("errorName", "*姓名最多可输入10个字符");
+            return false;
+        }
+        if (mobile == "") {
+            error("errorName", "");
+            error("errorTel", "*请输入您的电话");
+            return false;
+        }
+        var myreg = /^1[3|4|5|7|8][0-9](\d{8})$/;
+        if (!(myreg.test(mobile))) {
+            error("errorName", "");
+            error("errorTel", "*请输入有效的电话！");
+            return false;
+        }
+        if (userAdd == "") {
+            error("errorAdd", "*请输入您的地址");
+            return false;
+        }
+        if (userAdd.length > 25) {
+            error("errorAdd", "*地址最多可输入25个字符");
+            return false;
+        }
+
+        error("errorName", "");
+        error("errorTel", "");
+        var editor= Url + '&name=' + userName + '&phone=' + mobile + '&address=' + userAdd + '&callback=?';
+        saveinfo(editor);
+    };
+    //获取info
+    var get_info=function(){
+        var getinfourl=apiurl+"vprize/userInfo.php?actid=2&callback=?";
+        j.getJSON(getinfourl, function(data) {
+            if (data.code ==10000) {
+                j("#textname").attr('value',data.result.name);
+                j("#textmobile").attr('value',data.result.phone);
+                j("#txtdress").val(data.result.address);               }
+        });
+    };
+    //去填写地址，获取信息
+    var Toaddress=function(){
+        j(".toaddress").on("click",function(){
+            j(".mark_big, .mark_box").show();
+            j(".mark_box").html(close_top+add_adress);
+            j(".mark_box").css({"margin-top":"-245px"});
+            get_info();
+            j(".submit_address").on("click",function(){
+                submit_result();
+            });
+            closefun();
+        });
+    };
+    // 抢门票
+    j("#get_sticket").on("click","a",function(){//领取门票
+        var sticketurl=apiurl+"vipactive/active/index.php?c=music&a=wssGetTicket&callback=?";
+        j.getJSON(sticketurl, function(data) {
+            if(data.code==10000){//已购买年费会员success_sticket
+                j(".mark_big, .mark_box").show();
+                j(".mark_box").html(close_top+success_sticket);
+                Toaddress();
+                closefun();
+            }
+            else if(data.code== 10012){//未开始
+                j("#get_sticket").css({background:"#b4b1ab",color:"#898989"});
+                return false;
+            }
+            else if(data.code== 10010){//未登录
+                login({
+                    'type': 'fee',
+                    'callBack': 'parent.location.reload()'
+                });
+                return false;
+            }
+            else if (data.code == 10023) { //已领取
+                j(".mark_big, .mark_box").show();
+                j(".mark_box").html(close_top+hasbeen_sticket);
+                Toaddress();
+                closefun();
+                return false;
+            } else if (data.code == 10025) {//没有资格no_status
+                j(".mark_big, .mark_box").show();
+                j(".mark_box").html(close_top+no_status);
+                closefun();
+                return false;
+            } else if (data.code == 10022) {//已抢光
+                //alert(data.result.num+"2");
+                j("#get_sticket").html("");
+                j("#get_sticket").html("领取门票");
+                j(".mark_big, .mark_box").show();
+                j(".mark_box").html(close_top+over_sticket);
+                closefun();
+                return false;
+            }else if (data.code == 10001) {//领取失败
+                alert("领取失败")
+            }
+        })
+    });
+
+    // 当前剩余票数
+    var numurl = apiurl+"vipactive/active/index.php?c=music&a=wssRemainNum&callback=?";
+    j.getJSON(numurl, function(data){
+        if (data.code == 10000) {
+            //alert(data.result.num);
+            j(".p_stiket em").html(data.result.num);
+            if(data.result.num=="0"){
+                j("#get_sticket").html("领取门票");
+                j("#get_sticket").css({background:"#b4b1ab",color:"#898989"});
+
+                j("#open_member").on("click",function(){//开通会员
+                    j(".mark_big, .mark_box").show();
+                    j(".mark_box").html(close_top+no_sticket);
+                    closefun();
+                });
+                return false;
+            }
+            if(data.result.num>0){
+                j("#open_member a").attr({href:"http://pay.youku.com/buy/member.html?productid=1000020008&backurl=http%3A%2F%2Fact.vip.youku.com%2Fvipactive%2Factive%2Findex.php%3Fc%3Dmusic%26a%3DgetMusicOrder",target:"_blank"});
+                return false;
+            }
+        }
+    });
+
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+    <script src="http://r2.ykimg.com/051000004FEA7F756714C079DA0A7370"></script>
+<style>
+*{ margin: 0;padding: 0;font-size: 14px;}
+.fxBox{height:0px;width:320px;padding:5px 290px;position:relative;}
+.fxBox .handle{height:14px;line-height:16px;float:left;margin-right:3px;overflow:hidden;padding-top:35px;*padding-top:35px;}
+.fxBox .fxLogo a{margin-right:8px;margin-top:35px;}
+.fxLogo{position:absolute;top:40px;}
+.backBtn{width:99px;height:21px;position:absolute;top:20px;right:0px;}
+.backBtn a{display:block;width:99px;height:21px;background:url(http://res.mfs.ykimg.com/051000004F69B34B97927335B7064946.jpg) 0 0 no-repeat;}
+.backBtn a:hover{background:url(http://res.mfs.ykimg.com/051000004F69B34B97927335B7050628.jpg) 0 0 no-repeat;}
+</style>
+</head>
+<body>
+<div class="fxBox">
+    <div class="handle"><a href="#" link="null">分享到</a></div>
+    <span class="fxLogo" id="fxLogo">
+    	<a title="转发到新浪微博" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_sina.gif"></a>
+        <a title="转发到腾讯微博" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_qq_t.png"></a>
+        <a title="转发到网易微博" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_163_16.gif"></a>
+        <a title="转发到人人网" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_renren.gif"></a>
+        <a title="转发到开心网" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_kaixin.gif"></a>
+        <a title="转发到QQ空间" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_Qzone.gif"></a>
+        <a title="豆瓣" href="" target="_blank"><img src="http://static.youku.com/v1.0.0739/v/img/ico_Qzone.gif"></a>
+    </span>
+    <div class="backBtn">
+        <a href="http://news.youku.com/" target="_blank" class="backBtn" charset="_CHARSET_"></a>
+    </div>
+</div>
+<script type="text/javascript">
+    (function(){
+        var oHref = document.getElementById('fxLogo').getElementsByTagName('a');
+        var oTitle = document.title;
+        var oSource = '优酷网';
+        var oUrl = window.location.href;
+        var oApiarr = [
+                    'http://v.t.sina.com.cn/share/share.php?appkey=2684493555&url=' + oUrl + '&title=' + oTitle + '&source=' + oSource,
+                    'http://share.v.t.qq.com/index.php?c=share&a=index&url=' + oUrl + '&title=' + oTitle,
+                    'http://t.163.com/article/user/checkLogin.do?link=' + oUrl + '&info=' + oTitle + oUrl + '&source=' + oSource,
+                    'http://share.renren.com/share/buttonshare.do?link=' + oUrl + '&title=' + oTitle,
+                    'http://www.kaixin001.com/repaste/share.php?rurl=' + oUrl + '&rtitle=' + oTitle,
+                    'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + oUrl,
+                    'http://www.douban.com/share/service?name=' + oUrl
+        ];
+        function fxUrl(){
+            for(var i=0;i<oApiarr.length;i++){
+                oHref[i].href = oApiarr[i];
+            }
+        }
+        fxUrl();
+    })();
+</script>
+<br>
+<hr style="clear: both;">
+<!--分享-->
+<script>
+var shareClickHz = function(){
+var hzCode = {
+'s_qq' : '4000351',
+'s_qq1' : '4000361',
+'s_qq2' : '4000361',
+'s_sina' : '4000353',
+'s_sina1' : '4000363',
+'s_sina2' : '4000363',
+'s_renren' : '4000350',
+'s_renren1' : '4000360',
+'s_renren2' : '4000360',
+'s_qq_t' : '4001144',
+'s_qq_t1' : '4001146',
+'s_qq_t2' : '4001146',
+'s_pengyou' : '4001393',
+'s_pengyou1' : '4001393',
+'s_msn' : '4001567',
+'s_msn1' : '4001569',
+'s_msn2' : '4001569',
+'s_baidu' : '4000371',
+'s_baidu1' : '4000371',
+'s_kaixin' : '4000352',
+'s_kaixin1' : '4000362',
+'s_kaixin2' : '4000362',
+'s_douban' : '4001151',
+'s_douban1' : '4001151',
+'s_mop' : '4001364',
+'s_mop1' : '4001364',
+'s_sohu' : '4002240',
+'s_sohu1' : '4002240',
+'s_163' : '4000890',
+'s_1631' : '4000890'
+};
+for(var key in hzCode)
+{
+if($(key))
+{
+$(key).href = 'http://hz.youku.com/red/click.php?tp=1&cp=' + hzCode[key] + '&cpp=1000208&url='+escape($(key).href);
+}
+}
+};
+shareClickHz();
+//腾讯分享活动-回调函数接口
+var qqHaoyou = function(){
+var userinfo = get_username("all");
+var userid = userinfo.userid > 0 ? userinfo.userid : 0;
+var url = 'http://mini.cron.youku.com/web/www/qq_share/qq_cback.php?userId='+userid;
+$('s_qq_haoyou').href += '&callback=' + url;
+$('s_qq_haoyou1').href += '&callback=' + url;
+};
+qqHaoyou();
+</script>
+<div class="p2">
+    <h4>转发到</h4>
+    <div class="g1">
+        <a title="转发到QQ空间" charset="400-03-8" id="s_qq1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4000361&amp;cpp=1000208&amp;url=http%3A//sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey%3Furl%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html" target="_blank"><i class="ico__qzone"></i>QQ空间</a>
+        <br>
+        <a title="转发到微博" charset="400-03-10" id="s_sina1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4000363&amp;cpp=1000208&amp;url=http%3A//v.t.sina.com.cn/share/share.php%3Fappkey%3D2684493555%26url%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html%26title%3D%25E3%2580%2590%25E8%25A7%2586%25E9%25A2%2591%25EF%25BC%259A2015+%25E5%25BC%25A0%25E7%258E%25AE+%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A%25EF%25BC%259A%25E3%2580%258A%25E5%25BC%25A0%25E7%258E%25AE%25E6%2598%25AF%25E8%25B0%2581%25E3%2580%258B%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A%25E3%2580%2591%26ralateUid%3D1642904381%26source%3D%25E4%25BC%2598%25E9%2585%25B7%25E7%25BD%2591%26sourceUrl%3Dhttp%253A%252F%252Fwww.youku.com%252F%26content%3Dutf8%26searchPic%3Dfalse" target="_blank"><i class="ico__sina"></i>微博</a>
+        <br>
+        <a title="转发到百度贴吧" charset="400-03-12" id="s_baidu1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4000371&amp;cpp=1000208&amp;url=http%3A//tieba.baidu.com/f/commit/share/openShareApi%3Furl%3Dhttp%3A//v.youku.com/v_show/id_XMTMxMzI5NTQ1Mg%3D%3D.html%26title%3D2015+%25D5%25C5%25E7%25E2+%25D0%25C2%25D7%25A8%25BC%25AD%25CA%25D7%25B3%25AA%25BB%25E1%25A3%25BA%25A1%25B6%25D5%25C5%25E7%25E2%25CA%25C7%25CB%25AD%25A1%25B7%25D0%25C2%25D7%25A8%25BC%25AD%25CA%25D7%25B3%25AA%25BB%25E1%26desc%3D2014%25C4%25EA5%25D4%25C2%25A3%25AC%25D5%25C5%25E7%25E2%25B7%25A2%25D0%25D0%25CA%25D7%25B4%25CE%25D3%25C9%25B8%25F6%25C8%25CB%25B5%25A3%25B8%25D9%25D2%25F4%25C0%25D6%25BC%25E0%25D6%25C6%25B5%25C4EP%25A1%25B6%25CE%25B9%25A1%25B7%25A3%25AC%25B5%25B1%25CA%25B1%25BC%25B4%25D0%25FB...%26pic%3Dhttp%3A//r2.ykimg.com/0542040855D3C9F96A0A3F6121157116" target="_blank"><i class="ico__baidu"></i>百度贴吧</a>
+        <br>
+        <a title="转发到豆瓣" charset="400-03-17" id="s_douban1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4001151&amp;cpp=1000208&amp;url=http%3A//www.douban.com/recommend/%3Furl%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html%26title%3D2015+%25E5%25BC%25A0%25E7%258E%25AE+%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A%25EF%25BC%259A%25E3%2580%258A%25E5%25BC%25A0%25E7%258E%25AE%25E6%2598%25AF%25E8%25B0%2581%25E3%2580%258B%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A" target="_blank"><i class="ico__douban"></i>豆瓣</a>
+        <br>
+        <a href="http://v.youku.com/v_wechatShare/?url=http%3A%2F%2Fwww.youku.com%2Fshow_page%2Fid_z28c9f76c427611e5a080.html&amp;content=%E3%80%90%E8%A7%86%E9%A2%91%EF%BC%9A2015+%E5%BC%A0%E7%8E%AE+%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A%EF%BC%9A%E3%80%8A%E5%BC%A0%E7%8E%AE%E6%98%AF%E8%B0%81%E3%80%8B%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A%E3%80%91" charset="hz-4008673-1000709" target="_blank" title="转发到微信"><i class="ico__weixin"></i>微信</a>
+    </div>
+    <div class="g2">
+        <a title="转发给QQ好友" charset="hz-4007877-1000208" id="s_qq_haoyou1" href="http://connect.qq.com/widget/shareqq/index.html?title=2015+%E5%BC%A0%E7%8E%AE+%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A%EF%BC%9A%E3%80%8A%E5%BC%A0%E7%8E%AE%E6%98%AF%E8%B0%81%E3%80%8B%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A&amp;url=http%3A%2F%2Fv.youku.com%2Fv_show%2Fid_XMTMxMzI5NTQ1Mg%3D%3D.html%3Ftpa%3DdW5pb25faWQ9MTAzMjUyXzEwMDAwMV8wMV8wMQ&amp;desc=%E5%9C%A8%E4%BC%98%E9%85%B7%E4%B8%8A%E7%9C%8B%E8%A7%81%E8%BF%99%E6%9D%A1%E8%A7%86%E9%A2%91%E8%BF%98%E4%B8%8D%E9%94%99%E5%93%A6%EF%BC%9A2015+%E5%BC%A0%E7%8E%AE+%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A%EF%BC%9A%E3%80%8A%E5%BC%A0%E7%8E%AE%E6%98%AF%E8%B0%81%E3%80%8B%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A&amp;pics=http://r2.ykimg.com/0542040855D3C9F96A0A3F6121157116&amp;site=%E4%BC%98%E9%85%B7&amp;callback=http://mini.cron.youku.com/web/www/qq_share/qq_cback.php?userId=789361471" target="_blank"><i class="ico__qq"></i>QQ好友</a><br>
+        <a title="转发到人人网" charset="400-03-7" id="s_renren1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4000360&amp;cpp=1000208&amp;url=http%3A//share.renren.com/share/buttonshare.do%3Flink%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html" target="_blank"><i class="ico__renren"></i>人人网</a>
+        <br>
+        <a title="转发到腾讯微博" charset="400-03-16" id="s_qq_t1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4001146&amp;cpp=1000208&amp;url=http%3A//v.t.qq.com/share/share.php%3Ftitle%3D%25E3%2580%2590%25E8%25A7%2586%25E9%25A2%2591%25EF%25BC%259A2015+%25E5%25BC%25A0%25E7%258E%25AE+%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A%25EF%25BC%259A%25E3%2580%258A%25E5%25BC%25A0%25E7%258E%25AE%25E6%2598%25AF%25E8%25B0%2581%25E3%2580%258B%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A%25E3%2580%2591%26url%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html%26appkey%3De7ad0b0199994bda85ecc0a44ce9915f%26site%3Dwww.youku.com%26assname%3Dyouku2010" target="_blank"><i class="ico__tecent"></i>腾讯微博</a>
+        <br>
+        <a title="转发到开心网" charset="400-03-9" id="s_kaixin1" href="http://hz.youku.com/red/click.php?tp=1&amp;cp=4000362&amp;cpp=1000208&amp;url=http%3A//www.kaixin001.com/repaste/share.php%3Frurl%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html%26rcontent%3Dhttp%253A%252F%252Fwww.youku.com%252Fshow_page%252Fid_z28c9f76c427611e5a080.html%26rtitle%3D2015+%25E5%25BC%25A0%25E7%258E%25AE+%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A%25EF%25BC%259A%25E3%2580%258A%25E5%25BC%25A0%25E7%258E%25AE%25E6%2598%25AF%25E8%25B0%2581%25E3%2580%258B%25E6%2596%25B0%25E4%25B8%2593%25E8%25BE%2591%25E9%25A6%2596%25E5%2594%25B1%25E4%25BC%259A" target="_blank"><i class="ico__kaixin"></i>开心网</a>
+        <br>
+        <a href="http://v.youku.com/v_yixinShare/?url=http%3A%2F%2Fwww.youku.com%2Fshow_page%2Fid_z28c9f76c427611e5a080.html&amp;content=%E3%80%90%E8%A7%86%E9%A2%91%EF%BC%9A2015+%E5%BC%A0%E7%8E%AE+%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A%EF%BC%9A%E3%80%8A%E5%BC%A0%E7%8E%AE%E6%98%AF%E8%B0%81%E3%80%8B%E6%96%B0%E4%B8%93%E8%BE%91%E9%A6%96%E5%94%B1%E4%BC%9A%E3%80%91" charset="hz-4009071" target="_blank" title="转发到易信"><i class="ico__yixin"></i>易信</a>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+
+<div class="panel-con">
+
+</div>
+</body>
+</html>
